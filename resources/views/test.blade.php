@@ -1,1 +1,0 @@
-hop xau trai   
