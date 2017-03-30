@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateProductCateTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('product_cate', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',100);
-            $table->string('email',100)->unique();
-            $table->string('password',100);
-            $table->string('img');
-            $table->string('phone',20)->nullable();
-            $table->string('address');
-            $table->rememberToken();
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->integer('cate_id')->unsigned();
+            $table->foreign('cate_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('product-cate');
     }
 }
