@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     protected $table = 'products';
+
     protected $fillable = [
         'name',
         'code',
+        'alias',
         'description',
         'price',
         'user_id',
@@ -20,6 +22,20 @@ class Products extends Model
         'img',
         'is_public',
     ];
+
+    public function rule()
+    {
+        return [
+            'name' => 'required|min:3|max:191',
+            'code' => 'max:191',
+            'alias' => 'max:191',
+            'price' => 'required|digits',
+            'attribute' => 'required',
+            'img' => 'required',
+            'img_profile' => 'required',
+            'is_public' => 'required|digits',
+        ];
+    }
 
     public function comments()
     {
