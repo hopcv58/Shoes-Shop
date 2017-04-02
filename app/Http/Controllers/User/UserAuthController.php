@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Responsitory\Customers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
+class UserAuthController extends Controller
+{
+    /*
+|--------------------------------------------------------------------------
+| Login Controller
+|--------------------------------------------------------------------------
+|
+| This controller handles authenticating users for the application and
+| redirecting them to your home screen. The controller uses a trait
+| to conveniently provide its functionality to your applications.
+|
+*/
+
+    use AuthenticatesUsers;
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest', ['except' => 'logout']);
+    }
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $customer = new Customers();
+        $validator = Validator::make($request->all(),$customer->ruleLogin());
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+            $input = [
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+            ];
+            if(Auth::guard('customer')->attempt($input,$request->has('remember'))){
+                return redirect()->route('home');
+            }else{
+                return redirect()->back()->with(['login_fails' => 'incorrect username or password']);
+            }
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('customer')->logout();
+        return redirect()->route('login');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    public function postRegister(Request $request)
+    {
+
+    }
+
+    public function showForgotPasswordForm()
+    {
+        return view('auth.passwords.email');
+    }
+}

@@ -16,6 +16,13 @@ class Comments extends Model
         'commentable_type',
     ];
 
+    public function rule()
+    {
+        return [
+            'rule' => 'required|min:3',
+        ];
+    }
+
     public function commentable()
     {
         return $this->morphTo();

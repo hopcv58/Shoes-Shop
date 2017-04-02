@@ -15,6 +15,13 @@ class Advertisments extends Model
         'discount'
     ];
 
+    public function rule(){
+        return [
+            'name' => 'required|min:3|max:191',
+            'discount' => 'digits_between:0,100',
+        ];
+    }
+
     public function products(){
         return $this->hasMany(Product::class, 'ad_id', 'id');
     }

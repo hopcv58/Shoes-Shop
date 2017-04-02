@@ -20,7 +20,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
+        'img',
+        'phone',
+        'address',
     ];
 
     /**
@@ -32,6 +36,28 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Rule for edit and register
+     * @return array
+     */
+    public function rule(){
+        return [
+            'name' => 'required|min:3|max:191',
+            'email' => 'required|email',
+            'password' => 'required|min:6|max:191',
+            'img' => 'max:191',
+            'phone' => 'max:30',
+            'address' => 'min:3|max:191'
+        ];
+    }
+
+    public function ruleLogin(){
+        return [
+            'email' => 'required|email',
+            'password' => 'required|min:6|max:100',
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

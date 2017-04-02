@@ -18,6 +18,14 @@ class News extends Model
         'user_id',
     ];
 
+    public function rule()
+    {
+        return [
+            'title' => 'required|min:3|max:191|unique:title',
+            'content' => 'required|min:3',
+        ];
+    }
+
     public function comment()
     {
         return $this->morphMany('App\Responsitory\Comments', 'commentable');

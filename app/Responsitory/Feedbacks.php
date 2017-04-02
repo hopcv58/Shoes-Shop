@@ -16,6 +16,16 @@ class Feedbacks extends Model
         'phone',
     ];
 
+    public function rule()
+    {
+        return [
+            'username' => 'min:3|max:191',
+            'content' => 'required|min:3',
+            'email' => 'min:3|max:191|email',
+            'phone' => 'min:3|max:20',
+        ];
+    }
+
     public function customers()
     {
         return $this->belongsTo(Customers::class, 'customer_id', 'id');

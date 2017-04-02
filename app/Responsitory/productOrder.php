@@ -16,6 +16,14 @@ class productOrder extends Model
         'status',
     ];
 
+    public function rule(){
+        return [
+            'qty' => 'required|digits',
+            'amount' => 'required|digits',
+            'status' => 'required|digits',
+        ];
+    }
+
     public function orders()
     {
         return $this->belongsTo(Orders::class, 'order_id', 'id');
