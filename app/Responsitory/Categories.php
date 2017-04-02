@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categories extends Model
 {
     protected $table = 'categories';
+
     protected $fillable = [
         'name',
         'is_public',
@@ -14,6 +15,12 @@ class Categories extends Model
         'description',
     ];
 
+    public function rule()
+    {
+        return [
+            'name' => 'required|min:3|max:191|unique:name',
+        ];
+    }
     public function products()
     {
         return $this->belongsToMany(Products::class, productCate::class, 'cate_id', 'product_id');
