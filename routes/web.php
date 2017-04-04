@@ -56,6 +56,15 @@ Route::group(['namespace' => '\User'], function () {
         'as' => 'register',
         'uses' => 'UserAuthController@showRegistrationForm',
     ]);
+    
+    Route::get('category', [
+      'as' => 'category',
+      'uses' => 'UserCategoryController@showCategory',
+    ]);
+    Route::get('product', [
+      'as' => 'product',
+      'uses' => 'UserProductController@showProduct',
+    ]);
 });
 
 

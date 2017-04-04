@@ -11,13 +11,13 @@
     <title>{{ config('app.name', 'Shoe shop') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('customer/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('customer/css/my.css') }}" rel="stylesheet">
+    <link href="{{ asset('user/css/bootstrap.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('user/css/my.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{ asset('customer/js/jquery.js') }}"></script>
-    <script src="{{ asset('customer/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('user/js/jquery.js') }}"></script>
+    <script src="{{ asset('user/js/bootstrap.min.js') }}"></script>
     <script>
 			window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -48,7 +48,7 @@
 <div class="navbar navbar-default nav-nomargin">
     <div class="container">
         <div class="nav navbar-nav col-md-4">
-            <li><a class="navbar-text" href="#"><h4>Home</h4></a></li>
+            <li><a class="navbar-text" href="/home"><h4>Home</h4></a></li>
         </div>
         <div class="pull-right">
 
@@ -93,15 +93,15 @@
         <nav class="navbar navbar-default" data-spy="affix" data-offset-top="130">
             <div class="container">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Trang chủ</a></li>
+                    <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sản phẩm mới
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Giày công sở</a></li>
-                            <li><a href="#">Giày búp bê</a></li>
-                            <li><a href="#">Giày sandal</a></li>
-                            <li><a href="#">Giày da thật</a></li>
+                            <li><a href="{{ route('category') }}">Giày công sở</a></li>
+                            <li><a href="{{ route('category') }}">Giày búp bê</a></li>
+                            <li><a href="{{ route('category') }}">Giày sandal</a></li>
+                            <li><a href="{{ route('category') }}">Giày da thật</a></li>
                         </ul>
                     </li>
                     <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Giày nam</a></li>
@@ -113,7 +113,7 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search">
                             </div>
-                            <a href="#" class="navbar-link"><span class="glyphicon glyphicon-search"></span> Search</a>
+                            <a href="#" class="navbar-link" style="text-decoration: none;"><span class="glyphicon glyphicon-search"></span> Search</a>
                         </form>
                     </li>
                     @if (Auth::guard('customer')->guest())
@@ -134,7 +134,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
@@ -170,6 +169,5 @@
 </footer>
 <!--footer end-->
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
