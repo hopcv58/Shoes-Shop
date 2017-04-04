@@ -26,6 +26,7 @@ class News extends Model
         ];
     }
 
+
     public function comment()
     {
         return $this->morphMany('App\Responsitory\Comments', 'commentable');

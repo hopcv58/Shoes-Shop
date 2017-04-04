@@ -14,10 +14,6 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('test', function(){
-   $comment = \App\Responsitory\News::find(1)->comment();
-   dd($comment);
-});
 
 //========================== Route User ===========================
 
@@ -61,6 +57,15 @@ Route::group(['namespace' => '\User'], function () {
     Route::post('register', [
         'as' => 'register',
         'uses' => 'UserAuthController@showRegistrationForm',
+    ]);
+    
+    Route::get('category', [
+      'as' => 'category',
+      'uses' => 'UserCategoryController@showCategory',
+    ]);
+    Route::get('product', [
+      'as' => 'product',
+      'uses' => 'UserProductController@showProduct',
     ]);
 });
 
@@ -139,5 +144,6 @@ Route::group([
 
         //user
         Route::resource('users', 'UsersController');
+
     });
 });

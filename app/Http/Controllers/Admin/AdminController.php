@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Responsitory\Business;
 use App\Responsitory\Categories;
 use Illuminate\Http\Request;
@@ -17,10 +18,12 @@ class AdminController extends Controller
     {
         $this->business = new Business();
 //        $this->middleware('admin');
+
     }
 
     public function getIndex()
     {
         return view('admin.pages.index');
     }
+
 }

@@ -42,7 +42,11 @@ class UserAuthController extends Controller
     }
     public function showLoginForm()
     {
+<<<<<<< HEAD
         return view('auth.login');
+=======
+        return view('user.auth.login');
+>>>>>>> 8d1ce6ac7c83a492e89cc269a0c9db471b164c9a
     }
 
     public function login(Request $request)
@@ -72,7 +76,11 @@ class UserAuthController extends Controller
 
     public function showRegistrationForm()
     {
+<<<<<<< HEAD
         return view('auth.register');
+=======
+        return view('user.auth.register');
+>>>>>>> 8d1ce6ac7c83a492e89cc269a0c9db471b164c9a
     }
 
     public function postRegister(Request $request)

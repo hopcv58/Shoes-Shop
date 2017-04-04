@@ -1,7 +1,9 @@
 @extends('admin.layout.master')
+
 @section('title')
     Bảng điều khiển
 @endsection
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -17,6 +19,7 @@
                 <li class="active">Dashboard</li>
             </ol>
             </div>
+
         </section>
 
         <!-- Main content -->
