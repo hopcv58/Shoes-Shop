@@ -57,7 +57,7 @@ class UserAuthController extends Controller
                 'password' => $request->input('password'),
             ];
             if(Auth::guard('customer')->attempt($input,$request->has('remember'))){
-                return redirect()->route('home');
+                return redirect()->route('index');
             }else{
                 return redirect()->back()->with(['login_fails' => 'incorrect username or password']);
             }

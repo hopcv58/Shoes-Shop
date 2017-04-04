@@ -48,7 +48,7 @@
 <div class="navbar navbar-default nav-nomargin">
     <div class="container">
         <div class="nav navbar-nav col-md-4">
-            <li><a class="navbar-text" href="/home"><h4>Home</h4></a></li>
+            <li><a class="navbar-text" href="{{route('index')}}"><h4>Home</h4></a></li>
         </div>
         <div class="pull-right">
 
@@ -93,7 +93,7 @@
         <nav class="navbar navbar-default" data-spy="affix" data-offset-top="130">
             <div class="container">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
+                    <li class="active"><a href="{{route('index')}}">Trang chủ</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sản phẩm mới
                             <span class="caret"></span></a>

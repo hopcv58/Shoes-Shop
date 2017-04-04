@@ -23,7 +23,8 @@ Route::get('/', [
 ]);
 
 Route::group(['namespace' => '\User'], function () {
-    Route::get('home', [
+    Route::get('index', [
+        'as' => 'index',
         'uses' => 'UserController@index',
     ]);
 
@@ -59,11 +60,11 @@ Route::group(['namespace' => '\User'], function () {
     
     Route::get('category', [
       'as' => 'category',
-      'uses' => 'UserCategoryController@showCategory',
+      'uses' => 'UserController@showCategory',
     ]);
     Route::get('product', [
       'as' => 'product',
-      'uses' => 'UserProductController@showProduct',
+      'uses' => 'UserController@showProduct',
     ]);
 });
 

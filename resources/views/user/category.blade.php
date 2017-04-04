@@ -4,11 +4,11 @@
 <div id="wrapper">
     <div class="container-fluid">
         <!--side tab-->
-        <div class="col-md-2">
+        <div class="col-md-2 navbar-default nav-nomargin">
             
             <h3>Danh muục</h3>
             <ul>
-                <li>ah</li>
+                <li><a href="#">ah</a></li>
                 <li>ah</li>
                 <li>Giày bẹt</li>
             </ul>
