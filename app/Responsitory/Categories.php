@@ -4,7 +4,7 @@ namespace App\Responsitory;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class Categories extends BaseModel
 {
     protected $table = 'categories';
 
@@ -18,12 +18,18 @@ class Categories extends Model
     public function rule()
     {
         return [
-            'name' => 'required|min:3|max:191|unique:name',
+            'name' => 'required|min:3|max:191|unique:categories',
+            'alias' => 'max:191',
         ];
     }
-    public function products()
+  /*  public function products()
     {
-        return $this->belongsToMany(Products::class, productCate::class, 'cate_id', 'product_id');
+        return $this->belongsToMany(Products::class, productcate::class, 'cate_id', 'product_id');
+    }*/
+
+    public function productCate()
+    {
+        return $this->hasMany(productcate::class,'cate_id','id');
     }
     /*
         public function childs()

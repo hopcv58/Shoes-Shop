@@ -59,16 +59,5 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function products()
-    {
-        return $this->hasMany(Products::class, 'user_id', 'id');
-    }
 
-    public function news()
-    {
-        return $this->hasMany(News::class, 'user_id', 'id');
-    }
 }

@@ -42,23 +42,23 @@ class Products extends Model
         return $this->morphMany(Comments::class, 'commentable');
     }
 
-    public function categories()
+/*    public function categories()
     {
-        return $this->belongsToMany(Categories::class, productCate::class, 'product_id', 'cate_id');
-    }
+        return $this->belongsToMany(Categories::class, productcate::class, 'product_id', 'cate_id');
+    }*/
 
     public function advertisments()
     {
         return $this->belongsTo(Advertisments::class, 'ad_id', 'id');
     }
 
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
     public function productOrders()
     {
         return $this->hasMany(productOrder::class, 'product_id', 'id');
+    }
+
+    public function productCate()
+    {
+        return $this->hasMany(productcate::class,'product_id','id');
     }
 }

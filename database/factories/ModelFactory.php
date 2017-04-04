@@ -15,7 +15,7 @@ use Faker\Generator;
 use App\Responsitory\Advertisments;
 use App\Responsitory\Products;
 use App\Responsitory\Categories;
-use App\Responsitory\productCate;
+use App\Responsitory\productcate;
 use App\Responsitory\Customers;
 use App\Responsitory\Feedbacks;
 use App\Responsitory\News;
@@ -54,7 +54,6 @@ $factory->define(Products::class, function (Generator $faker){
        'code' => $faker->currencyCode,
        'description' => $faker->paragraph,
        'price' => $faker->numberBetween(100,1000),
-       'user_id' => $faker->numberBetween(1,10),
        'ad_id' => $faker->numberBetween(1,10),
        'attribute' => $faker->sentence,
        'img_profile' => $faker->sentence,
@@ -73,7 +72,7 @@ $factory->define(Categories::class, function (Generator $faker) {
    ] ;
 });
 
-$factory->define(productCate::class, function (Generator $faker) {
+$factory->define(productcate::class, function (Generator $faker) {
    return [
        'product_id' => $faker->numberBetween(1,10),
        'cate_id' => $faker->numberBetween(1,10),
@@ -108,7 +107,6 @@ $factory->define(News::class, function (Generator $faker) {
        'summary' => $faker->sentence,
        'img' => $faker->sentence,
        'is_public' => $faker->numberBetween(0,1),
-       'user_id' => $faker->numberBetween(1,10),
    ];
 });
 
