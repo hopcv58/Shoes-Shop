@@ -5,6 +5,7 @@
 }
 .thumbnail {
     margin: 10px -10px;
+    height: inherit;
 }
 .img-middle {
     position: absolute;
@@ -15,7 +16,9 @@
     opacity: 0;
     transition: .75s ease;
 }
-
+.img-middle a{
+    text-decoration: none;
+}
 .img-container:hover .img-middle {
     opacity: 1;
 }
@@ -30,8 +33,9 @@
     margin:10%;
 }
 .img-btn{
-    padding: 15px 25px;
+    padding: 15% 20%;
 }
+
 /*nav bar*/
 .affix {
     top: 0;
@@ -104,4 +108,7 @@
     background-position: center;
     background-size: cover;
     transition: transform 0s ease-out;
+}
+.panel-body {
+    background-color: #EEEEEE;
 }
