@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{asset('admin/dist/css/skins/_all-skins.min.css')}}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('admin/plugins/iCheck/flat/blue.css')}}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/iCheck/square/blue.css')}}">
     <!-- Morris chart -->
 {{--<link rel="stylesheet" href="{{asset('admin/plugins/morris/morris.css')}}">--}}
 <!-- jvectormap -->
@@ -26,7 +28,7 @@
 <!-- Date Picker -->
 {{--<link rel="stylesheet" href="{{asset('admin/plugins/datepicker/datepicker3.css')}}">--}}
 <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{asset('admin/plugins/daterangepicker/daterangepicker.css')}}">
+    {{--<link rel="stylesheet" href="{{asset('admin/plugins/daterangepicker/daterangepicker.css')}}">--}}
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
@@ -38,6 +40,8 @@
     <![endif]-->
     <!-- custom css -->
     @yield('css')
+    <!-- my css -->
+    <link rel="stylesheet" href="{{asset('admin/bootstrap/css/mycss.css')}}">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -102,7 +106,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('admin/dist/js/demo.js')}}"></script>
 <!-- ckeditor -->
-<script src="{{asset('admin/plugins/ckeditor/ckeditor.js')}}"></script>
+{{--<script src="{{asset('admin/plugins/ckeditor/ckeditor.js')}}"></script>--}}
+<!-- iCheck -->
+<script src="{{asset('admin/plugins/iCheck/icheck.min.js')}}"></script>
 @yield('script')
 {{--text editor--}}
 {{--<script>

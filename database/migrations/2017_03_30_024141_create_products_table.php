@@ -19,8 +19,6 @@ class CreateProductsTable extends Migration
             $table->string('code',100)->nullable();
             $table->text('description')->nullable();
             $table->integer('price');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('ad_id')->unsigned();
             $table->foreign('ad_id')->references('id')->on('advertisments')->comment('ma quang cao');
             $table->string('attribute')->comment('kieu json');
@@ -38,6 +36,8 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('advertisements');
         Schema::dropIfExists('products');
     }
 }

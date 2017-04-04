@@ -13,6 +13,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('test', function(){
+   $comment = \App\Responsitory\News::find(1)->comment();
+   dd($comment);
+});
+
 //========================== Route User ===========================
 
 Route::get('/', [
@@ -96,5 +102,42 @@ Route::group([
             return redirect()->route('admin.homepage');
             }
         ]);
+
+        // loai san pham
+        Route::group(['prefix' => 'categories'], function (){
+           Route::get('/', [
+               'as' => 'admin.categories.list',
+               'uses' => 'CategoriesController@listCategories',
+           ]);
+
+           Route::get('create',[
+               'as' => 'admin.categories.create',
+               'uses' => 'CategoriesController@showCreateCateForm',
+           ]);
+
+           Route::post('create',[
+               'as' => 'admin.categories.postCreate',
+               'uses' => 'CategoriesController@storeCategory',
+           ]);
+
+           Route::get('update/{id}',[
+               'as' => 'admin.categories.update',
+               'uses' => 'CategoriesController@showUpdateCategoryForm',
+           ]);
+
+           Route::post('update/{id}',[
+               'as' => 'admin.categories.postUpdate',
+               'uses' => 'CategoriesController@updateCategory'
+           ]);
+
+           Route::post('detete',[
+               'as' => 'admin.categories.delete',
+               'uses' => 'CategoriesController@deleteCategory',
+           ]);
+        });
+        //end loai san pham
+
+        //user
+        Route::resource('users', 'UsersController');
     });
 });

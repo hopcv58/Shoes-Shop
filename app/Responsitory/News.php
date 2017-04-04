@@ -31,9 +31,4 @@ class News extends Model
         return $this->morphMany('App\Responsitory\Comments', 'commentable');
     }
 
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
 }

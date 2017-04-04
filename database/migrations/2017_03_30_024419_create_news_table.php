@@ -20,8 +20,6 @@ class CreateNewsTable extends Migration
             $table->text('summary')->nullable();
             $table->string('img');
             $table->tinyInteger('is_public');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -33,6 +31,7 @@ class CreateNewsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('users');
         Schema::dropIfExists('news');
     }
 }

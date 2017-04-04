@@ -13,7 +13,7 @@ class CreateProductCateTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_cate', function (Blueprint $table) {
+        Schema::create('productcate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
@@ -30,6 +30,8 @@ class CreateProductCateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product-cate');
+        Schema::dropIfExists('products');
+        Schema::dropIfExists('categories');
+        Schema::dropIfExists('productcate');
     }
 }
