@@ -29,7 +29,9 @@
 
             <!-- Trang chủ admin -->
             <li class="active treeview">
-                <a href="#">
+
+                <a href="{{route('admin.homepage')}}">
+
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
@@ -46,7 +48,9 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Danh mục sản phẩm</a></li>
+
+                    <li><a href="{{route('admin.categories.list')}}"><i class="fa fa-circle-o"></i> Danh mục sản phẩm</a></li>
+
                     <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Loại sản phẩm</a></li>
                 </ul>
             </li>
@@ -99,7 +103,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Ban quản trị</a></li>
+                    <li><a href="{{route('users.index')}}"><i class="fa fa-circle-o"></i> Ban quản trị</a></li>
+
                     <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Khách hàng</a></li>
                 </ul>
             </li>
