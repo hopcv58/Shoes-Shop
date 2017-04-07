@@ -35,6 +35,9 @@
 .img-btn{
     padding: 15% 20%;
 }
+.img-name{
+    height: 30px;
+}
 
 /*nav bar*/
 .affix {
@@ -48,6 +51,25 @@
 }
 .nav-nomargin{
     margin-bottom: 0;
+}
+/*side bar*/
+@media (min-width: 768px) {
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+    .sidebar-nav .navbar ul {
+        float: none;
+        display: block;
+    }
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+    .sidebar-nav .navbar li a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
 }
 /*footer*/
 .footer-wrapper {

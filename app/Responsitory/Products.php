@@ -23,7 +23,7 @@ class Products extends BaseModel
         'price',
         'phoi_do',
         'user_id',
-        'adver_id',
+        'ad_id',
         'attribute',
         'img_profile',
         'img',

@@ -24,7 +24,8 @@ Route::get('/', [
 ]);
 
 Route::group(['namespace' => '\User'], function () {
-    Route::get('home', [
+    Route::get('index', [
+        'as' => 'index',
         'uses' => 'UserController@index',
     ]);
 
@@ -57,15 +58,22 @@ Route::group(['namespace' => '\User'], function () {
         'as' => 'register',
         'uses' => 'UserAuthController@showRegistrationForm',
     ]);
-
-    Route::get('category', [
-        'as' => 'category',
-        'uses' => 'UserCategoryController@showCategory',
+    Route::get('category/{id}', [
+      'as' => 'category',
+      'uses' => 'UserController@showCategory',
     ]);
-    Route::get('product', [
-        'as' => 'product',
-        'uses' => 'UserProductController@showProduct',
+    Route::get('product/{id}', [
+      'as' => 'product',
+      'uses' => 'UserController@showProduct',
     ]);
+    Route::resource('cart', 'UserCartController');
+    Route::delete('emptyCart', 'UserCartController@emptyCart');
+    Route::post('switchToWishlist/{id}', 'UserCartController@switchToWishlist');
+    
+    Route::resource('wishlist', 'UserWishlistController');
+    Route::delete('emptyWishlist', 'UserWishlistController@emptyWishlist');
+    Route::post('switchToCart/{id}', 'UserWishlistController@switchToCart');
+    Route::get('order', 'UserOrderController@checkOut');
 });
 
 

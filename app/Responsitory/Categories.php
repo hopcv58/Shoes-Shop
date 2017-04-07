@@ -31,15 +31,5 @@ class Categories extends BaseModel
     {
         return $this->hasMany(productcate::class,'cate_id','id');
     }
-    /*
-        public function childs()
-        {
-            return $this->hasMany(Categories::class, 'parent_id');
-        }
-
-        public function parents()
-        {
-            return $this->belongsTo(Categories::class, 'parent_id');
-        }
-    */
+   
 }
