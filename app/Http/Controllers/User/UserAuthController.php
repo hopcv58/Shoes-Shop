@@ -43,7 +43,6 @@ class UserAuthController extends Controller
     public function showLoginForm()
     {
         return view('user.auth.login');
-
     }
 
     public function login(Request $request)
@@ -58,7 +57,7 @@ class UserAuthController extends Controller
                 'password' => $request->input('password'),
             ];
             if(Auth::guard('customer')->attempt($input,$request->has('remember'))){
-                return redirect()->route('home');
+                return redirect()->route('index');
             }else{
                 return redirect()->back()->with(['login_fails' => 'incorrect username or password']);
             }
@@ -73,7 +72,6 @@ class UserAuthController extends Controller
 
     public function showRegistrationForm()
     {
-
         return view('user.auth.register');
     }
 

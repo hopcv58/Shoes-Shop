@@ -86,7 +86,7 @@
                                        aria-hidden="true" ></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{ route('product') }}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"
+                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"
                                        ></a>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                     <a href="#" class="glyphicon glyphicon-shopping-cart btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{ route('product') }}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
+                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                                     <a href="#" class="glyphicon glyphicon-shopping-cart btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{ route('product') }}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
+                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                                     <a href="#" class="glyphicon glyphicon-shopping-cart btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{ route('product') }}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
+                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
             <!--section body end-->
             <!--section button-->
             <div class="text-center section-row">
-                <a class="btn-default section-button" href="{{route('category')}}">
+                <a class="btn-default section-button" href="/category/1">
                     Xem thêm
                 </a>
             </div>
@@ -201,7 +201,7 @@
                                     <a href="#" class="glyphicon glyphicon-shopping-cart btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{ route('product') }}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
+                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                             </div>
                         </div>
@@ -222,29 +222,7 @@
                                     <a href="#" class="glyphicon glyphicon-shopping-cart btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{ route('product') }}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="padding: 20px">
-                            <p class=" text-center"><strong>Giày Sandal Talaha SD175</strong></p>
-                            <h3 class=" text-center"><strong>449,000₫</strong></h3>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-md-12 card img-container">
-                        <div class="row thumbnail">
-                            <img src="http://placehold.it/500x500" class="img-responsive margin" alt="Image">
-                        </div>
-                        <div class="img-middle">
-                            <div class="img-overlay">
-                                <div class="col-md-6">
-                                    <a href="#" class="glyphicon glyphicon-shopping-cart btn-default img-btn" aria-hidden="true"></a>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="{{ route('product') }}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
+                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                             </div>
                         </div>
@@ -266,7 +244,29 @@
                                     <a href="#" class="glyphicon glyphicon-shopping-cart btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{ route('product') }}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
+                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 20px">
+                            <p class=" text-center"><strong>Giày Sandal Talaha SD175</strong></p>
+                            <h3 class=" text-center"><strong>449,000₫</strong></h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="col-md-12 card img-container">
+                        <div class="row thumbnail">
+                            <img src="http://placehold.it/500x500" class="img-responsive margin" alt="Image">
+                        </div>
+                        <div class="img-middle">
+                            <div class="img-overlay">
+                                <div class="col-md-6">
+                                    <a href="#" class="glyphicon glyphicon-shopping-cart btn-default img-btn" aria-hidden="true"></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"></a>
                                 </div>
                             </div>
                         </div>

@@ -2,8 +2,6 @@
 
 namespace App\Responsitory;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * contain all Business logic
  * Class Business
@@ -21,7 +19,7 @@ class Business // extends Model
     private $productCates;
     private $productOrder;
     private $slides;
-
+    
     public function __construct()
     {
         $this->categories = new Categories();
@@ -35,10 +33,40 @@ class Business // extends Model
         $this->products = new Products();
         $this->slides = new Slides();
     }
-
+    
     public function getCate()
     {
         return $this->categories->index();
     }
-
+    
+    public function getCateById($cate_id)
+    {
+        $cate = categories::where('id', $cate_id)->get();
+        return $cate[ 0 ];
+    }
+    
+    public function getProductById($id)
+    {
+        $cate = products::where('id', $id)->get();
+        return $cate[ 0 ];
+    }
+    
+    public function getProductByCate($cate_id)
+    {
+        $product_ids = productcate::where('cate_id', $cate_id)->get();
+        $arr_product = [];
+        foreach ($product_ids as $value) {
+            $arr_product[] = $value->product_id;
+        }
+        $product_list = $this->products->whereIn('id', $arr_product)->get();
+        return $product_list;
+        
+    }
+    
+    public function getCommentByProduct($product_id)
+    {
+        $comment = comments::join('customers', 'comments.customer_id', '=', 'customers.id')->where('commentable_id',
+          $product_id)->get();
+        return $comment;
+    }
 }
