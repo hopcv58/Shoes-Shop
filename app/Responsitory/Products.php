@@ -15,7 +15,7 @@ class Products extends Model
         'alias',
         'description',
         'price',
-        'user_id',
+        'ad_id',
         'adver_id',
         'attribute',
         'img_profile',

@@ -12,6 +12,6 @@ class ProductcateTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(productcate::class, 10)->create();
+        factory(productcate::class, 300)->create();
     }
 }

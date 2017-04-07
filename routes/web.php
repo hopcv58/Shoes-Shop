@@ -60,14 +60,22 @@ Route::group(['namespace' => '\User'], function () {
         'uses' => 'UserAuthController@showRegistrationForm',
     ]);
     
-    Route::get('category', [
+    Route::get('category/{id}', [
       'as' => 'category',
       'uses' => 'UserController@showCategory',
     ]);
-    Route::get('product', [
+    Route::get('product/{id}', [
       'as' => 'product',
       'uses' => 'UserController@showProduct',
     ]);
+    Route::resource('cart', 'UserCartController');
+    Route::delete('emptyCart', 'UserCartController@emptyCart');
+    Route::post('switchToWishlist/{id}', 'UserCartController@switchToWishlist');
+    
+    Route::resource('wishlist', 'UserWishlistController');
+    Route::delete('emptyWishlist', 'UserWishlistController@emptyWishlist');
+    Route::post('switchToCart/{id}', 'UserWishlistController@switchToCart');
+    Route::get('order', 'UserOrderController@checkOut');
 });
 
 

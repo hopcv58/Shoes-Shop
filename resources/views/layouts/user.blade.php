@@ -98,10 +98,10 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sản phẩm mới
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('category') }}">Giày công sở</a></li>
-                            <li><a href="{{ route('category') }}">Giày búp bê</a></li>
-                            <li><a href="{{ route('category') }}">Giày sandal</a></li>
-                            <li><a href="{{ route('category') }}">Giày da thật</a></li>
+                            <li><a href="/category/1">Giày công sở</a></li>
+                            <li><a href="/category/2">Giày búp bê</a></li>
+                            <li><a href="/category/3">Giày sandal</a></li>
+                            <li><a href="/category/3">Giày da thật</a></li>
                         </ul>
                     </li>
                     <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Giày nam</a></li>
@@ -113,9 +113,18 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search">
                             </div>
-                            <a href="#" class="navbar-link" style="text-decoration: none;"><span class="glyphicon glyphicon-search"></span> Search</a>
+                            <a href="#" class="navbar-link" style="text-decoration: none;"><span
+                                        class="glyphicon glyphicon-search"></span> Search</a>
                         </form>
                     </li>
+                    {{--cart/wishlist area--}}
+                    <li><a href="{{ url('/wishlist') }}">Wishlist
+                            ({{ Cart::instance('wishlist')->count(false) }})</a></li>
+                    <li><a href="{{ url('/cart') }}">Cart
+                            ({{ Cart::instance('default')->count(false) }})</a></li>
+
+                    {{--cart/wishlist area end--}}
+                    {{--login area--}}
                     @if (Auth::guard('customer')->guest())
                         <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
                         </li>
@@ -123,7 +132,8 @@
                         </li>
                     @else
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
                                 {{ Auth::guard('customer')->user()->username }} <span class="caret"></span>
                             </a>
 
@@ -134,13 +144,15 @@
                                                      document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
                             </ul>
                         </li>
                     @endif
+                    {{--login area--}}
                 </ul>
             </div>
         </nav>
@@ -167,6 +179,7 @@
         </div>
     </div>
 </footer>
+@yield('extra_js')
 <!--footer end-->
 <!-- Scripts -->
 </body>
