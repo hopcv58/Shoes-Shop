@@ -8,3 +8,6 @@ tr>th{
     height:200px;
     line-height: 10px;
 }
+#add_new .col-md-6{
+    margin-bottom: 10px;
+}

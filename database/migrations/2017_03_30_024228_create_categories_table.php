@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->integer('parent_id')->unsigned()->default(0);
-            $table->tinyInteger('is_public');
+            $table->tinyInteger('is_public')->default(0);
             $table->string('alias')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

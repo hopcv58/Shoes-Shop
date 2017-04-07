@@ -61,7 +61,6 @@
                                 </div>
 
                                 <div class="form-group">
-
                                     <div class="checkbox icheck">
                                         <label>
                                             <input type="checkbox" value="1"
@@ -69,7 +68,6 @@
                                             Public <span class="text-danger"> (default: private)</span>
                                         </label>
                                     </div>
-
                                 </div>
 
                                 <div class="form-group">

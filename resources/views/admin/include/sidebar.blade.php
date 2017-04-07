@@ -5,7 +5,11 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{asset('upload/img_profile/meo.jpg')}}" class="img-circle" alt="User Image">
+                @if(($img = Auth::user()->img) == null)
+                    <img src="{{asset('upload/img_profile/meo.jpg')}}" class="img-circle" alt="User Image">
+                @else
+                    <img src="{{asset("upload/img_profile/$img")}}" class="img-circle" alt="User Image">
+                @endif
             </div>
             <div class="pull-left info">
                 <p>{{Auth::user()->name}}</p>
@@ -49,9 +53,10 @@
                 </a>
                 <ul class="treeview-menu">
 
-                    <li><a href="{{route('admin.categories.list')}}"><i class="fa fa-circle-o"></i> Danh mục sản phẩm</a></li>
+                    <li><a href="{{route('admin.categories.list')}}"><i class="fa fa-circle-o"></i> Danh mục sản
+                            phẩm</a></li>
 
-                    <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Loại sản phẩm</a></li>
+                    <li><a href="{{route('products.index')}}"><i class="fa fa-circle-o"></i> Sản phẩm</a></li>
                 </ul>
             </li>
             <!-- ./ quản lý sản phẩm -->
@@ -126,8 +131,6 @@
                 </ul>
             </li>
             <!-- ./quản lý tin tức -->
-
-
 
 
             <li class="header">LABELS</li>

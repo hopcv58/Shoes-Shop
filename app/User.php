@@ -44,11 +44,11 @@ class User extends Authenticatable
     public function rule(){
         return [
             'name' => 'required|min:3|max:191',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6|max:191',
             'img' => 'max:191',
             'phone' => 'max:30',
-            'address' => 'min:3|max:191'
+            'address' => 'max:191'
         ];
     }
 

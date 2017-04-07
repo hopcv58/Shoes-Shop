@@ -26,8 +26,9 @@ class CategoriesController extends Controller
             $listcates = $this->cate->latest()->paginate(5);
             return view('admin.pages.categories.list', compact('listcates'));
         } else {
-            $listcates = $this->cate->where('name', 'like', "%$query%")->orWhere('alias', 'like',
-                "%$query%")->latest()->paginate(5);
+            /*$listcates = $this->cate->where('name', 'like', "%$query%")->orWhere('alias', 'like',
+                "%$query%")->latest()->paginate(5);*/
+            $listcates = $this->cate->search($query,'name','alias',5);
             return view('admin.pages.categories.list', compact('listcates','query'));
         }
     }

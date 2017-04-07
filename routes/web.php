@@ -14,7 +14,6 @@
 use Illuminate\Support\Facades\Route;
 
 
-
 //========================== Route User ===========================
 
 Route::get('/', [
@@ -58,14 +57,14 @@ Route::group(['namespace' => '\User'], function () {
         'as' => 'register',
         'uses' => 'UserAuthController@showRegistrationForm',
     ]);
-    
+
     Route::get('category', [
-      'as' => 'category',
-      'uses' => 'UserCategoryController@showCategory',
+        'as' => 'category',
+        'uses' => 'UserCategoryController@showCategory',
     ]);
     Route::get('product', [
-      'as' => 'product',
-      'uses' => 'UserProductController@showProduct',
+        'as' => 'product',
+        'uses' => 'UserProductController@showProduct',
     ]);
 });
 
@@ -78,7 +77,7 @@ Route::group([
     'namespace' => '\Admin',
 ], function () {
 
-    Route::group([], function (){
+    Route::group([], function () {
         Route::get('login', [
             'as' => 'admin.login',
             'uses' => 'AuthController@showAdminLoginForm'
@@ -102,48 +101,69 @@ Route::group([
         ]);
 
         Route::get('/', [
-            'as'=> 'dashboard',
-            'uses'=> function(){
-            return redirect()->route('admin.homepage');
+            'as' => 'dashboard',
+            'uses' => function () {
+                return redirect()->route('admin.homepage');
             }
         ]);
 
         // loai san pham
-        Route::group(['prefix' => 'categories'], function (){
-           Route::get('/', [
-               'as' => 'admin.categories.list',
-               'uses' => 'CategoriesController@listCategories',
-           ]);
+        Route::group(['prefix' => 'categories'], function () {
+            Route::get('/', [
+                'as' => 'admin.categories.list',
+                'uses' => 'CategoriesController@listCategories',
+            ]);
 
-           Route::get('create',[
-               'as' => 'admin.categories.create',
-               'uses' => 'CategoriesController@showCreateCateForm',
-           ]);
+            Route::get('create', [
+                'as' => 'admin.categories.create',
+                'uses' => 'CategoriesController@showCreateCateForm',
+            ]);
 
-           Route::post('create',[
-               'as' => 'admin.categories.postCreate',
-               'uses' => 'CategoriesController@storeCategory',
-           ]);
+            Route::post('create', [
+                'as' => 'admin.categories.postCreate',
+                'uses' => 'CategoriesController@storeCategory',
+            ]);
 
-           Route::get('update/{id}',[
-               'as' => 'admin.categories.update',
-               'uses' => 'CategoriesController@showUpdateCategoryForm',
-           ]);
+            Route::get('update/{id}', [
+                'as' => 'admin.categories.update',
+                'uses' => 'CategoriesController@showUpdateCategoryForm',
+            ]);
 
-           Route::post('update/{id}',[
-               'as' => 'admin.categories.postUpdate',
-               'uses' => 'CategoriesController@updateCategory'
-           ]);
+            Route::post('update/{id}', [
+                'as' => 'admin.categories.postUpdate',
+                'uses' => 'CategoriesController@updateCategory'
+            ]);
 
-           Route::post('detete',[
-               'as' => 'admin.categories.delete',
-               'uses' => 'CategoriesController@deleteCategory',
-           ]);
+            Route::post('detete', [
+                'as' => 'admin.categories.delete',
+                'uses' => 'CategoriesController@deleteCategory',
+            ]);
         });
         //end loai san pham
 
         //user
-        Route::resource('users', 'UsersController');
+        Route::resource('users', 'UsersController', ['except' => ['destroy', 'edit', 'show']]);
+        Route::post('users/delete', [
+            'as' => 'admin.users.delete',
+            'uses' => 'UsersController@destroy',
+        ]);
 
+        Route::get('profile',[
+            'as' => 'admin.users.profile',
+            'uses' => 'UsersController@edit',
+        ]);
+
+        Route::resource('products', 'ProductsController', ['except' => ['destroy', 'show']]);
+        Route::post('products/delete',[
+            'as' => 'admin.products.delete',
+            'uses' => 'ProductsController@destroy',
+        ]);
+
+        //quang cao
+        Route::resource('advertisments', 'AdvertismentsController',['except' => ['destroy', 'show']]);
+        Route::post('advertisments/delete', [
+            'as' => 'admin.advertisments.delete',
+            'uses' => 'AdvertismentsController@destroy',
+        ]);
     });
 });
