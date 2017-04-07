@@ -17,8 +17,8 @@ class CreateAdvertisementsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->text('detail')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->text('start_date')->nullable();
+            $table->text('end_date')->nullable();
             $table->tinyInteger('discount')->nullable();
             $table->timestamps();
         });

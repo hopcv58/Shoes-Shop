@@ -107,7 +107,7 @@
                                         @if(!isset($query))
                                         {{$listcates->links()}}
                                             @else
-                                        {{$listcates->appends(['query'=>$query])->links()}}
+                                        {{$listcates->appends(['search'=>$query])->links()}}
                                             @endif
                                     </div>
                                 </div>

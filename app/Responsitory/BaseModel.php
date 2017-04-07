@@ -61,4 +61,8 @@ class BaseModel extends Model
     {
         return $this->findOrFail($id)->delete();
     }
+
+    public function search($keyword, $field, $field2 = null, $int){
+        return $this->where($field,'like',"%$keyword%")->orWhere($field2, 'like', "%$keyword%")->latest()->paginate($int);
+    }
 }

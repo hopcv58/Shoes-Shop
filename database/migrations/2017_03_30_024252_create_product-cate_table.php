@@ -16,7 +16,7 @@ class CreateProductCateTable extends Migration
         Schema::create('productcate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('cate_id')->unsigned();
             $table->foreign('cate_id')->references('id')->on('categories');
             $table->timestamps();

@@ -60,7 +60,7 @@ class AuthController extends Controller
         } else {
             $input = [
                 'email' => $request->input('email'),
-                'password' => $request->input('password')
+                'password' => $request->input('password'),
             ];
             if(Auth::attempt($input,$request->has('remember')))
             {

@@ -5,9 +5,15 @@ namespace App\Responsitory;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Products extends BaseModel
 {
     protected $table = 'products';
+
+    protected $casts = [
+        'img_profile' => 'array',
+        'attribute' => 'array',
+        'is_public' => 'boolean',
+    ];
 
     protected $fillable = [
         'name',
@@ -15,8 +21,9 @@ class Products extends Model
         'alias',
         'description',
         'price',
+        'phoi_do',
+        'user_id',
         'ad_id',
-        'adver_id',
         'attribute',
         'img_profile',
         'img',
@@ -29,11 +36,19 @@ class Products extends Model
             'name' => 'required|min:3|max:191',
             'code' => 'max:191',
             'alias' => 'max:191',
-            'price' => 'required|digits',
-            'attribute' => 'required',
-            'img' => 'required',
+            'price' => 'required|numeric',
+            'phoi_do' => 'max:191',
             'img_profile' => 'required',
-            'is_public' => 'required|digits',
+        ];
+    }
+
+    public function ruleUpdate(){
+        return [
+            'name' => 'required|min:3|max:191',
+            'code' => 'max:191',
+            'alias' => 'max:191',
+            'price' => 'required|numeric',
+            'phoi_do' => 'max:191',
         ];
     }
 

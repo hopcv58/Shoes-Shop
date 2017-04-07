@@ -15,16 +15,17 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('code',100)->nullable();
+            $table->string('name');
+            $table->string('code', 100)->nullable();
             $table->text('description')->nullable();
             $table->integer('price');
-            $table->integer('ad_id')->unsigned();
-            $table->foreign('ad_id')->references('id')->on('advertisments')->comment('ma quang cao');
+            $table->string('phoi_do')->nullable();
+            $table->integer('ad_id')->unsigned()->nullable();
+            $table->foreign('ad_id')->references('id')->on('advertisments')->onDelete('set null')->onUpdate('cascade')->comment('ma quang cao');
             $table->string('attribute')->comment('kieu json');
-            $table->string('img_profile',100);
+            $table->string('img_profile', 100);
             $table->string('img')->comment('kieu json');
-            $table->tinyInteger('is_public')->comment('0: private, 1:public');
+            $table->tinyInteger('is_public')->default(0)->comment('0: private, 1:public');
             $table->timestamps();
         });
     }
