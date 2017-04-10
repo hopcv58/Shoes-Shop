@@ -94,21 +94,20 @@
                                          </span>
                                     @endif
                                 </div>
-{{--
+
                                 <div class="form-group">
-                                    <div class="checkbox icheck">
-                                        <label>
-                                            <input type="checkbox" value="1"
+                                    {{--<div class="checkbox icheck">--}}
+                                        <label class="control-label" for="change_password">Change password</label>
+                                            <input type="checkbox" value="1" style="width: 20px"
                                                    name="change_password" id="change_password">
-                                            Change password
-                                        </label>
-                                    </div>
+
+                                    {{--</div>--}}
                                 </div>
 
                                 <div class="form-group {{session('err_password') ? 'has-error' : ''}}">
                                     <label for="password" class="control-label">Password (*)</label>
-                                    <input type="password" class="form-control" name="password"
-                                           placeholder="Enter password ...">
+                                    <input type="password" class="form-control" name="password" id="password"
+                                           placeholder="Enter password ..." disabled>
 
                                     @if(session('err_password'))
                                         <span class="help-block">
@@ -119,7 +118,7 @@
 
                                 <div class="form-group {{$errors->has('newpassword') ? 'has-error' : ''}}">
                                     <label for="newpassword" class="control-label">New Password (*)</label>
-                                    <input type="password" class="form-control" id="newpassword" name="newpassword"
+                                    <input type="password" class="form-control" id="newpassword" name="newpassword" disabled
                                            placeholder="New password ..." value="{{old('newpassword')}}">
 
                                     @if($errors->has('newpassword'))
@@ -129,7 +128,7 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group">
+                           {{--     <div class="form-group">
                                     <label for="repassword" class="control-label">ReEnter Password (*)</label>
                                     <input type="password" class="form-control" disabled id="reenterpassword"
                                            placeholder="ReEnter password ...">
@@ -184,11 +183,20 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            $('input').iCheck({
+            $("#change_password").change(function () {
+                if($(this).is(":checked")){
+                    $("#password").removeAttr('disabled');
+                    $("#newpassword").removeAttr('disabled');
+                }else{
+                    $("#password").attr('disabled','');
+                    $("#newpassword").attr('disabled','');
+                }
+            });
+        /*                $('input').iCheck({
                 checkboxClass: 'icheckbox_square-blue',
                 radioClass: 'iradio_square-blue',
                 increaseArea: '20%' // optional
-            });
+            });*/
         });
     </script>
 @endsection

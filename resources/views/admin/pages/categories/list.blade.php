@@ -36,8 +36,8 @@
                 <div class="alert alert-danger myAlert">
                     <a href="#" class="close">&times;</a>
                     {{session('fail')}}
-                    {{session('id')}}
-                    <a href="#">xem danh sach san pham o day</a>
+                    {{--{{session('id')}}--}}
+                    {{--<a href="#">xem danh sach san pham o day</a>--}}
                 </div>
             @endif
             <div class="row">

@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('code') ? 'has-error' : ''}}">
-                                    <label for="code" class="control-label">Code (*)</label>
+                                    <label for="code" class="control-label">Code </label>
                                     <input type="text" class="form-control" name="code"
                                            placeholder="Enter Product Code ..."
                                            value="{{old('code')}}">
@@ -80,7 +80,7 @@
                                     <label>Advertisment</label>
                                     <select class="form-control select2" name="ad_id"
                                             style="width: 100%;">
-                                        <option value="" selected>Select advertisment</option>
+                                        <option value="" selected>Select advertisment (*)</option>
                                         @foreach($advers as $adver)
                                             <option value="{{$adver->id}}">{{$adver->name}}</option>
                                         @endforeach
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('alias') ? 'has-error' : ''}}">
-                                    <label for="alias" class="control-label">Alias (*)</label>
+                                    <label for="alias" class="control-label">Alias </label>
                                     <input type="text" class="form-control" name="alias" value="{{old('password')}}"
                                            placeholder="Enter Alias ...">
                                     @if($errors->has('alias'))
@@ -99,7 +99,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('description') ? 'has-error' : ''}}">
-                                    <label for="description" class="control-label">Description (*)</label>
+                                    <label for="description" class="control-label">Description </label>
                                     <textarea class="form-control textarea" name="description"
                                               placeholder="Enter product description ...">{{old('description')}}</textarea>
                                     @if($errors->has('description'))
@@ -110,7 +110,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('price') ? 'has-error' : ''}}">
-                                    <label for="price" class="control-label">Price (USD)</label>
+                                    <label for="price" class="control-label">Price (USD) (*)</label>
                                     <input type="number" class="form-control" name="price"
                                            placeholder="Enter Price ..."
                                            value="{{old('price')}}">
@@ -122,7 +122,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('phoi_do') ? 'has-error' : ''}}">
-                                    <label for="phoi_do" class="control-label">Phối Đồ (*)</label>
+                                    <label for="phoi_do" class="control-label">Phối Đồ </label>
                                     <input type="text" name="phoi_do" class="form-control" placeholder="Phối Đồ"
                                            value="{{old('phoi_do')}}">
                                     @if($errors->has('phoi_do'))
@@ -144,7 +144,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('img') ? 'has-error' : ''}}">
-                                    <label for="img" class="control-label">Image Detail (*)</label>
+                                    <label for="img" class="control-label">Image Detail </label>
                                     <input type="file" name="img[]" multiple
                                            value="{{old('img')}}">
                                     @if($errors->has('img'))
@@ -179,7 +179,7 @@
                                                     <option value="{{$i}}" {{old('height[]') ? 'selected' : ''}}>{{$i}}</option>
                                                 @endfor
                                             </select>
-                                            <label for="qty" class="control-label">Số lượng</label>
+                                            <label for="qty" class="control-label">Số lượng (*)</label>
                                             <input type="number" class="form-control" name="qty[]"
                                                    placeholder="Số lượng ..."
                                                    value="{{old('qty[]')}}">

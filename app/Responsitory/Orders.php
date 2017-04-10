@@ -4,7 +4,7 @@ namespace App\Responsitory;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Orders extends Model
+class Orders extends BaseModel
 {
     protected $table = 'orders';
 

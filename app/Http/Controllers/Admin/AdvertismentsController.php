@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Responsitory\Advertisments;
+use App\Responsitory\Business;
+use App\Responsitory\Products;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -11,10 +13,12 @@ use Illuminate\Support\Facades\Validator;
 class AdvertismentsController extends Controller
 {
     private $adv;
+    private $bussiness;
 
     function __construct()
     {
         $this->adv = new Advertisments();
+        $this->bussiness = new Business();
     }
 
     /**
@@ -29,7 +33,7 @@ class AdvertismentsController extends Controller
             $advs = $this->adv->latest()->paginate(5);
             return view('admin.pages.advertisments.list', compact('advs'));
         } else {
-            $advs = $this->advs->search($query, 'name', 'discount', 5);
+            $advs = $this->adv->search($query, 'name', 'discount', 5);
             return view('admin.pages.advertisments.list', compact('advs', 'query'));
         }
     }
@@ -41,7 +45,8 @@ class AdvertismentsController extends Controller
      */
     public function create()
     {
-        return view ('admin.pages.advertisments.create');
+        $products = Products::all();
+        return view ('admin.pages.advertisments.create', compact('products'));
     }
 
     /**
@@ -56,8 +61,11 @@ class AdvertismentsController extends Controller
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $this->adv->store($request->all());
-        return redirect()->route('advertisments.index')->with('success', 'Tạo quảng cáo thành công');
+        $arr_products = $request->input('product_id');
+        if($this->bussiness->adminStoreAd($request->all(),$arr_products)) {
+            return redirect()->route('advertisments.index')->with('success', 'Tạo quảng cáo thành công');
+        }
+        return redirect()->route('advertisments.index')->with('success', 'Tạo quảng cáo thất bại');
     }
 
     /**
@@ -69,7 +77,8 @@ class AdvertismentsController extends Controller
     public function edit($id)
     {
         $adv = $this->adv->show($id);
-        return view('admin.pages.advertisments.edit', compact('adv'));
+        $products = Products::all();
+        return view('admin.pages.advertisments.edit', compact('adv','products'));
     }
 
     /**
@@ -91,9 +100,12 @@ class AdvertismentsController extends Controller
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
-        $this->adv->show($id)->update($request->all());
-        return redirect()->route('advertisments.index')->with('success',"Cập nhật sự kiện quảng cáo thành công");
+        $arr_products = $request->input('product_id');
+        if($this->bussiness->adminUpdateAdById($request->all(),$id,$arr_products)) {
+            return redirect()->route('advertisments.index')->with('success', 'Cập nhật quảng cáo thành công');
+        }
+//        $this->adv->show($id)->update($request->all());
+        return redirect()->route('advertisments.index')->with('fail',"Thất bại sorry :'(");
     }
 
     /**
