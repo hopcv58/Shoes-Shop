@@ -2,7 +2,6 @@
 @section('content')
 
     <div class="container">
-        <p><a href="{{ url('index') }}">Home</a> / Cart</p>
         <h1>Your Cart</h1>
 
         <hr>
@@ -24,7 +23,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th class="table-image"></th>
+                    <th class="col-md-4"></th>
                     <th>Product</th>
                     <th>Option</th>
                     <th>Quantity</th>
@@ -38,9 +37,12 @@
 
                 @foreach (Cart::content() as $item)
                     <tr>
-                        <td class="table-image"><a href="{{ url('index', [$item->model->slug]) }}"><img src="http://placehold.it/500x500" alt="product" class="img-responsive cart-image col-md-3"></a></td>
-                        <td><a href="{{ url('index', [$item->model->slug]) }}">{{ $item->name }}</a></td>
-                        <td class="col-md-3">{{implode($item->options->toArray(),' ')}}</td>
+                        <td class="table-image"><a href="{{ route('product', [$item->id]) }}"><img
+                                        src="{{asset('upload/img_product/'.$products[$item->id]->img_profile)}}" alt="product"
+                                        class="img-responsive cart-image col-md-6"></a></td>
+                        <td><a href="{{ route('product', [$item->id]) }}">{{ $item->name }}</a></td>
+
+                        <td class="col-md-3">Size {{$item->options['size']}},màu {{$item->options['color']}}</td>
                         <td>
                             <select class="quantity" data-id="{{ $item->rowId }}">
                                 <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
@@ -56,12 +58,13 @@
                             <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
                                 {!! csrf_field() !!}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="submit" class="btn btn-danger btn-sm" value="Remove">
+                                <input type="submit" class="col-md-6 btn btn-danger btn-sm" value="Xóa">
                             </form>
 
-                            <form action="{{ url('switchToWishlist', [$item->rowId]) }}" method="POST" class="side-by-side">
+                            <form action="{{ url('switchToWishlist', [$item->rowId]) }}" method="POST"
+                                  class="side-by-side">
                                 {!! csrf_field() !!}
-                                <input type="submit" class="btn btn-success btn-sm" value="To Wishlist">
+                                <input type="submit" class="col-md-6 btn btn-success btn-sm" value="Đánh dấu">
                             </form>
                         </td>
                     </tr>
@@ -74,6 +77,7 @@
                     <td>${{ Cart::instance('default')->subtotal() }}</td>
                     <td></td>
                     <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="table-image"></td>
@@ -82,29 +86,26 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                 </tr>
-
                 </tbody>
             </table>
 
-            <a href="{{ url('/index') }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
-            <a href="{{url('/order')}}" class="btn btn-success btn-lg">Proceed to Checkout</a>
+            <a href="{{ URL::previous() }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
+            <a href="{{route('order.index')}}" class="btn btn-success btn-lg">Proceed to Checkout</a>
 
             <div style="float:right">
-                <form action="{{ url('/emptyCart') }}" method="POST">
+                <form action="{{ url('emptyCart') }}" method="POST">
                     {!! csrf_field() !!}
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="submit" class="btn btn-danger btn-lg" value="Empty Cart">
                 </form>
             </div>
-
         @else
-
             <h3>You have no items in your shopping cart</h3>
-            <a href="{{ url('/index') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
+            <button onclick="window.history.back()" class="btn btn-primary btn-lg">Continue Shopping</button>
 
         @endif
-
         <div class="spacer"></div>
 
     </div> <!-- end container -->
@@ -113,15 +114,14 @@
 
 @section('extra_js')
     <script>
-			(function(){
-
+			(function () {
 				$.ajaxSetup({
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					}
 				});
 
-				$('.quantity').on('change', function() {
+				$('.quantity').on('change', function () {
 					var id = $(this).attr('data-id')
 					$.ajax({
 						type: "PATCH",
@@ -129,7 +129,7 @@
 						data: {
 							'quantity': this.value,
 						},
-						success: function(data) {
+						success: function (data) {
 							window.location.href = '{{ url('/cart') }}';
 						}
 					});

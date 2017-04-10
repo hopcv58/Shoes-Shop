@@ -75,9 +75,9 @@ class UserAuthController extends Controller
         return view('user.auth.register');
     }
 
-    public function postRegister(Request $request)
+    public function register(Request $request)
     {
-
+        return view('user.auth.register');
     }
 
     public function showForgotPasswordForm()

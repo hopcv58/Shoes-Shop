@@ -25,7 +25,7 @@ class Orders extends Model
     public function rule()
     {
         return [
-            'name' => 'min:3|max:191|unique:name',
+            'name' => 'min:3|max:191',
             'status' => 'digits',
             'total' => 'digits',
             'payment' => 'required|min:3|max:191',

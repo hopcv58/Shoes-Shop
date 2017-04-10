@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use \Cart as Cart;
+use Cart as Cart;
+use Illuminate\Http\Request;
 use Validator;
+use App\Responsitory\Products;
 
 class UserCartController extends Controller
 {
@@ -17,13 +18,19 @@ class UserCartController extends Controller
      */
     public function index()
     {
-        return view('user.cart');
+        $products = [];
+        foreach (Cart::content() as $item)
+        {
+            $product = Products::find($item->id);
+            $products[$item->id] = $product;
+        }
+        return view('user.cart',compact('products'));
     }
     
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -35,16 +42,16 @@ class UserCartController extends Controller
         if (!$duplicates->isEmpty()) {
             return redirect('cart')->withSuccessMessage('Item is already in your cart!');
         }
-        
-        Cart::add($request->id, $request->name, 1, $request->price, explode(" ",$request->option))->associate('App\Responsitory\Products');
+        Cart::add($request->id, $request->name, 1, $request->price,
+          ['color' => $request->color, 'size' => $request->size])->associate('App\Responsitory\Products');
         return redirect('cart')->withSuccessMessage('Item was added to your cart!');
     }
     
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
@@ -69,7 +76,7 @@ class UserCartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -92,7 +99,7 @@ class UserCartController extends Controller
     /**
      * Switch item from shopping cart to wishlist.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function switchToWishlist($id)

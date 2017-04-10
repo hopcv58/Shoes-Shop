@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <p><a href="{{ url('index') }}">Home</a> / Wishlist</p>
+        <p><a href="{{route('index')}}">Home</a> / Wishlist</p>
         <h1>Your Wishlist</h1>
 
         <hr>
@@ -36,11 +36,12 @@
                 <tbody>
                 @foreach (Cart::instance('wishlist')->content() as $item)
                     <tr>
-                        <td class="table-image"><a href="{{ url('index', [$item->model->slug]) }}"><img
-                                        src="http://placehold.it/500x500" alt="product"
-                                        class="img-responsive cart-image"></a></td>
-                        <td><a href="{{ url('/category/1', [$item->model->slug]) }}">{{ $item->name }}</a></td>
-                        <td class="col-md-3">{{implode($item->options->toArray(),' ')}}</td>
+                        <td class="table-image"><a href="{{ route('product', [$item->id]) }}"><img
+                                        src="{{asset('upload/img_product/'.$products[$item->id]->img_profile)}}"
+                                        alt="product"
+                                        class="img-responsive cart-image col-md-6"></a></td>
+                        <td><a href="{{ route('product', [$item->id]) }}">{{ $item->name }}</a></td>
+                        <td class="col-md-3">Size {{$item->options['size']}},màu {{$item->options['color']}}</td>
                         <td>${{ $item->subtotal }}</td>
                         <td class=""></td>
                         <td>
@@ -63,7 +64,7 @@
 
             <div class="spacer"></div>
 
-            <a href="/index" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
+            <a href="{{URL::previous()}}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
 
             <div style="float:right">
                 <form action="{{ url('/emptyWishlist') }}" method="POST">
@@ -76,7 +77,7 @@
         @else
 
             <h3>You have no items in your Wishlist</h3>
-            <a href="/index" class="btn btn-primary btn-lg">Continue Shopping</a>
+            <a href="{{URL::previous()}}" class="btn btn-primary btn-lg">Continue Shopping</a>
 
         @endif
 
