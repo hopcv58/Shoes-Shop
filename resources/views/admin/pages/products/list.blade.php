@@ -70,15 +70,16 @@
                         <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Code</th>
-                                    <th>Alias</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Advertisment</th>
-                                    <th>Image Profile</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Tên sp</th>
+                                    <th>Mã sp</th>
+                                    <th>Ký hiệu</th>
+                                    <th>Mô tả</th>
+                                    <th>Giá</th>
+                                    <th>Quảng cáo</th>
+                                    <th>Hình đại diện</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                    <th>Số lượng</th>
                                     <th style="width: 7%;" colspan="2">Action</th>
                                 </tr>
                                 @foreach($products as $product)
@@ -105,6 +106,7 @@
                                                 <span class="badge bg-red">private</span>
                                             @endif
                                         </td>
+                                        <td>{{$soluong[$product->id]}}</td>
                                         <td>
                                             <a href="javascript:;"
                                                class="btn btn-xs btn-danger delete"

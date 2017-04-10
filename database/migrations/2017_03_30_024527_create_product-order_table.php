@@ -20,8 +20,8 @@ class CreateProductOrderTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('no action');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->integer('qty');
-            $table->integer('amount');
-            $table->tinyInteger('status');
+            $table->text('attribute');
+            $table->tinyInteger('status')->default(0)->comment('0: chưa chuyển, 1: đã chuyển');
             $table->timestamps();
         });
     }

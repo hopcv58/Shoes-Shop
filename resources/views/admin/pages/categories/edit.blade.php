@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('alias') ? 'has-error' : ''}}">
-                                    <label for="alias" class="control-label">Alias of Category (*)</label>
+                                    <label for="alias" class="control-label">Alias of Category </label>
                                     <input type="text" class="form-control" name="alias" value="{{$cateid->alias}}"
                                            placeholder="Enter Alias ...">
                                     @if($errors->has('alias'))
@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('description') ? 'has-error' : ''}}">
-                                    <label for="description" class="control-label">Description of Category (*)</label>
+                                    <label for="description" class="control-label">Description of Category </label>
                                     <textarea class="textarea" name="description"
                                               placeholder="Enter Description ...">{{$cateid->description}}</textarea>
 

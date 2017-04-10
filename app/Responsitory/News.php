@@ -5,7 +5,7 @@ namespace App\Responsitory;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class News extends BaseModel
 {
     protected $table = 'news';
 
@@ -15,14 +15,14 @@ class News extends Model
         'img',
         'summary',
         'is_public',
-        'user_id',
     ];
 
     public function rule()
     {
         return [
-            'title' => 'required|min:3|max:191|unique:title',
+            'title' => 'required|min:3|max:191|unique:news',
             'content' => 'required|min:3',
+            'img' => 'required',
         ];
     }
 

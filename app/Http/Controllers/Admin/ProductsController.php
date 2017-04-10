@@ -29,13 +29,14 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
+        $soluong = $this->business->adminGetProductQuantity();
         $query = $request->input('search');
         if ($query == null) {
             $products = $this->_products->latest()->paginate(5);
-            return view('admin.pages.products.list', compact('products'));
+            return view('admin.pages.products.list', compact('products', 'soluong'));
         } else {
             $products = $this->_products->search($query, 'name', 'code', 5);
-            return view('admin.pages.products.list', compact('products', 'query'));
+            return view('admin.pages.products.list', compact('products', 'query', 'soluong'));
         }
     }
 
@@ -119,16 +120,6 @@ class ProductsController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -200,14 +191,14 @@ class ProductsController extends Controller
         }
         productcate::where('product_id',$id)->delete();
         $products = Products::findOrFail($id);
-        $products->name = $data['name'];
-        $products->code = $data['code'];
-        $products->alias = $data['alias'];
-        $products->description = $data['description'];
-        $products->phoi_do = $data['phoi_do'];
-        $products->ad_id = $data['ad_id'];
-        $products->price = $data['price'];
-        $products->attribute = $data['attribute'];
+        $products->name                 = $data['name'];
+        $products->code                 = $data['code'];
+        $products->alias                = $data['alias'];
+        $products->description          = $data['description'];
+        $products->phoi_do              = $data['phoi_do'];
+        $products->ad_id                = $data['ad_id'];
+        $products->price                = $data['price'];
+        $products->attribute            = $data['attribute'];
         if(key_exists('img_profile',$data)) {
             $products->img_profile = $data['img_profile'];
         }
@@ -233,7 +224,7 @@ class ProductsController extends Controller
         if ($products->save()) {
             return redirect()->route('products.index')->with('success', "Đã chỉnh sửa sản phẩm {$data['name']}");
         } else {
-            return redirect()->route('products.index')->with('fail', "Thêm thất bại");
+            return redirect()->route('products.index')->with('fail', "Chỉnh sửa thất bại");
         }
     }
 
