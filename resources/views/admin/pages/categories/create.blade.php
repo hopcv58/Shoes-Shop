@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('alias') ? 'has-error' : ''}}">
-                                    <label for="alias" class="control-label">Alias of Category (*)</label>
+                                    <label for="alias" class="control-label">Alias of Category</label>
                                     <input type="text" class="form-control" name="alias" value="{{old('alias')}}"
                                            placeholder="Enter Alias ...">
                                     @if($errors->has('alias'))
@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('description') ? 'has-error' : ''}}">
-                                    <label for="description" class="control-label">Description of Category (*)</label>
+                                    <label for="description" class="control-label">Description of Category</label>
                                     <textarea class="textarea" name="description"
                                               placeholder="Enter Description ...">{{old('description')}}</textarea>
 
@@ -71,7 +71,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" value="submit" class="btn btn-primary">Submit</button>
                                     <button class="btn btn-github" type="reset">Reset</button>
                                 </div>
                             </form>

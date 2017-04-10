@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Categories
+    Admin
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -87,7 +87,7 @@
                                         <td style="width: 15%;">{{$user->phone }}</td>
                                         <td>{{$user->address}}</td>
                                         <td>{{date_format($user->updated_at,'Y-m-d')}}</td>
-                                        <td>{{$user->img}}</td>
+                                        <td><img src="{!! asset("upload/img_profile/$user->img") !!}" class="img-thumbnail" width="150px" alt="img profile"></td>
                                         <td>
                                             @if($user->id == 1)
                                                 <span class="badge bg-blue">Super admin</span>

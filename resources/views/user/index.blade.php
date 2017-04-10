@@ -86,7 +86,7 @@
                                        aria-hidden="true" ></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="/product/1" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"
+                                    <a href="{{route('product',['id' => 1])}}" class="glyphicon glyphicon-eye-open btn-default img-btn" aria-hidden="true"
                                        ></a>
                                 </div>
                             </div>

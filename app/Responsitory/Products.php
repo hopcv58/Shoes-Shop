@@ -12,7 +12,6 @@ class Products extends BaseModel
     protected $casts = [
         'img_profile' => 'array',
         'attribute' => 'array',
-        'is_public' => 'boolean',
     ];
 
     protected $fillable = [
@@ -22,7 +21,6 @@ class Products extends BaseModel
         'description',
         'price',
         'phoi_do',
-        'user_id',
         'ad_id',
         'attribute',
         'img_profile',

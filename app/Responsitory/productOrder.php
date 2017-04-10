@@ -4,7 +4,7 @@ namespace App\Responsitory;
 
 use Illuminate\Database\Eloquent\Model;
 
-class productOrder extends Model
+class productOrder extends BaseModel
 {
     protected $table = 'product_order';
 
@@ -12,14 +12,13 @@ class productOrder extends Model
         'product_id',
         'order_id',
         'qty',
-        'amount',
+        'attribute',
         'status',
     ];
 
     public function rule(){
         return [
             'qty' => 'required|digits',
-            'amount' => 'required|digits',
             'status' => 'required|digits',
         ];
     }
@@ -31,6 +30,6 @@ class productOrder extends Model
 
     public function products()
     {
-        return $this->belongsTo(Products::clas, 'product_id', 'id');
+        return $this->belongsTo(Products::class, 'product_id', 'id');
     }
 }

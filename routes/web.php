@@ -59,17 +59,17 @@ Route::group(['namespace' => '\User'], function () {
         'uses' => 'UserAuthController@showRegistrationForm',
     ]);
     Route::get('category/{id}', [
-      'as' => 'category',
-      'uses' => 'UserController@showCategory',
+        'as' => 'category',
+        'uses' => 'UserController@showCategory',
     ]);
     Route::get('product/{id}', [
-      'as' => 'product',
-      'uses' => 'UserController@showProduct',
+        'as' => 'product',
+        'uses' => 'UserController@showProduct',
     ]);
     Route::resource('cart', 'UserCartController');
     Route::delete('emptyCart', 'UserCartController@emptyCart');
     Route::post('switchToWishlist/{id}', 'UserCartController@switchToWishlist');
-    
+
     Route::resource('wishlist', 'UserWishlistController');
     Route::delete('emptyWishlist', 'UserWishlistController@emptyWishlist');
     Route::post('switchToCart/{id}', 'UserWishlistController@switchToCart');
@@ -150,28 +150,111 @@ Route::group([
         //end loai san pham
 
         //user
-        Route::resource('users', 'UsersController', ['except' => ['destroy', 'edit', 'show']]);
+        Route::resource('users', 'UsersController', ['except' => ['destroy', 'create', 'edit', 'show']]);
         Route::post('users/delete', [
             'as' => 'admin.users.delete',
             'uses' => 'UsersController@destroy',
+            'middleware' => 'adminRole',
+        ]);
+        Route::get('users/create', [
+            'middleware' => 'adminRole',
+            'as' => 'users.create',
+            'uses' => 'UsersController@create',
         ]);
 
-        Route::get('profile',[
+        Route::get('profile', [
             'as' => 'admin.users.profile',
             'uses' => 'UsersController@edit',
         ]);
 
         Route::resource('products', 'ProductsController', ['except' => ['destroy', 'show']]);
-        Route::post('products/delete',[
+        Route::post('products/delete', [
             'as' => 'admin.products.delete',
             'uses' => 'ProductsController@destroy',
         ]);
 
         //quang cao
-        Route::resource('advertisments', 'AdvertismentsController',['except' => ['destroy', 'show']]);
+        Route::resource('advertisments', 'AdvertismentsController', ['except' => ['destroy', 'show']]);
         Route::post('advertisments/delete', [
             'as' => 'admin.advertisments.delete',
             'uses' => 'AdvertismentsController@destroy',
         ]);
+
+        Route::get('users/customer', [
+            'as' => 'admin.users.customer',
+            'uses' => 'UsersController@getCustomer',
+        ]);
+
+        Route::get('users/customer/{id}', [
+            'as' => 'admin.users.customer.detail',
+            'uses' => 'UsersController@customerDetail',
+        ]);
+
+        Route::get('orders', [
+            'as' => 'admin.orders.index',
+            'uses' => 'OrdersController@index',
+        ]);
+
+        Route::post('orders/delete', [
+            'as' => 'admin.orders.delete',
+            'uses' => 'OrdersController@delete',
+        ]);
+
+        Route::get('orders/detail/{id}', [
+            'uses' => 'OrdersController@detail',
+        ]);
+        Route::get('orders/detail/{id}/product', [
+            'as' => 'admin.orders.detail',
+            'uses' => 'OrdersController@detailProduct',
+        ]);
+
+        Route::get('orders/update/{id}', [
+            'as' => 'admin.orders.update',
+            'uses' => 'OrdersController@update',
+        ]);
+
+        Route::post('orders/update/{id}/update', [
+            'as' => 'admin.orders.update.post',
+            'uses' => 'OrdersController@postUpdate',
+        ]);
+
+        Route::get('product-orders/index', [
+            'as' => 'admin.productorder.index',
+            'uses' => 'OrdersController@getProductOrders',
+        ]);
+
+        Route::get('sale', [
+            'as' => 'admin.sale',
+            'uses' => 'AdminController@getSale',
+        ]);
+
+        Route::get('slides/create', [
+            'as' => 'admin.news.getslides',
+            'uses' => 'AdminController@showCreateSlidesForm',
+        ]);
+
+        Route::post('slides/create', [
+            'as' => "admin.news.postslides",
+            'uses' => 'AdminController@postSlide',
+        ]);
+
+        Route::get('feedbacks/list', [
+            'as' => 'admin.news.feedbacks',
+            'uses' => function () {
+                $feedbacks = \App\Responsitory\Feedbacks::paginate(5);
+                return view('admin.pages.news.feedbacks', compact('feedbacks'));
+            }
+        ]);
+
+        Route::post('feedbacks/list/{id}', [
+            'as' => 'admin.feedbacks.changestatus',
+            'uses' => 'AdminController@changeFeedbackStatus'
+        ]);
+        Route::resource('news', 'NewsController', ['except' => ['show']]);
     });
 });
+
+Route::get('/sendmail', [
+    'as' => 'sendmail',
+    'uses' => 'MailController@sendMail'
+]);

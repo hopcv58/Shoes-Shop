@@ -5,15 +5,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Responsitory\Business;
 use App\Responsitory\Categories;
+use App\Responsitory\Customers;
+use App\Responsitory\Feedbacks;
+use App\Responsitory\productOrder;
+use App\Responsitory\Products;
+use App\Responsitory\Slides;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller
 {
     private $business;
+
     function __construct()
     {
         $this->business = new Business();
@@ -23,7 +32,74 @@ class AdminController extends Controller
 
     public function getIndex()
     {
-        return view('admin.pages.index');
+        $total_sale = $this->business->adminGetSale();
+        $total_orders = $this->business->adminGetAllOrders();
+        $total_products = $this->business->adminGetAllProducts();
+        $total_customer = $this->business->adminGetAllCustomer();
+        $customers = User::latest()->limit(8)->get();
+        $products = Products::latest()->limit(5)->get();
+        $product_orders = productOrder::latest()->limit(7)->get();
+        $hot_products = productOrder::select('product_id', DB::raw('SUM(qty) as `total_qty`'))
+            ->groupBy('product_id')
+            ->limit(8)
+            ->orderBy('total_qty', 'desc')
+            ->get();
+//        dd($hot_products);
+        return view('admin.pages.index',
+            compact('total_sale', 'total_orders', 'total_products', 'total_customer', 'customers', 'products',
+                'product_orders', 'hot_products'));
+    }
+
+    public function getSale()
+    {
+        $month = Carbon::now()->month;
+        $day = Carbon::now()->day;
+        $monthSale = $this->business->adminGetMonthSale($month);
+        $daySale = $this->business->adminGetDaySale($day);
+        $totalSale = $this->business->adminGetSale();
+        $totalQty = $this->business->adminGetQty();
+        $dayQty = $this->business->adminGetDayQty($day);
+        $monthQty = $this->business->adminGetMonthQty($month);
+        $totalOrder = $this->business->adminGetAllOrders();
+        return view('admin.pages.orders.thongke',
+            compact('monthSale', 'daySale', 'totalSale', 'totalQty', 'dayQty', 'monthQty', 'totalOrder'));
+    }
+
+    public function showCreateSlidesForm(){
+        return view('admin.pages.news.createSlide');
+    }
+
+    public function postSlide(Request $request){
+        $path = 'upload/img_news';
+        $slides = new Slides();
+        $is_public = $request->has('is_public') ? 1 : 0;
+        if($request->hasFile('img_profile')){
+            $name = $this->business->saveImg($request->file('img_profile'),$path);
+            $slides->name = $name;
+            $slides->is_public = $is_public;
+            $slides->save();
+        }
+        if($request->hasFile('img')){
+            $names = $this->business->saveManyImg($request->file('img'),$path);
+            foreach ($names as $name){
+                $slides = new Slides();
+                $slides->name = $name;
+                $slides->is_public = $is_public;
+                $slides->save();
+            }
+        }
+        return redirect()->back()->with('success', 'upload thành công');
+    }
+    public function changeFeedbackStatus($id){
+        $feedback = Feedbacks::find($id);
+        if($feedback->is_public == 1){
+            $feedback->is_public = 0;
+            $feedback->save();
+        }else{
+            $feedback->is_public = 1;
+            $feedback->save();
+        }
+        return redirect()->back()->with('success', 'Thay đổi trạng thái thành công');
     }
 
 }

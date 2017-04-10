@@ -48,7 +48,7 @@
                     <i class="fa fa-files-o"></i>
                     <span>Quản lý sản phẩm</span>
                     <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
@@ -71,10 +71,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Doanh Thu</a></li>
-                    <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Sản Phẩm</a></li>
-                    <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Giao Dịch</a></li>
-                    <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Bài Viết</a></li>
+                    <li><a href="{{route('admin.sale')}}"><i class="fa fa-circle-o"></i> Doanh Thu</a></li>
                 </ul>
             </li>
             <!-- ./thống kê thương mại -->
@@ -89,12 +86,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> Đơn Hàng</a></li>
-                    <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Lịch sử giao dịch</a></li>
-                    <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                    <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                    <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                    <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+                    <li><a href="{{route('admin.orders.index')}}"><i class="fa fa-circle-o"></i> Đơn Hàng</a></li>
+                    <li><a href="{{route('admin.productorder.index')}}"><i class="fa fa-circle-o"></i> Đơn hàng sản phẩm</a></li>
                 </ul>
             </li>
             <!-- ./quản lý đơn hàng -->
@@ -110,7 +103,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{route('users.index')}}"><i class="fa fa-circle-o"></i> Ban quản trị</a></li>
 
-                    <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Khách hàng</a></li>
+                    <li><a href="{{route('admin.users.customer')}}"><i class="fa fa-circle-o"></i> Khách hàng</a></li>
                 </ul>
             </li>
             <!-- ./quản lý user -->
@@ -124,19 +117,12 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Tin tức</a></li>
-                    <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> slides</a></li>
-                    <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Phản hồi</a></li>
-                    <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Bình luận</a></li>
+                    <li><a href="{{route('news.index')}}"><i class="fa fa-circle-o"></i> Tin tức</a></li>
+                    <li><a href="{{route('admin.news.getslides')}}"><i class="fa fa-circle-o"></i> slides</a></li>
+                    <li><a href="{{route('admin.news.feedbacks')}}"><i class="fa fa-circle-o"></i> Phản hồi</a></li>
                 </ul>
             </li>
             <!-- ./quản lý tin tức -->
-
-
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
             <li>
                 <a href="pages/mailbox/mailbox.html">
                     <i class="fa fa-envelope"></i> <span>Mailbox</span>

@@ -108,13 +108,15 @@ class CategoriesController extends Controller
         $id = $request->input('idCate');
         $idCate = Categories::find($id);
         $name = $idCate->name;
+//        dd($idCate->productCate->count());
         //Nếu trong danh mục có sản phẩm thì phải xóa các sản phẩm trước
         if ($idCate->productCate()->count() > 0) {
             $products = $idCate->productCate()->get();
             return redirect()->route('admin.categories.list')
-                ->with(['fail' => "Need to delete all products of $name", 'products' => $products, 'id' => $id]);
+                ->with(['fail' => "Phải xóa tất cả các sản phẩm của $name", 'products' => $products, 'id' => $id]);
         }
-        if ($this->cate->destroyId($idCate)) {
+//        if ($this->cate->destroyId($idCate)) {
+        if($idCate->delete()){
             return redirect()->route('admin.categories.list')->with('success', "delete $name successfully");
         }
     }

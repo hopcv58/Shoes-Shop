@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -17,7 +18,7 @@ class UsersController extends Controller
 
     function __construct()
     {
-        $this->users = new User();
+        $this->users    = new User();
         $this->business = new Business();
     }
 
@@ -28,9 +29,9 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $currentUser = Auth::user();
-        $query = $request->input('search');
-        if($query==null){
+        $currentUser    = Auth::user();
+        $query          = $request->input('search');
+        if($query == null){
             $users = User::paginate(5);
             return view('admin.pages.users.list',compact('users','currentUser'));
         }else{
@@ -58,8 +59,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['password'] = bcrypt($data['password']);
         $validator = Validator::make($data, $this->users->rule());
+        $data['password'] = bcrypt($data['password']);
         if($validator->fails())
         {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -95,26 +96,29 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $path = 'upload/img_profile';
         $rule = [
-            'name' => 'max:191',
-            'email' => 'email',
-            'img' => 'max:191',
-            'phone' => 'max:30',
-            'address' => 'max:191'
+            'name'          => 'max:191',
+            'email'         => 'email',
+            'phone'         => 'max:30',
+            'address'       => 'max:191',
+            'newpassword'   => 'min:6|max:191',
         ];
         $data = $request->all();
-
-/*        if(key_exists('password',$data)) {
-            $new_password = md5($request->input('newpassword'));
-            $old_password = md5($request->input('password'));
-            if ($old_password != $user->password) {
-                return redirect()->back()->with('err_password', 'Incorrect password please reenter password');
-            }else{
+        $validator = Validator::make($data,$rule);
+        if($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        if($request->has('change_password')) {
+            $new_password = bcrypt($request->input('newpassword'));
+            if(Hash::check($request->input('password'), Auth::user()->getAuthPassword())){
                 $data['password'] = $new_password;
+            }else{
+                return redirect()->back()->with('err_password', 'Incorrect password please reenter password');
             }
         }else{
             unset($data['password']);
             unset($rule['newpassword']);
-        }*/
+        }
         if($request->hasFile('img')){
             $img = $request->file('img');
             $data['img'] = $this->business->saveImg($img, $path);
@@ -122,14 +126,14 @@ class UsersController extends Controller
                 unlink($path . '/' . $user->img);
             }
         }
-        $validator = Validator::make($data,$rule);
+    /*    $validator = Validator::make($data,$rule);
         if($validator->fails())
         {
             return redirect()->back()->withErrors($validator)->withInput();
-        }else{
+        }else{*/
             $user->update($data);
             return redirect()->route('admin.users.profile')->with('success',"Update profile $user->name succesfully");
-        }
+
     }
 
     /**
@@ -151,5 +155,24 @@ class UsersController extends Controller
         }else{
             return redirect()->route('users.index')->with('fail', 'User ko tồn tại');
         }
+    }
+
+    public function getCustomer(Request $request){
+        $query = $request->input('search');
+        if($query == null){
+            $customers = Customers::latest()->paginate(5);
+            return view('admin.pages.users.customerList',compact('customers'));
+        }else {
+            $customers = Customers::where('username','like',"%$query%")->orWhere('email','like',"%$query%")->paginate(5);
+            return view('admin.pages.users.customerList', compact('customers', 'query'));
+        }
+    }
+
+    public function customerDetail($id){
+        $customer_id = Customers::find($id);
+        echo "<p>Name: $customer_id->username </p>";
+        echo "<p>Address: $customer_id->address </p>";
+        echo "<p>Email: $customer_id->email</p>";
+        echo "<p>Phone Number: $customer_id->phone</p>";
     }
 }
