@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
-use \Cart as Cart;
+use Cart as Cart;
+use Illuminate\Http\Request;
 use Validator;
-
+use App\Responsitory\Products;
 
 class UserWishlistController extends Controller
 {
@@ -19,13 +18,19 @@ class UserWishlistController extends Controller
      */
     public function index()
     {
-        return view('user.wishlist');
+        $products = [];
+        foreach (Cart::instance('wishlist')->content() as $item)
+        {
+            $product = Products::find($item->id);
+            $products[$item->id] = $product;
+        }
+        return view('user.wishlist',compact('products'));
     }
     
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -35,20 +40,19 @@ class UserWishlistController extends Controller
         });
         
         if (!$duplicates->isEmpty()) {
-            return redirect('shop')->withSuccessMessage('Item is already in your wishlist!');
+            return redirect(url()->previous())->withErrorMessage('Item is already in your wishlist!');
         }
         
-        Cart::instance('wishlist')->add($request->id, $request->name, 1, $request->price, explode(" ",$request->option))
-          ->associate('App\Responsitory\Products');
-        
-        return redirect('shop')->withSuccessMessage('Item was added to your wishlist!');
+        Cart::add($request->id, $request->name, 1, $request->price,
+          ['color' => $request->color, 'size' => $request->size])->associate('App\Responsitory\Products');
+        return redirect(url()->previous())->withSuccessMessage('Item was added to your wishlist!');
     }
     
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -59,7 +63,7 @@ class UserWishlistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -82,23 +86,20 @@ class UserWishlistController extends Controller
     /**
      * Switch item from wishlist to shopping cart.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function switchToCart($id)
     {
         $item = Cart::instance('wishlist')->get($id);
-        
         Cart::instance('wishlist')->remove($id);
-        
-        $duplicates = Cart::instance('default')->search(function ($cartItem, $rowId) use ($id) {
+        $duplicates = Cart::search(function ($cartItem, $rowId) use ($id) {
             return $cartItem->id === $id;
         });
         
         if (!$duplicates->isEmpty()) {
-            return redirect('cart')->withSuccessMessage('Item is already in your shopping cart!');
+            return redirect(url()->previous())->withErrorMessage('Item is already in your cart!');
         }
-        
         Cart::instance('default')->add($item->id, $item->name, 1, $item->price, $item->options->toArray())
           ->associate('App\Responsitory\Products');
         

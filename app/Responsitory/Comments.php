@@ -28,7 +28,7 @@ class Comments extends Model
         return $this->morphTo();
     }
 
-    public function users()
+    public function customers()
     {
         return $this->belongsTo(Customers::class, 'customer_id', 'id');
     }

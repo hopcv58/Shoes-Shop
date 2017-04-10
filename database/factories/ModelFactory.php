@@ -74,7 +74,7 @@ $factory->define(Categories::class, function (Generator $faker) {
 
 $factory->define(productcate::class, function (Generator $faker) {
    return [
-       'product_id' => $faker->numberBetween(1,110),
+       'product_id' => $faker->numberBetween(1,100),
        'cate_id' => $faker->numberBetween(1,10),
    ];
 });
@@ -114,7 +114,7 @@ $factory->define(Comments::class, function (Generator $faker){
    return [
        'customer_id' => $faker->numberBetween(1,10),
        'content' => $faker->paragraph,
-       'commentable_id' => $faker->numberBetween(1,110),
+       'commentable_id' => $faker->numberBetween(1,100),
        'commentable_type' => $faker->randomElement(['App\Responsitory\News', 'App\Responsitory\Products']),
    ];
 });

@@ -16,15 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 //========================== Route User ===========================
 
-Route::get('/', [
-    'as' => 'home',
-    'uses' => function () {
-        return view('welcome');
-    }
-]);
-
 Route::group(['namespace' => '\User'], function () {
-    Route::get('index', [
+    Route::get('/', [
         'as' => 'index',
         'uses' => 'UserController@index',
     ]);
@@ -56,7 +49,10 @@ Route::group(['namespace' => '\User'], function () {
 
     Route::post('register', [
         'as' => 'register',
-        'uses' => 'UserAuthController@showRegistrationForm',
+        'uses' => 'UserAuthController@register',
+    ]);
+    Route::get('category', [
+      'uses' => 'UserController@showAllCategory',
     ]);
     Route::get('category/{id}', [
         'as' => 'category',
@@ -73,7 +69,21 @@ Route::group(['namespace' => '\User'], function () {
     Route::resource('wishlist', 'UserWishlistController');
     Route::delete('emptyWishlist', 'UserWishlistController@emptyWishlist');
     Route::post('switchToCart/{id}', 'UserWishlistController@switchToCart');
-    Route::get('order', 'UserOrderController@checkOut');
+    Route::resource('order', 'UserOrderController');
+    Route::get('search', [
+      'as' => 'search',
+      'uses' => 'UserController@search',
+    ]);
+    Route::get('news/{id}', [
+      'as' => 'news',
+      'uses' => 'UserController@showNews',
+    ]);
+    Route::get('news', [
+      'as' => 'allNews',
+      'uses' => 'UserController@showAllNews',
+    ]);
+    Route::post('product/comment','UserController@addCommentToProduct');
+    Route::post('news/comment','UserController@addCommentToNewst');
 });
 
 
