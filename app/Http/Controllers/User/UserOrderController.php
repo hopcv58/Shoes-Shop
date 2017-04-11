@@ -38,7 +38,7 @@ class UserOrderController extends Controller
             $order->total = str_replace(",","",Cart::instance('default')->subtotal());
             $order->note = $request->note;
             if(!Auth::guard('customer')->guest()){
-                $order->customer_id = $request->customer_id;
+                $order->customer_id = Auth::guard('customer')->user()->id;
                 $order->name = $request->name ? $request->name : Auth::guard('customer')->user()->name;
                 $order->email = $request->email ? $request->email : Auth::guard('customer')->user()->email;
                 $order->phone = $request->phone ? $request->phone : Auth::guard('customer')->user()->phone;
@@ -50,7 +50,6 @@ class UserOrderController extends Controller
                 $order->phone = $request->phone;
                 $order->address = $request->address;
             }
-            dd($order);
             $order->save();
             foreach (Cart::content() as $item) {
                 $productOrder = new productOrder();
@@ -72,7 +71,7 @@ class UserOrderController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show()
+    public function showAll()
     {
         $orders = [];
         if (Auth::guard('customer')->guest()) {

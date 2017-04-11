@@ -70,6 +70,10 @@ Route::group(['namespace' => '\User'], function () {
     Route::delete('emptyWishlist', 'UserWishlistController@emptyWishlist');
     Route::post('switchToCart/{id}', 'UserWishlistController@switchToCart');
     Route::resource('order', 'UserOrderController');
+    Route::get('allOrders',[
+        'as' => 'allOrders',
+        'uses' => 'UserOrderController@showAll']
+    );
     Route::get('search', [
       'as' => 'search',
       'uses' => 'UserController@search',
