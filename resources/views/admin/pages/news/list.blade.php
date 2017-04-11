@@ -77,7 +77,7 @@
                                 @foreach($news as $new)
                                     <tr>
                                         <td>{{$new->title}}</td>
-                                        <td style="width: 20%;">{{$new->summary}}</td>
+                                        <td style="width: 20%;">{!! $new->summary !!}</td>
                                         <td style="width: 30%;"><img src="{{asset("upload/img_news/$new->img")}}" class="thumbnail" width="150px" alt=""></td>
                                         <td>
                                             @if($new->is_public == 1)

@@ -32,7 +32,7 @@ class ProductsController extends Controller
         $soluong = $this->business->adminGetProductQuantity();
         $query = $request->input('search');
         if ($query == null) {
-            $products = $this->_products->latest()->paginate(5);
+            $products = $this->_products->orderBy('updated_at', 'desc')->paginate(5);
             return view('admin.pages.products.list', compact('products', 'soluong'));
         } else {
             $products = $this->_products->search($query, 'name', 'code', 5);

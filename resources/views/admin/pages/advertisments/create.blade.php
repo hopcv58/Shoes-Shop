@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Admin Talaha | Create new advertisment
+    Create new advertisment
 @endsection
 @section('css')
     <!-- Select2 -->

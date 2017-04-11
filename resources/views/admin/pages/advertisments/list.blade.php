@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Categories
+    Advertisments
 @endsection
 @section('content')
     <div class="content-wrapper">

@@ -60,8 +60,11 @@ class OrdersController extends Controller
 
     public  function update($order_id){
         $order_id = $this->orders->find($order_id);
+//        dd('aa');
         $product_order = productOrder::where('order_id', $order_id);
-        return view('admin.pages.orders.update', compact('order_id'));
+        /*$product_order->status == 0 ? $product_order->status = 1 : $product_order->status = 0;
+        $product_order->save();*/
+        return view('admin.pages.orders.update', compact('order_id', 'product_order'));
     }
 
     public function postUpdate(Request $request, $id)
