@@ -58,7 +58,6 @@ class UserOrderController extends Controller
                 $productOrder->status = 0;
                 $productOrder->order_id = $order->id;
                 $productOrder->save();
-                
             }
             Cart::destroy();
             return Redirect::back();
