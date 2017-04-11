@@ -143,7 +143,7 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <a href="{{route('order.index')}}">Xem các đơn hàng</a>
+                                    <a href="{{route('allOrders')}}">Xem các đơn hàng</a>
                                 </li>
                             </ul>
                         </li>
