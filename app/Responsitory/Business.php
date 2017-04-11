@@ -510,7 +510,7 @@ class Business // extends Model
         try {
             $feedback = new Feedbacks();
 //            $order->name = $request->name;
-            $feedback->content = $request->content;
+            $feedback->content = $request->input('content');
             if (!isset(Auth::guard('customer')->user()->id)) {
                 $feedback->username = $request->username;
                 $feedback->email = $request->email;
