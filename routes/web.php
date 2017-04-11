@@ -52,7 +52,7 @@ Route::group(['namespace' => '\User'], function () {
         'uses' => 'UserAuthController@register',
     ]);
     Route::get('category', [
-      'uses' => 'UserController@showAllCategory',
+      'uses' => 'UserController@showNewProduct',
     ]);
     Route::get('category/{id}', [
         'as' => 'category',
@@ -84,6 +84,8 @@ Route::group(['namespace' => '\User'], function () {
     ]);
     Route::post('product/comment','UserController@addCommentToProduct');
     Route::post('news/comment','UserController@addCommentToNewst');
+    Route::post('feedback','UserController@addFeedback');
+    Route::get('feedback','UserController@showFeedbackForm');
 });
 
 

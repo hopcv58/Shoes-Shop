@@ -14,8 +14,10 @@
     <link href="{{ asset('user/css/bootstrap.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('user/css/my.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('user/css/style.css') }}" rel="stylesheet">--}}
 
-    <!-- Font Awesome -->
+
+<!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -23,6 +25,7 @@
     <!-- Scripts -->
     <script src="{{ asset('user/js/jquery.js') }}"></script>
     <script src="{{ asset('user/js/bootstrap.min.js') }}"></script>
+    <script src="{{asset('user/js/jquery.elevatezoom.js')}}"></script>
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -82,7 +85,8 @@
         <div class="col-md-4" style="margin-top: 10px">
             <form action="{{route('search')}}" class="navbar-form navbar-left">
                 <div class="input-group">
-                    <input type="text" name="input" class="form-control" placeholder="search..." style="border-radius: 0px;">
+                    <input type="text" name="input" class="form-control" placeholder="search..."
+                           style="border-radius: 0px;">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </span>
@@ -90,12 +94,12 @@
             </form>
 
         </div>
-       {{-- <div class="col-md-2 info">
-            <div class="policy-text">
-                <strong>BẢO HÀNH SẢN PHẨM</strong>
-                <p class="small">TRỌN ĐỜI</p>
-            </div>
-        </div>--}}
+        {{-- <div class="col-md-2 info">
+             <div class="policy-text">
+                 <strong>BẢO HÀNH SẢN PHẨM</strong>
+                 <p class="small">TRỌN ĐỜI</p>
+             </div>
+         </div>--}}
         <div class="col-md-2 info">
             <div class="policy-text">
                 <strong>MIỄN PHÍ VẬN CHUYỂN</strong>
@@ -210,85 +214,112 @@
 
     </div>
     <!--navbar end-->
-    @yield('content')
-</div>
-<!--footer begin-->
-<footer class="footer">
-    <div class="container">
-        <div class="col-md-4">
-            <h4>GIỚI THIỆU TALAHA</h4>
-            <br>
-            <p>Talaha tôn vinh người phụ nữ hiện đại với phong cách thời thượng, cởi mở và cũng rất duyên dáng, thân
-                thiện.</p>
-            <br>
-            <h4>THÔNG TIN LIÊN LẠC</h4>
-            <p>HOTLINE: 0888340410 </p>
-            <p>Giờ mở cửa: 08:00-22:00</p>
-            <p>Mail: cskh@talaha.vn</p>
-            <div class="col-md-12" style="margin-top: 10px">
-                <img src="{{asset('upload/img_pages/chungchi.png')}}" alt="">
+    <!--wrapper start-->
+    <div id="wrapper">
+        <div class="container">
+            {{--path--}}
+            {{--@section('path')--}}
+            {{--<a href="{{route('index')}}">Home</a>--}}
+            {{--@show--}}
+            @yield('path')
+            {{--path end--}}
+            {{--side nav--}}
+            <div class="row">
+                <div class="col-md-3">
+                    @yield('left_bar')
+                </div>
+                <div class="col-md-9">
+                </div>
+                {{--side nav end--}}
+                <div class="col-md-9">
+                    @yield('right_content')
+                </div>
+                @yield('content')
             </div>
-            <div class="col-sm-12 col-xs-12 mobile-icon" style="margin-top: 20px;">
-                <ul class="list-unstyled clearfix">
-                    <li class="facebook">
-                        <a target="_blank" href="https://www.facebook.com/talaha.vn" class="fa fa-facebook"></a>
-                    </li>
-                    <li class="twitter">
-                        <a class="fa fa-twitter" target="_blank" href="#"></a>
-                    </li>
-                    <li class="google-plus">
-                        <a class="fa fa-google-plus" target="_blank" href="#"></a>
-                    </li>
-                    <li class="youtube">
-                        <a class="fa fa-youtube" target="_blank" href="#"></a>
-                    </li>
-                    <li class="instagram">
-                        <a class="fa fa-instagram" target="_blank" href="#"></a>
-                    </li>
+        </div>
+        <!--wrapper end-->
+
+    </div>
+    <!--footer begin-->
+    <footer class="footer">
+        <div class="container">
+            <div class="col-md-4">
+                <h4>GIỚI THIỆU TALAHA</h4>
+                <br>
+                <p>Talaha tôn vinh người phụ nữ hiện đại với phong cách thời thượng, cởi mở và cũng rất duyên dáng, thân
+                    thiện.</p>
+                <br>
+                <h4>THÔNG TIN LIÊN LẠC</h4>
+                <p>HOTLINE: 0888340410 </p>
+                <p>Giờ mở cửa: 08:00-22:00</p>
+                <p>Mail: cskh@talaha.vn</p>
+                <div class="col-md-12" style="margin-top: 10px">
+                    <img src="{{asset('upload/img_pages/chungchi.png')}}" alt="">
+                </div>
+                <div class="col-sm-12 col-xs-12 mobile-icon" style="margin-top: 20px;">
+                    <ul class="list-unstyled clearfix">
+                        <li class="facebook">
+                            <a target="_blank" href="https://www.facebook.com/talaha.vn" class="fa fa-facebook"></a>
+                        </li>
+                        <li class="twitter">
+                            <a class="fa fa-twitter" target="_blank" href="#"></a>
+                        </li>
+                        <li class="google-plus">
+                            <a class="fa fa-google-plus" target="_blank" href="#"></a>
+                        </li>
+                        <li class="youtube">
+                            <a class="fa fa-youtube" target="_blank" href="#"></a>
+                        </li>
+                        <li class="instagram">
+                            <a class="fa fa-instagram" target="_blank" href="#"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">Hướng dẫn chọn size</a></li>
+                    <li><a href="#">Chính sách bảo hành và đổi trả</a></li>
+                    <li><a href="#">Quy định hình thức thanh toán và giao hàng</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="col-md-2">
-            <h4>HỖ TRỢ KHÁCH HÀNG</h4>
-            <ul class="list-unstyled">
-                <li><a href="#">Hướng dẫn chọn size</a></li>
-                <li><a href="#">Chính sách bảo hành và đổi trả</a></li>
-                <li><a href="#">Quy định hình thức thanh toán và giao hàng</a></li>
-                <li><a href="#">Chính sách bảo mật</a></li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            <h4>TIN TỨC</h4>
-            <br>
-            <ul class="list-unstyled">
-                <li><a href="#">Xu hướng thời trang</a></li>
-                <li><a href="#">Thông tin khuyến mãi</a></li>
-                <li><a href="#">Bộ sưu tập</a></li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <h4>FANPAGE FACEBOOK</h4>
-            <div class="fb-page" data-href="https://www.facebook.com/facebook"
-                 data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
-                 data-show-facepile="true">
-                {{--<blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore"><a--}}
-                {{--href="https://www.facebook.com/facebook">Facebook</a></blockquote>--}}
+            <div class="col-md-2">
+                <h4>TIN TỨC</h4>
+                <br>
+                <ul class="list-unstyled">
+                    <li><a href="#">Xu hướng thời trang</a></li>
+                    <li><a href="#">Thông tin khuyến mãi</a></li>
+                    <li><a href="#">Bộ sưu tập</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>FANPAGE FACEBOOK</h4>
+                <div class="fb-page" data-href="https://www.facebook.com/facebook"
+                     data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
+                     data-show-facepile="true">
+                    {{--<blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore"><a--}}
+                    {{--href="https://www.facebook.com/facebook">Facebook</a></blockquote>--}}
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 @yield('extra_js')
 <!--footer end-->
-<!-- Scripts -->
-<div id="fb-root"></div>
-<script>(function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+    <!-- Scripts -->
+    <div id="fb-root"></div>
+    <script>(function (d, s, id)
+        {
+            var js, fjs = d.getElementsByTagName(s)[ 0 ];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 </html>

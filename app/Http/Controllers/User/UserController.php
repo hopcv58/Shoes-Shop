@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Responsitory\Business;
+use App\Responsitory\Customers;
+use App\Responsitory\Feedbacks;
 use App\Responsitory\News;
 use App\Responsitory\Products;
 use Illuminate\Http\Request;
@@ -19,6 +21,9 @@ class UserController extends Controller
         $this->business = new Business();
     }
     
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $feedbacks = $this->business->getFeedback();
@@ -42,10 +47,13 @@ class UserController extends Controller
         
     }
     
-    public function showAllCategory()
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showNewProduct()
     {
 //        $product  =  productcate::with('Categories')->get();
-        $products = $this->business->getAllProduct();
+        $products = $this->business->getAllProduct()->take(8);
         if (isset($products)) {
             return view('user.category', compact('products'));
         } else {
@@ -53,6 +61,10 @@ class UserController extends Controller
         }
     }
     
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showProduct($id)
     {
 //        $product  =  productcate::with('Categories')->get();
@@ -60,7 +72,8 @@ class UserController extends Controller
         if (isset($product)) {
             $comment = $this->business->getCommentByProduct($id);
             $option = $this->business->getProductOption($id);
-            return view('user.product', compact('product', 'comment', 'option'));
+            $related = $this->business->getProductRelated($id);
+            return view('user.product', compact('product', 'comment', 'option','related'));
         } else {
             return view('errors.404');
         }
@@ -125,4 +138,16 @@ class UserController extends Controller
         }
         
     }
+    
+    public function showFeedbackForm()
+    {
+        return view('user.feedback');
+    }
+    
+    public function addFeedback(Request $request)
+    {
+        $this->business->saveFeedback($request);
+        return view('user.feedback');
+    }
+    
 }

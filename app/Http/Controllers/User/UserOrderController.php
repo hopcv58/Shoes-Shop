@@ -24,21 +24,33 @@ class UserOrderController extends Controller
         return view('user.order');
     }
     
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function store(Request $request)
     {
         try {
             $order = new Orders();
-
 //            $order->name = $request->name;
             $order->payment = $request->payment;
             $order->status = 0;
-            $order->total = floatval(Cart::instance('default')->subtotal());
+            $order->total = str_replace(",","",Cart::instance('default')->subtotal());
             $order->note = $request->note;
-            $order->customer_id = $request->customer_id;
-            $order->username = $request->name;
-            $order->email = $request->email;
-            $order->phone = $request->phone;
-            $order->address = $request->address;
+            if(!Auth::guard('customer')->guest()){
+                $order->customer_id = $request->customer_id;
+                $order->name = $request->name ? $request->name : Auth::guard('customer')->user()->name;
+                $order->email = $request->email ? $request->email : Auth::guard('customer')->user()->email;
+                $order->phone = $request->phone ? $request->phone : Auth::guard('customer')->user()->phone;
+                $order->address = $request->address ? $request->address : Auth::guard('customer')->user()->address;
+            }
+            else{
+                $order->name = $request->name;
+                $order->email = $request->email;
+                $order->phone = $request->phone;
+                $order->address = $request->address;
+            }
+            dd($order);
             $order->save();
             foreach (Cart::content() as $item) {
                 $productOrder = new productOrder();
@@ -57,6 +69,9 @@ class UserOrderController extends Controller
         }
     }
     
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show()
     {
         $orders = [];
