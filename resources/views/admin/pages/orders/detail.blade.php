@@ -73,7 +73,7 @@
                         <tr>
                             <th>Qty</th>
                             <th>Product</th>
-                            <th>Alias</th>
+                            <th>Số lượng</th>
                             <th>Description</th>
                             <th>Subtotal</th>
                         </tr>
@@ -84,9 +84,9 @@
                         <tr>
                             <td>{{$pid->qty}}</td>
                             <td>{{$pid->products->name}}</td>
-                            <td>{{$pid->products->alias}}</td>
-                            <td>{{$pid->products->description}}</td>
-                            <td>${{($pid->qty)*($pid->products->price)}}</td>
+                            <td>{{$pid->qty}}</td>
+                            <td>{!! $pid->products->description !!}</td>
+                            <td>{{number_format(($pid->qty)*($pid->products->price))}} vnđ</td>
                         </tr>
                             @endforeach
                         @else
@@ -116,11 +116,11 @@
                         <table class="table">
                             <tr>
                                 <th style="width:50%">Subtotal:</th>
-                                <td>${{$order_id->total}}</td>
+                                <td>{{number_format($order_id->total)}} vnđ</td>
                             </tr>
                             <tr>
                                 <th>Shipping:</th>
-                                <td>$0</td>
+                                <td>0 vnđ</td>
                             </tr>
                             <tr>
                                 <th>Total:</th>

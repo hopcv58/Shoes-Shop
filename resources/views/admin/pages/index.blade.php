@@ -62,7 +62,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Tổng doanh thu</span>
-                            <span class="info-box-number">{{$total_sale}} $</span>
+                            <span class="info-box-number">{{number_format($total_sale)}} vnđ</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -124,13 +124,16 @@
                                             <tr>
                                                 <td>{{$hot_product->product_id}}</td>
                                                 <td>{{$hot_product->products->name}}</td>
-                                                <td><span class="label label-primary">${{$hot_product->products->price}}</span></td>
+                                                <td>
+                                                    <span class="label label-primary">{{number_format($hot_product->products->price)}}
+                                                        đ</span>
+                                                </td>
                                                 <td><span class="label label-danger">
                                                         @if($hot_product->products->advertisments != null)
-                                                        {{$hot_product->products->advertisments->discount}} %
+                                                            {{$hot_product->products->advertisments->discount}} %
                                                         @else
-                                                        0%
-                                                            @endif
+                                                            0%
+                                                        @endif
                                                     </span></td>
                                                 <td>{{$hot_product->total_qty}}</td>
                                             </tr>
@@ -240,11 +243,13 @@
                                     @foreach($products as $product)
                                         <li class="item">
                                             <div class="product-img">
-                                                <img src="{{asset("upload/img_product/$product->img_profile")}}" width="100px" alt="Product Image">
+                                                <img src="{{asset("upload/img_product/$product->img_profile")}}"
+                                                     width="100px" alt="Product Image">
                                             </div>
                                             <div class="product-info">
                                                 <a href="javascript:void(0)" class="product-title">{{$product->name}}
-                                                    <span class="label label-warning pull-right">{{$product->price}} $</span></a>
+                                                    <span class="label label-warning pull-right">{{number_format($product->price)}}
+                                                        đ</span></a>
                                                 <span class="product-description">{!! $product->description !!}</span>
                                             </div>
                                         </li>
@@ -263,54 +268,53 @@
                     </div>
                     <!-- /.box -->
 
-                    {{--<div class="col-md-6">--}}
-                        <!-- USERS LIST -->
-                        <div class="box box-danger">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Latest Members</h3>
+                {{--<div class="col-md-6">--}}
+                <!-- USERS LIST -->
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Latest Members</h3>
 
-                                <div class="box-tools pull-right">
-                                    <span class="label label-danger">8 New Members</span>
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                                class="fa fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                                class="fa fa-times"></i>
-                                    </button>
-                                </div>
+                            <div class="box-tools pull-right">
+                                <span class="label label-danger">8 New Members</span>
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                            class="fa fa-times"></i>
+                                </button>
                             </div>
-                            <!-- /.box-header -->
-                            <div class="box-body no-padding">
-                                <ul class="users-list clearfix">
-                                    @if($customers != null)
-                                        @foreach($customers as $customer)
-                                            <li>
-                                                <img src="{{asset("upload/img_profile/$customer->img")}}"
-                                                     alt="User Image">
-                                                <a class="users-list-name" href="#">{{$customer->name}}</a>
-                                                <span class="users-list-date">{{$customer->created_at->toFormattedDateString()}}</span>
-                                            </li>
-                                        @endforeach
-                                    @else
-                                        <li>
-                                            <a class="users-list-name" href="#">Chưa có thành viên nào</a>
-                                        </li>
-                                    @endif
-                                </ul>
-                                <!-- /.users-list -->
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer text-center">
-                                <a href="{{route('users.index')}}" class="uppercase">View All Users</a>
-                            </div>
-                            <!-- /.box-footer -->
                         </div>
-                        <!--/.box -->
-                    {{--</div>--}}
-                    <!-- /.col -->
+                        <!-- /.box-header -->
+                        <div class="box-body no-padding">
+                            <ul class="users-list clearfix">
+                                @if($customers != null)
+                                    @foreach($customers as $customer)
+                                        <li>
+                                            <img src="{{asset("upload/img_profile/$customer->img")}}"
+                                                 alt="User Image">
+                                            <a class="users-list-name" href="#">{{$customer->name}}</a>
+                                            <span class="users-list-date">{{$customer->created_at->toFormattedDateString()}}</span>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <li>
+                                        <a class="users-list-name" href="#">Chưa có thành viên nào</a>
+                                    </li>
+                                @endif
+                            </ul>
+                            <!-- /.users-list -->
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <a href="{{route('users.index')}}" class="uppercase">View All Users</a>
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                    <!--/.box -->
+                {{--</div>--}}
+                <!-- /.col -->
                 </div>
                 <!-- /.col -->
-
 
 
             </div>

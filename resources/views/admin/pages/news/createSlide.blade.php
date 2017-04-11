@@ -20,6 +20,9 @@
         </section>
         <section class="content">
             <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-google" href="{{route('admin.slides.list')}}">Xem toàn bộ Slides</a>
+                    </div>
                 @if(session('success'))
                     <div class="alert alert-success myAlert">
                         <a href="#" class="close">&times;</a>

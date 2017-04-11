@@ -339,6 +339,25 @@ class Business // extends Model
         return $arr;
     }
 
+    /**
+     * Lấy toàn bộ sản phẩm từ 1 thể loại
+     * @return array
+     */
+    public function adminGetAllProductsFromCategories(){
+        $categories = $this->categories->all();
+        if($categories == null){
+            return null;
+        }
+        $products_cate = [];
+        foreach ($categories as $category){
+            $products_cate[$category->id] = productcate::where('cate_id', $category->id)->get();
+//            dd($products_cate);
+        }
+//        dd($products_cate);
+        return $products_cate;
+    }
+
+
     //   ==================================User function===================================================
     public function getCateById($cate_id)
     {

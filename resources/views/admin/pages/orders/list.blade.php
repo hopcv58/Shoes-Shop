@@ -1,14 +1,14 @@
 @extends('admin.layout.master')
 @section('title')
-    Categories
+    Admin Talaha | Hóa đơn
 @endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Categories
-                <small>List of categories</small>
+                Orders
+                <small>List of orders</small>
             </h1>
 
             <ol class="breadcrumb">
@@ -83,7 +83,7 @@
                                         <td>{{$order->id}}</td>
                                         <td style="width: 20%;">{{($order->username != null) ? $order->username : $order->customers->username }}</td>
                                         <td style="width: 10%;">{{$order->payment}}</td>
-                                        <td>{{$order->total}} $</td>
+                                        <td><span class="label label-success">{{number_format($order->total)}} vnđ </span></td>
                                         <td>{{$order->created_at->toDateTimeString()}}</td>
                                         <td>
                                             @if($order->status == 1)

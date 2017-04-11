@@ -91,7 +91,8 @@
                                         <td>{{$product->price}}</td>
                                         @if($product->advertisments != null)
                                             <td>
-                                                <span class="badge bg-blue-active">{{$product->advertisments->name}}</span>
+                                                <p class="text-danger">{{$product->advertisments->name}}</p>
+                                                <span class="badge bg-blue-active">Giảm giá: {{$product->advertisments->discount}} %</span>
                                             </td>
                                         @else
                                             <td><span class="badge bg-red">No Advertisment</span></td>

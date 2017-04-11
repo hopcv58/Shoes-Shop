@@ -17,10 +17,11 @@
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-12">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <form action="{{route('news.store')}}" method="post" role="form" enctype="multipart/form-data">
+                            <form action="{{route('news.store')}}" method="post" role="form"
+                                  enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <legend>Tạo bài post mới</legend>
@@ -39,8 +40,9 @@
 
                                 <div class="form-group {{$errors->has('summary') ? 'has-error' : ''}}">
                                     <label for="summary" class="control-label">Tóm Tắt</label>
-                                    <input type="text" class="form-control" name="alias" value="{{old('summary')}}"
-                                           placeholder="Enter summary ...">
+                                    <textarea class="textarea" name="summary"
+                                              placeholder="Enter summary ...">{{old('summary')}}
+                                    </textarea>
                                     @if($errors->has('summary'))
                                         <span class="help-block">
                                     <strong>{{$errors->first('summary')}}</strong>

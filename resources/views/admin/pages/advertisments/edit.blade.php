@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Update category
+    Update Advertisments
 @endsection
 @section('css')
     <!-- Select2 -->

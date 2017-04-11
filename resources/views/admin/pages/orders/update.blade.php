@@ -34,7 +34,8 @@
 
                                 <div class="form-group">
                                     <label for="alias" class="control-label">Khách hàng</label>
-                                    <input type="text" class="form-control" name="alias" value="{{$order_id->customers->username}}"
+                                    <input type="text" class="form-control" name="alias"
+                                           value="{{($order_id->customer_id != null) ? $order_id->customers->username : $order_id->username}}"
                                            disabled>
                                 </div>
 

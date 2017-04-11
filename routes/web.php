@@ -261,6 +261,21 @@ Route::group([
             'uses' => 'AdminController@changeFeedbackStatus'
         ]);
         Route::resource('news', 'NewsController', ['except' => ['show']]);
+
+        Route::get('slides/list', [
+            'as' => 'admin.slides.list',
+            'uses' => 'AdminController@getListSlides',
+        ]);
+
+        Route::post('slides/delete/', [
+            'as' => 'admin.slides.destroy',
+            'uses' => 'AdminController@deleteSlide'
+        ]);
+
+        Route::get('slides/changestatus/{id}', [
+            'as' => 'admin.slide.changestatus',
+            'uses' => 'AdminController@slideChangeStatus',
+        ]);
     });
 });
 
