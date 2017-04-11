@@ -1,15 +1,15 @@
 @extends('layouts.user')
-@section('path')
-    @parent / Cart
-@endsection
-@section('left_bar')
-    <ul><strong><h3>Danh mục</h3></strong></ul>
-    <ul class="col-md-offset-1">
-        @foreach($cateList as $category)
-            <li><strong><a href="{{url('category',[$category->id])}}">{{$category->name}}</a></strong></li>
-        @endforeach
-    </ul>
-@endsection
+{{--@section('path')--}}
+    {{--@parent / Cart--}}
+{{--@endsection--}}
+{{--@section('left_bar')--}}
+    {{--<ul><strong><h3>Danh mục</h3></strong></ul>--}}
+    {{--<ul class="col-md-offset-1">--}}
+        {{--@foreach($cateList as $category)--}}
+            {{--<li><strong><a href="{{url('category',[$category->id])}}">{{$category->name}}</a></strong></li>--}}
+        {{--@endforeach--}}
+    {{--</ul>--}}
+{{--@endsection--}}
 @section('content')
     <h1>Your Cart</h1>
 
@@ -83,9 +83,9 @@
             <tr>
                 <td class="table-image"></td>
                 <td></td>
+                <td></td>
                 <td class="small-caps table-bg" style="text-align: right">Total</td>
                 <td>${{ Cart::instance('default')->subtotal() }}</td>
-                <td></td>
                 <td></td>
                 <td></td>
             </tr>

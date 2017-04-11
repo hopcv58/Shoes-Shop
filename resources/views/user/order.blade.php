@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('no_left_bar')
+@section('content')
     @if (sizeof(Cart::content()) > 0)
         <div class="row">
             <div class="col-md-6">
@@ -127,10 +127,6 @@
                                         <textarea id="note" type="text" class="form-control"
                                                   name="note"></textarea>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" name="customer_id"
-                                           value="{{Auth::guard('customer')->user()->id}}">
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">

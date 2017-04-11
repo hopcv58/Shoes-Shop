@@ -50,10 +50,10 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showAllCategory()
+    public function showNewProduct()
     {
 //        $product  =  productcate::with('Categories')->get();
-        $products = $this->business->getAllProduct();
+        $products = $this->business->getAllProduct()->take(8);
         if (isset($products)) {
             return view('user.category', compact('products'));
         } else {
@@ -72,7 +72,8 @@ class UserController extends Controller
         if (isset($product)) {
             $comment = $this->business->getCommentByProduct($id);
             $option = $this->business->getProductOption($id);
-            return view('user.product', compact('product', 'comment', 'option'));
+            $related = $this->business->getProductRelated($id);
+            return view('user.product', compact('product', 'comment', 'option','related'));
         } else {
             return view('errors.404');
         }
