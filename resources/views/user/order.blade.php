@@ -75,11 +75,11 @@
                             <form class="form-horizontal" role="form" method="POST" action="">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label for="name" class="col-md-4 control-label">
+                                    <label for="username" class="col-md-4 control-label">
                                         Họ tên người nhận</label>
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control"
-                                               name="name" value="{{Auth::guard('customer')->user()->username}}"
+                                        <input id="username" type="text" class="form-control"
+                                               name="username" value="{{Auth::guard('customer')->user()->username}}"
                                                required>
                                     </div>
                                 </div>
@@ -107,8 +107,7 @@
                                     <div class="col-md-6">
                                         <select id="payment" class="form-control" name="payment" required>
                                             <option value="paypal">Paypal</option>
-                                            <option value="fast ship">Fast ship(40k)</option>
-                                            <option value="free ship">Free ship(5-7 days)</option>
+                                            <option value="free ship">Free ship</option>
                                         </select>
                                     </div>
                                 </div>
