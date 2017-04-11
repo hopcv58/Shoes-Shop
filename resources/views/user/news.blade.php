@@ -4,21 +4,21 @@
     <div id="wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <h2 class="text-center">{{$news->title}}</h2>
                     <i class="">{{$news->summary}}</i>
-                    <p>
-                        {{$news->content}}
-                    </p>
+                    <div class="text-center">
+                        {!! $news->content !!}
+                    </div>
                 </div>
-                <div class="col-md-5 pull-right">
+                <div class="col-md-3 pull-right">
                     <h3>Bài viết tương tự</h3>
                     @foreach($related as $relate)
                         <div class="row card section-row">
                             <div class="col-md-3">
                                 <div class="thumbnail">
                                     <a href="{{route('news',$relate->id)}}"><img
-                                                src="{{asset('upload/img_product/'.$relate->img)}}"
+                                                src="{{asset('upload/img_news/'.$relate->img)}}"
                                                 class="img-responsive margin" alt="Image"></a>
                                 </div>
                             </div>

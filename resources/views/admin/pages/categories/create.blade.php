@@ -20,7 +20,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <form action="{{route('admin.categories.postCreate')}}" method="post" role="form">
+                            <form action="{{route('admin.categories.postCreate')}}" method="post" role="form" enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <legend>Create new category</legend>
@@ -33,6 +33,17 @@
                                     @if($errors->has('name'))
                                         <span class="help-block">
                                     <strong>{{$errors->first('name')}}</strong>
+                                         </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{session('not_img') ? 'has-error' : ''}}">
+                                    <label for="img_profile" class="control-label">Chọn ảnh hiển thị trên trang (*)</label>
+                                    <input type="file" name="img_profile"
+                                           value="{{old('img_profile')}}">
+                                    @if(session('not_img'))
+                                        <span class="help-block">
+                                    <strong>{{session('not_img')}}</strong>
                                          </span>
                                     @endif
                                 </div>

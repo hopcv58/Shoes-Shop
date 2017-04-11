@@ -35,7 +35,7 @@ class UserOrderController extends Controller
             $order->total = floatval(Cart::instance('default')->subtotal());
             $order->note = $request->note;
             $order->customer_id = $request->customer_id;
-            $order->username = $request->user_name;
+            $order->username = $request->name;
             $order->email = $request->email;
             $order->phone = $request->phone;
             $order->address = $request->address;

@@ -40,5 +40,4 @@ class UserTest extends TestCase
             ->see('Create category successfully');
     }
 
-
 }
