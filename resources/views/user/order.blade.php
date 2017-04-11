@@ -11,11 +11,11 @@
                                   class="form-horizontal" role="form" method="POST" action="">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label for="name" class="col-md-4 control-label">
+                                    <label for="username" class="col-md-4 control-label">
                                         Họ tên người nhận</label>
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control"
-                                               name="name" required>
+                                        <input id="username" type="text" class="form-control"
+                                               name="username" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -72,7 +72,7 @@
                     @else
                         <div class="panel-heading">Địa chỉ người nhận</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="">
+                            <form onsubmit="return confirm('This will empty your cart and submit your order\n Are you sure about this?');" class="form-horizontal" role="form" method="POST" action="">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="username" class="col-md-4 control-label">
