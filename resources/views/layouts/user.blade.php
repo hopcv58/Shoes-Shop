@@ -173,7 +173,7 @@
                             <li><a href="#">LIÊN HỆ</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{route('index')}}">SẢN PHẨM MỚI</a></li>
+                    <li><a href="{{route('newProduct')}}">SẢN PHẨM MỚI</a></li>
                     {{--<li class="dropdown">--}}
                     {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Tất cả sản phẩm--}}
                     {{--<span class="caret"></span></a>--}}

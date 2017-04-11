@@ -35,20 +35,19 @@ class UserOrderController extends Controller
 //            $order->name = $request->name;
             $order->payment = $request->payment;
             $order->status = 0;
-            $order->total = str_replace(",","",Cart::instance('default')->subtotal());
+            $order->total = str_replace(",", "", Cart::instance('default')->subtotal());
             $order->note = $request->note;
-            if(!Auth::guard('customer')->guest()){
+            if (!Auth::guard('customer')->guest()) {
                 $order->customer_id = Auth::guard('customer')->user()->id;
-                $order->name = $request->name ? $request->name : Auth::guard('customer')->user()->name;
-                $order->email = $request->email ? $request->email : Auth::guard('customer')->user()->email;
-                $order->phone = $request->phone ? $request->phone : Auth::guard('customer')->user()->phone;
-                $order->address = $request->address ? $request->address : Auth::guard('customer')->user()->address;
-            }
-            else{
-                $order->name = $request->name;
-                $order->email = $request->email;
-                $order->phone = $request->phone;
-                $order->address = $request->address;
+                $order->username = $request->input('username') ? $request->input('username') : Auth::guard('customer')->user()->username;
+                $order->email = $request->input('email') ? $request->input('email') : Auth::guard('customer')->user()->email;
+                $order->phone = $request->input('phone') ? $request->input('phone') : Auth::guard('customer')->user()->phone;
+                $order->address = $request->input('address') ? $request->input('address') : Auth::guard('customer')->user()->address;
+            } else {
+                $order->username = $request->input('username');
+                $order->email = $request->input('email');
+                $order->phone = $request->input('phone');
+                $order->address = $request->input('address');
             }
             $order->save();
             foreach (Cart::content() as $item) {
@@ -75,7 +74,7 @@ class UserOrderController extends Controller
     {
         $orders = [];
         if (Auth::guard('customer')->guest()) {
-            return view('user.showOrder',compact('orders'));
+            return view('user.showOrder', compact('orders'));
         } else {
             $orders = Orders::where('customer_id', Auth::guard('customer')->user()->id)->get();
             return view('user.showOrder', compact('orders'));
