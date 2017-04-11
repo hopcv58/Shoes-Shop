@@ -117,27 +117,46 @@
                             </div>
                         @endforeach
                     </div>
-                    <!--section body end-->
-                    <!--section button-->
-                    <div class="text-center section-row">
-                        <a class="btn btn-default section-button" href="{{route('category',$cate->id)}}">
-                            Xem thêm
+                @endforeach
+            </div>
+            <!--section body end-->
+            <!--section button-->
+            <div class="text-center section-row">
+                <a class="btn btn-default section-button" href="{{route('category',$cate->id)}}">
+                    Xem thêm
+                </a>
+            </div>
+            <!--section button end-->
+        </section>
+    @endforeach
+    <section>
+        <!--section label-->
+        <div class="text-center section-row">
+            <div class="row">
+                <div class="col-md-5">
+                    <hr>
+                </div>
+                <div class="col-md-2 section-title text-center">Đánh giá</div>
+                <div class="col-md-5">
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <!--section label end-->
+        <!--section body-->
+        <div class="row">
+            @foreach($feedbacks as $feedback)
+                <div class="col-md-2">
+                    <div class="col-md-12 card img-container">
+                        <a href="{{route('product',[$pro->id])}}" class="row thumbnail">
+                            <img src="{{asset('upload/img_product/'.$pro->img_profile)}}" class="img-responsive margin"
+                                 alt="Image">
                         </a>
-                    </div>
-                    <!--section button end-->
-                </section>
-            @endforeach
-            <section>
-                <!--section label-->
-                <div class="text-center section-row">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <hr>
+                        <div class="feedback-label">
+                            <h5 class=" text-center"><strong>{{$feedback->username}}</strong></h5>
+                            {{$feedback->content}}
                         </div>
-                        <div class="col-md-2 section-title text-center">Đánh giá</div>
-                        <div class="col-md-5">
-                            <hr>
-                        </div>
+
                     </div>
                 </div>
                 <!--section label end-->
@@ -189,21 +208,18 @@
                                     <h3 class=" text-center"><strong>{{$pro->price}} {{$pro->code}}</strong></h3>
                                 </div>
 
-                            </div>
-                        </div>
-                    @endforeach
+                    </div>
                 </div>
-                <!--section body end-->
-                <!--section button-->
-                <div class="text-center section-row">
-                    <a class="btn btn-default section-button" href="{{route('category',$cate->id)}}">
-                        Xem thêm
-                    </a>
-                </div>
-                <!--section button end-->
-            </section>
+            @endforeach
         </div>
-    </div>
-    <!--wrapper end-->
+        <!--section body end-->
+        <!--section button-->
+        <div class="text-center section-row">
+            <a class="btn btn-default section-button" href="{{route('category',$cate->id)}}">
+                Xem thêm
+            </a>
+        </div>
+        <!--section button end-->
+    </section>
 @endsection
 

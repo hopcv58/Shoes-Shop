@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('content')
+@section('no_left_bar')
     <!--wrapper start-->
     <div class="container">
         <img src="//hstatic.net/246/1000067246/1000154680/blog_xuhuong_img.jpg?v=329" alt="" class="img-responsive" />

@@ -14,6 +14,8 @@
     <link href="{{ asset('user/css/bootstrap.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('user/css/my.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('user/css/style.css') }}" rel="stylesheet">--}}
+
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -23,6 +25,7 @@
     <!-- Scripts -->
     <script src="{{ asset('user/js/jquery.js') }}"></script>
     <script src="{{ asset('user/js/bootstrap.min.js') }}"></script>
+    <script src="{{asset('user/js/jquery.elevatezoom.js')}}"></script>
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -210,6 +213,30 @@
 
     </div>
     <!--navbar end-->
+    <!--wrapper start-->
+    <div id="wrapper">
+        <div class="container">
+            {{--path--}}
+            {{--@section('path')--}}
+                {{--<a href="{{route('index')}}">Home</a>--}}
+            {{--@show--}}
+            @yield('path')
+            {{--path end--}}
+            {{--side nav--}}
+            <div class="row">
+                <div class="col-md-3">
+                @yield('left_bar')
+                </div>
+                <div class="col-md-9">
+            </div>
+            {{--side nav end--}}
+            <div class="col-md-9">
+                @yield('right_content')
+            </div>
+            
+        </div>
+    </div>
+    <!--wrapper end-->
     @yield('content')
 </div>
 <!--footer begin-->

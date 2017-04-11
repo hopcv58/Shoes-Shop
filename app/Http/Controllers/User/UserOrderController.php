@@ -24,11 +24,14 @@ class UserOrderController extends Controller
         return view('user.order');
     }
     
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function store(Request $request)
     {
         try {
             $order = new Orders();
-
 //            $order->name = $request->name;
             $order->payment = $request->payment;
             $order->status = 0;
@@ -57,6 +60,9 @@ class UserOrderController extends Controller
         }
     }
     
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show()
     {
         $orders = [];
