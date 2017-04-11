@@ -28,7 +28,7 @@
                                   enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <div class="form-group">
-                                    <legend>Create new Product</legend>
+                                    <legend>Tạo mới sản phẩm</legend>
                                 </div>
                                 {{--@if(count($errors)>0)
                                     <span class="alert alert-danger">
@@ -38,7 +38,7 @@
                                     </span>
                                 @endif--}}
                                 <div class="form-group {{$errors->has('name') ? 'has-error' : ''}}">
-                                    <label for="name" class="control-label">Name (*)</label>
+                                    <label for="name" class="control-label">Tên giày (*)</label>
                                     <input type="text" class="form-control" name="name" placeholder="Enter Name ..."
                                            value="{{old('name')}}" required autofocus>
                                     @if($errors->has('name'))
@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('code') ? 'has-error' : ''}}">
-                                    <label for="code" class="control-label">Code </label>
+                                    <label for="code" class="control-label">Mã sản phẩm </label>
                                     <input type="text" class="form-control" name="code"
                                            placeholder="Enter Product Code ..."
                                            value="{{old('code')}}">
@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="form-group {{session('cate_err') ? 'has-error' : ''}}">
-                                    <label>Categories (*)</label>
+                                    <label>Chọn loại giày (*)</label>
                                     <select class="form-control select2" multiple="multiple"
                                             data-placeholder="Select a Categories" name="cate_id[]"
                                             style="width: 100%;">
@@ -80,7 +80,7 @@
                                     <label>Advertisment</label>
                                     <select class="form-control select2" name="ad_id"
                                             style="width: 100%;">
-                                        <option value="" selected>Select advertisment (*)</option>
+                                        <option value="" selected>Chọn chương trình quảng cáo</option>
                                         @foreach($advers as $adver)
                                             <option value="{{$adver->id}}">{{$adver->name}}</option>
                                         @endforeach
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('alias') ? 'has-error' : ''}}">
-                                    <label for="alias" class="control-label">Alias </label>
+                                    <label for="alias" class="control-label">Tên gọi khác </label>
                                     <input type="text" class="form-control" name="alias" value="{{old('password')}}"
                                            placeholder="Enter Alias ...">
                                     @if($errors->has('alias'))
@@ -99,7 +99,7 @@
                                 </div>
 
                                 <div class="form-group {{$errors->has('description') ? 'has-error' : ''}}">
-                                    <label for="description" class="control-label">Description </label>
+                                    <label for="description" class="control-label">Mô tả </label>
                                     <textarea class="form-control textarea" name="description"
                                               placeholder="Enter product description ...">{{old('description')}}</textarea>
                                     @if($errors->has('description'))
@@ -109,14 +109,28 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group {{$errors->has('price') ? 'has-error' : ''}}">
-                                    <label for="price" class="control-label">Price (USD) (*)</label>
-                                    <input type="number" class="form-control" name="price"
-                                           placeholder="Enter Price ..."
-                                           value="{{old('price')}}">
-                                    @if($errors->has('price'))
+                                <div class="form-group {{$errors->has('height') ? 'has-error' : ''}}">
+                                    <label for="height" class="control-label">Chiều cao giày (*)</label>
+                                    <select name="height" class="form-control">
+                                        @for($i=0; $i < 11 ;$i++)
+                                            <option value="{{$i}}" {{ $i == 0 ? 'selected' : ''}}>{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                    @if($errors->has('height'))
                                         <span class="help-block">
-                                    <strong>{{$errors->first('price')}}</strong>
+                                    <strong>{{$errors->first('height')}}</strong>
+                                         </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{$errors->has('material') ? 'has-error' : ''}}">
+                                    <label for="material" class="control-label">Chất liệu giày (*) </label>
+                                    <input type="text" name="material" class="form-control"
+                                           placeholder="Chất liệu giày ..."
+                                           value="{{old('material')}}">
+                                    @if($errors->has('material'))
+                                        <span class="help-block">
+                                    <strong>{{$errors->first('material')}}</strong>
                                          </span>
                                     @endif
                                 </div>
@@ -128,6 +142,18 @@
                                     @if($errors->has('phoi_do'))
                                         <span class="help-block">
                                     <strong>{{$errors->first('phoi_do')}}</strong>
+                                         </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{$errors->has('price') ? 'has-error' : ''}}">
+                                    <label for="price" class="control-label">Giá bán (VNĐ) (*)</label>
+                                    <input type="number" class="form-control" name="price"
+                                           placeholder="Enter Price ..."
+                                           value="{{old('price')}}">
+                                    @if($errors->has('price'))
+                                        <span class="help-block">
+                                    <strong>{{$errors->first('price')}}</strong>
                                          </span>
                                     @endif
                                 </div>
@@ -159,10 +185,6 @@
                                     <div class="col-md-12" id="add_new"
                                          style="border: 1px solid #e5e5e5; margin-bottom: 10px">
                                         <div class="form-group {{$errors->has('attribute') ? 'has-error' : ''}}">
-                                            <label for="material" class="control-label">Material</label>
-                                            <input type="text" class="form-control" name="material[]"
-                                                   placeholder="Enter Material ..."
-                                                   value="{{old('material[]')}}">
                                             <label for="size" class="control-label">Size</label>
                                             <select name="size[]" class="form-control">
                                                 @for($i=35; $i < 46 ;$i++)
@@ -173,12 +195,6 @@
                                             <input type="text" class="form-control" name="color[]"
                                                    placeholder="Enter Color ..."
                                                    value="{{old('color[]')}}">
-                                            <label for="height" class="control-label">Height</label>
-                                            <select name="height[]" class="form-control">
-                                                @for($i=0; $i < 11 ;$i++)
-                                                    <option value="{{$i}}" {{old('height[]') ? 'selected' : ''}}>{{$i}}</option>
-                                                @endfor
-                                            </select>
                                             <label for="qty" class="control-label">Số lượng (*)</label>
                                             <input type="number" class="form-control" name="qty[]"
                                                    placeholder="Số lượng ..."
@@ -237,10 +253,6 @@
                     $("#attribute").append(' <hr> <div class="col-md-12" '
                         + 'style="border: 1px solid #e5e5e5; margin-bottom: 10px; padding: 10px">'
                         + '<div class="form-group {{$errors->has('attribute') ? 'has-error' : ''}}">'
-                        + '<label for="material" class="control-label">Material</label>'
-                        + '<input type="text" class="form-control" name="material[]"'
-                        + 'placeholder="Enter Material ..."'
-                        + 'value="{{old('material[]')}}">'
                         + '<label for="size" class="control-label">Size</label>'
                         + '<select name="size[]" class="form-control">@for($i=35; $i < 45 ;$i++)'
                         + '<option value="{{$i}}" {{old('height[]') ? 'selected' : ''}}>{{$i}}</option>'
@@ -248,9 +260,6 @@
                         + '<label for="color" class="control-label">Color</label>'
                         + '<input type="text" class="form-control" name="color[]" placeholder="Enter Color ..."'
                         + 'value="{{old('color[]')}}">'
-                        + '<label for="height" class="control-label">Height</label>'
-                        + '<select name="height[]" class="form-control">@for($i=0; $i < 11 ;$i++)'
-                        + '<option value="{{$i}}" {{old('height[]') ? 'selected' : ''}}>{{$i}}</option>@endfor</select>'
                         + '<label for="qty" class="control-label">Số lượng</label>'
                         + '<input type="number" class="form-control" name="qty[]"'
                         + 'placeholder="Số lượng ..." value="{{old('qty[]')}}">'

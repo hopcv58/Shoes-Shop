@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->tinyInteger('is_public')->default(0);
             $table->string('alias')->nullable();
             $table->text('description')->nullable();
+            $table->string('img_profile')->nullable();
             $table->timestamps();
         });
     }

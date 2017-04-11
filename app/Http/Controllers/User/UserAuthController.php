@@ -67,7 +67,7 @@ class UserAuthController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('customer')->logout();
-        return redirect()->route('login');
+        return redirect()->route('index');
     }
 
     public function showRegistrationForm()
@@ -77,8 +77,33 @@ class UserAuthController extends Controller
 
     public function register(Request $request)
     {
-        return view('user.auth.register');
+        $rule = [
+            'name' => 'required|max:191',
+            'email' => 'email|max:191',
+            'password' => 'required|min:6|max:191',
+            'confirm' => 'required|min:6|max:191',
+            'address' => 'required|max:191',
+            'phone' => 'required|max:191'
+
+        ];
+        $validator = Validator::make($request->all(), $rule);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        if($request->password != $request->confirm){
+            return redirect()->back()->with('fail', 'Mật khẩu không khớp')->withInput();
+        }
+        $customer = new Customers();
+        $customer->username = $request->name;
+        $customer->email = $request->email;
+        $customer->password = bcrypt($request->password);
+        $customer->address = $request->address;
+        $customer->phone = $request->phone;
+        $customer->save();
+        return redirect()->back()->with('success', 'Thêm mới người dùng thành công');
     }
+
+
 
     public function showForgotPasswordForm()
     {

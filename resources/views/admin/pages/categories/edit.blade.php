@@ -20,19 +20,33 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <form action="{{route('admin.categories.postUpdate',['id' => "$cateid->id"])}}" method="post" role="form">
+                            <form action="{{route('admin.categories.postUpdate',['id' => "$cateid->id"])}}" method="post" role="form" enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <legend>Create new category</legend>
                                 </div>
 
                                 <div class="form-group {{$errors->has('name') ? 'has-error' : ''}}">
-                                    <label for="name" class="control-label">Name of Category (*)</label>
+                                    <label for="name" class="control-label">Name of Category</label>
                                     <input type="text" class="form-control" name="name" placeholder="Enter Name ..."
                                            value="{{$cateid->name}}" required autofocus>
                                     @if($errors->has('name'))
                                         <span class="help-block">
                                     <strong>{{$errors->first('name')}}</strong>
+                                         </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <img src="{{asset("upload/img_pages/$cateid->img_profile")}}" width="600px" alt="">
+                                </div>
+                                <div class="form-group {{session('not_img') ? 'has-error' : ''}}">
+                                    <label for="img_profile" class="control-label">Thay đổi ảnh hiển thị trên trang</label>
+                                    <input type="file" name="img_profile"
+                                           value="{{old('img_profile')}}">
+                                    @if(session('not_img'))
+                                        <span class="help-block">
+                                    <strong>{{session('not_img')}}</strong>
                                          </span>
                                     @endif
                                 </div>

@@ -196,8 +196,6 @@
                     <h3>You have no items in your shopping cart</h3>
                     <button onclick="{{route('index')}}" class="btn btn-primary btn-lg">Continue Shopping
                     </button>
-
-
                     <div class="spacer"></div>
 
             </div>
