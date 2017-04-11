@@ -83,6 +83,8 @@
                                                 <form action="{{ route('cart.store') }}" method="POST">
                                                     {!! csrf_field() !!}
                                                     <input type="hidden" name="id" value="{{ $pro->id }}">
+                                                    <input type="hidden" name="name" value="{{ $pro->name }}">
+                                                    <input type="hidden" name="price" value="{{ $pro->price }}">
                                                     <input type="hidden" name="size" value="35">
                                                     <input type="hidden" name="color"
                                                            value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
@@ -96,6 +98,8 @@
                                                 <form action="{{ route('wishlist.store') }}" method="POST">
                                                     {!! csrf_field() !!}
                                                     <input type="hidden" name="id" value="{{ $pro->id }}">
+                                                    <input type="hidden" name="name" value="{{ $pro->name }}">
+                                                    <input type="hidden" name="price" value="{{ $pro->price }}">
                                                     <input type="hidden" name="size" value="35">
                                                     <input type="hidden" name="color"
                                                            value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
@@ -146,12 +150,46 @@
                         <div class="col-md-2">
                             <div class="col-md-12 card img-container">
                                 <a href="{{route('product',[$pro->id])}}" class="row thumbnail">
-                                    <img src="{{asset('upload/img_product/'.$pro->img_profile)}}" class="img-responsive margin"
-                                         alt="Image">
+                                    <img src="{{asset('upload/img_product/'.$pro->img_profile)}}"
+                                         class="img-responsive margin" alt="Image">
                                 </a>
-                                <div class="feedback-label">
-                                    <h5 class=" text-center"><strong>{{$feedback->username}}</strong></h5>
-                                    {{$feedback->content}}
+                                <div class="img-middle">
+                                    <div class="img-overlay">
+                                        <div class="col-md-6">
+                                            <form action="{{ route('cart.store') }}" method="POST">
+                                                {!! csrf_field() !!}
+                                                <input type="hidden" name="id" value="{{ $pro->id }}">
+                                                <input type="hidden" name="name" value="{{ $pro->name }}">
+                                                <input type="hidden" name="price" value="{{ $pro->price }}">
+                                                <input type="hidden" name="size" value="35">
+                                                <input type="hidden" name="color"
+                                                       value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
+                                                <button type="submit"
+                                                        class="glyphicon glyphicon-shopping-cart btn-default img-btn"
+                                                        aria-hidden="true">
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form action="{{ route('wishlist.store') }}" method="POST">
+                                                {!! csrf_field() !!}
+                                                <input type="hidden" name="id" value="{{ $pro->id }}">
+                                                <input type="hidden" name="name" value="{{ $pro->name }}">
+                                                <input type="hidden" name="price" value="{{ $pro->price }}">
+                                                <input type="hidden" name="size" value="35">
+                                                <input type="hidden" name="color"
+                                                       value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
+                                                <button type="submit"
+                                                        class="glyphicon glyphicon-tags btn-default img-btn"
+                                                        aria-hidden="true">
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 20px">
+                                    <p class=" text-center"><strong>{{$pro->name}}</strong></p>
+                                    <h3 class=" text-center"><strong>{{$pro->price}} {{$pro->code}}</strong></h3>
                                 </div>
 
                             </div>
