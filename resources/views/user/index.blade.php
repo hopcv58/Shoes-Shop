@@ -83,8 +83,6 @@
                                                 <form action="{{ route('cart.store') }}" method="POST">
                                                     {!! csrf_field() !!}
                                                     <input type="hidden" name="id" value="{{ $pro->id }}">
-                                                    <input type="hidden" name="name" value="{{ $pro->name }}">
-                                                    <input type="hidden" name="price" value="{{ $pro->price }}">
                                                     <input type="hidden" name="size" value="35">
                                                     <input type="hidden" name="color"
                                                            value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
@@ -98,8 +96,6 @@
                                                 <form action="{{ route('wishlist.store') }}" method="POST">
                                                     {!! csrf_field() !!}
                                                     <input type="hidden" name="id" value="{{ $pro->id }}">
-                                                    <input type="hidden" name="name" value="{{ $pro->name }}">
-                                                    <input type="hidden" name="price" value="{{ $pro->price }}">
                                                     <input type="hidden" name="size" value="35">
                                                     <input type="hidden" name="color"
                                                            value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">

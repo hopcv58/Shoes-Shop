@@ -20,7 +20,7 @@
                         <td>{{$order->address}}</td>
                         <td>{{$order->phone}}</td>
                         <td>{{$order->total}}</td>
-                        <td>{{$order->status ? "Chưa chuyển" : "Đã chuyển"}}</td>
+                        <td>{{$order->status ? "Đã chuyển" : "Chưa chuyển"}}</td>
                         <td>{{$order->created_at}}</td>
                     </tr>
                 @endforeach
