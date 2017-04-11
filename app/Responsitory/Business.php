@@ -418,6 +418,17 @@ class Business // extends Model
         return $comment;
     }
     
+    public function getProductRelated($product_id)
+    {
+        $categories = productcate::where('product_id',$product_id)->get();
+        $related = [];
+        foreach ($categories as $cate)
+        {
+            $related[] = $this->getProductByCate($cate->cate_id);
+        }
+        return ($related[array_rand($related)]->shuffle()->take(4));
+    }
+    
     public function getNewsById($id)
     {
         $news = news::where('id', $id)->where('is_public', 1)->first();

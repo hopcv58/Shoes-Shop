@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('no_left_bar')
+@section('content')
     {{--comment--}}
     <div class="row">
         <div class="text-center section-row">

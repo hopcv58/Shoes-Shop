@@ -52,7 +52,7 @@ Route::group(['namespace' => '\User'], function () {
         'uses' => 'UserAuthController@register',
     ]);
     Route::get('category', [
-      'uses' => 'UserController@showAllCategory',
+      'uses' => 'UserController@showNewProduct',
     ]);
     Route::get('category/{id}', [
         'as' => 'category',

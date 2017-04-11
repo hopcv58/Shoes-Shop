@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('no_left_bar')
+@section('content')
     {{--init--}}
     <?php
     $colors = array_unique(json_decode($product->attribute)->color);
@@ -75,9 +75,74 @@
                 @endif
             </form>
         </div>
+
     </div>
-    {{--comment--}}
     <div class="row">
+        <div class="col-md-4">
+            <strong class="col-md-6">Sản phẩm</strong>
+            <strong class="col-md-6">{{$product->name}}</strong>
+            <strong class="col-md-6">Chất liệu</strong>
+            <strong class="col-md-6">{{$product->material}}</strong>
+            <strong class="col-md-6">Độ cao</strong>
+            <strong class="col-md-6">{{$product->height}}</strong>
+            <strong class="col-md-6">Màu sắc</strong>
+            <strong class="col-md-6">{{implode(" ",json_decode($product->attribute)->color)}}</strong>
+            <strong class="col-md-6">Kích cỡ</strong>
+            <strong class="col-md-6">35-39</strong>
+            <strong class="col-md-6">Phối đồ</strong>
+            <strong class="col-md-6">Phối đồ</strong>
+        </div>
+    </div>
+    <div class="row">
+        {{--related--}}
+        @if(count($related)>0)
+            <div class="text-center section-row">
+                <div class="row">
+                    <div class="col-md-5">
+                        <hr>
+                    </div>
+                    <div class="col-md-2 section-title">Sản phẩm liên quan</div>
+                    <div class="col-md-5">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach($related as $relate)
+                    <div class="col-md-3">
+                        <div class="col-md-12 card img-container">
+                            <a href="{{route('product',[$relate->id])}}" class="row thumbnail">
+                                <img src="{{asset('upload/img_product/'.$relate->img_profile)}}"
+                                     class="img-responsive margin"
+                                     alt="Image">
+                            </a>
+                            <div class="img-label">
+                                <h5 class=" text-center"><strong>{{$relate->name}}</strong></h5>
+                                @if (isset($product->advertisments))
+                                    <h3 class="text-center">
+                                        {{number_format($product->price*(100-$product->advertisments->discount)/100)}} đ
+                                    </h3>
+                                    <h4 class="text-center">
+                                        <strike>{{number_format($product->price)}} đ</strike>
+                                    </h4>
+                                @else
+                                    <h3 class=" text-center">
+                                        {{number_format($product->price)}} đ
+                                    </h3>
+                                    <br>
+                                @endif
+
+                            </div>
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+        {{--related--}}
+    </div>
+    <div class="row">
+        {{--comment--}}
         @if(count($comment)>0)
             <div class="text-center section-row">
                 <div class="row">
@@ -90,7 +155,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default col-md-8 col-md-offset-2">
+            <div class="container">
                 <div class="panel panel-body">
                     @foreach($comment as $cmt)
                         <strong class="col-md-12">{{$cmt->username}}</strong><br>
@@ -101,29 +166,28 @@
                 </div>
             </div>
         @endif
-    </div>
+        {{--end comment--}}
+        {{--add comment--}}
 
-    {{--end comment--}}
-    {{--add comment--}}
-
-    @if (Auth::guard('customer')->guest())
-        You're not log in. Please <a class="" href="{{route('login')}}">Login</a>
-        or <a class="" href="{{route('register')}}">Register</a> to comment
-    @else
-        <form action="{{url('product/comment')}}" method="POST"
-              class="form-horizontal col-md-8 col-md-offset-2">
-            {!! csrf_field() !!}
-            <div class="form-group">
-                        <textarea class="col-md-8 form-control" rows="5" name="content" id="comment"
+        @if (Auth::guard('customer')->guest())
+            You're not log in. Please <a class="" href="{{route('login')}}">Login</a>
+            or <a class="" href="{{route('register')}}">Register</a> to comment
+        @else
+            <form action="{{url('product/comment')}}" method="POST"
+                  class="form-horizontal col-md-8 col-md-offset-2">
+                {!! csrf_field() !!}
+                <div class="form-group">
+                        <textarea class="form-control" rows="5" name="content" id="comment"
                                   placeholder="Your comment" required></textarea>
-            </div>
-            <input type="hidden" name="commentable_id" value="{{$product->id}}">
-            <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">
-            <button class="btn btn-info btn-lg">Comment
-                as {{ Auth::guard('customer')->user()->username }}</button>
-        </form>
-    @endif
-    {{--end add comment--}}
+                </div>
+                <input type="hidden" name="commentable_id" value="{{$product->id}}">
+                <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">
+                <button class="btn btn-info btn-lg">Comment
+                    as {{ Auth::guard('customer')->user()->username }}</button>
+            </form>
+        @endif
+        {{--end add comment--}}
+    </div>
 @endsection
 
 

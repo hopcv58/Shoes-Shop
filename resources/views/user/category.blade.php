@@ -1,17 +1,25 @@
 @extends('layouts.user')
 @section('path')
-<div>
-                <img src="{{asset("upload/img_pages/$category->img_profile")}}" alt=""
-                     class="img-responsive"/>
-                <ol class="breadcrumb">
-                    <li><a href="{{route('index')}}">Trang chủ</a></li>
-                    <li><a href="#">Danh mục</a></li>
-                    <li class="active"><span style="font-weight: bold;">{{$category->name}}</span></li>
-                </ol>
-                <h3 class="text-center">{{isset($category->name)? $category->name : 'All categories'}}</h3>
-                <hr style="background-color: #292126; height: 1px">
-            </div>
-            @endsection
+    <div>
+        @if(isset($category))
+            <img src="{{asset("upload/img_pages/$category->img_profile")}}" alt=""
+                 class="img-responsive"/>
+        @else
+            {{--Link ảnh cho sản phẩm mới nhất ở đây--}}
+            <img src="{{asset("upload/img_pages/sanPhamMoiNhat")}}" alt=""
+                 class="img-responsive"/>
+        @endif
+        <ol class="breadcrumb">
+            <li><a href="{{route('index')}}">Trang chủ</a></li>
+            <li><a href="#">Danh mục</a></li>
+            <li class="active"><span style="font-weight: bold;">
+                {{isset($category->name)? $category->name : 'Sản phẩm mới nhập'}}
+                </span></li>
+        </ol>
+        <h3 class="text-center">{{isset($category->name)? $category->name : 'Sản phẩm mới nhập'}}</h3>
+        <hr style="background-color: #292126; height: 1px">
+    </div>
+@endsection
 @section('left_bar')
     <ul><strong><h3>Danh mục</h3></strong></ul>
     <ul class="col-md-offset-1">
@@ -66,80 +74,84 @@
 @endsection
 @section('right_content')
     <!--wrapper start-->
+    <!--section body-->
+    <div id="productList">
+        @foreach($products as $key => $product)
+            <div class="col-md-3" id="card{{$key}}">
+                <div class="product-item">
+                    @if (isset($product->advertisments))
+                        <div class="img-adv"><p>-{{$product->advertisments->discount}}%</p></div>
+                    @endif
 
-            
-                    <!--section body-->
-                    <div id="productList">
-                        @foreach($products as $key => $product)
-                            <div class="col-md-3" id="card{{$key}}">
-                                <div class="product-item">
-                                    @if (isset($product->advertisments))
-                                        <div class="img-adv"><p>-{{$product->advertisments->discount}}%</p></div>
+                    {{--<div class="row">--}}
+                    <a href="{{route('product',[$product->id])}}">
+                        <img src="{{asset('upload/img_product/'.$product->img_profile)}}"
+                             class="img-responsive margin"
+                             alt="Image">
+                    </a>
+                    {{--</div>--}}
+                    <div class="img-middle-cate">
+                        <div class="img-overlay">
+                            <div class="col-md-6">
+                                <form action="{{ route('cart.store') }}" method="POST">
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                    @if (!isset($product->advertisments))
+                                        <input type="hidden" name="price" value="{{ $product->price }}">
+                                    @else
+                                        <input type="hidden" name="price"
+                                               value="{{number_format($product->price*(100-$product->advertisments->discount)/100)}}">
                                     @endif
-
-                                    {{--<div class="row">--}}
-                                        <a href="{{route('product',[$product->id])}}">
-                                            <img src="{{asset('upload/img_product/'.$product->img_profile)}}"
-                                                 class="img-responsive margin"
-                                                 alt="Image">
-                                        </a>
-                                    {{--</div>--}}
-                                    <div class="img-middle-cate">
-                                        <div class="img-overlay">
-                                            <div class="col-md-6">
-                                                <form action="{{ route('cart.store') }}" method="POST">
-                                                    {!! csrf_field() !!}
-                                                    <input type="hidden" name="id" value="{{ $product->id }}">
-                                                    <input type="hidden" name="name" value="{{ $product->name }}">
-                                                    <input type="hidden" name="price" value="{{ $product->price }}">
-                                                    <input type="hidden" name="size" value="35">
-                                                    <input type="hidden" name="color"
-                                                           value="{{array_unique(json_decode($product->attribute)->color)[0]}}">
-                                                    <button type="submit"
-                                                            class="glyphicon glyphicon-shopping-cart btn-default img-btn"
-                                                            aria-hidden="true">
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <form action="{{ route('wishlist.store') }}" method="POST">
-                                                    {!! csrf_field() !!}
-                                                    <input type="hidden" name="id" value="{{ $product->id }}">
-                                                    <input type="hidden" name="name" value="{{ $product->name }}">
-                                                    <input type="hidden" name="price"
-                                                           value="{{ $product->price }}"><input
-                                                            type="hidden" name="size" value="35">
-                                                    <input type="hidden" name="color"
-                                                           value="{{array_unique(json_decode($product->attribute)->color)[0]}}">
-                                                    <button type="submit"
-                                                            class="glyphicon glyphicon-tags btn-default img-btn"
-                                                            aria-hidden="true">
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-price" style="margin-top: 20px">
-                                     <p class="text-center"> <strong>{{$product->name}}</strong></p>
-                                        @if (isset($product->advertisments))
-                                            <h3 class="text-center">
-                                               {{number_format($product->price*(100-$product->advertisments->discount)/100)}} đ
-                                            </h3>
-                                            <h4 class="text-center">
-                                                <strike>{{number_format($product->price)}} đ</strike>
-                                            </h4>
-                                        @else
-                                            <h3 class=" text-center">
-                                                {{number_format($product->price)}} đ
-                                            </h3>
-                                            <br>
-                                        @endif
-
-                                    </div>
-
-                                </div>
+                                    <input type="hidden" name="size" value="35">
+                                    <input type="hidden" name="color"
+                                           value="{{array_unique(json_decode($product->attribute)->color)[0]}}">
+                                    <button type="submit"
+                                            class="glyphicon glyphicon-shopping-cart btn-default img-btn"
+                                            aria-hidden="true">
+                                    </button>
+                                </form>
                             </div>
-                        @endforeach
+                            <div class="col-md-6">
+                                <form action="{{ route('wishlist.store') }}" method="POST">
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                    <input type="hidden" name="price"
+                                           value="{{ $product->price }}"><input
+                                            type="hidden" name="size" value="35">
+                                    <input type="hidden" name="color"
+                                           value="{{array_unique(json_decode($product->attribute)->color)[0]}}">
+                                    <button type="submit"
+                                            class="glyphicon glyphicon-tags btn-default img-btn"
+                                            aria-hidden="true">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price" style="margin-top: 20px">
+                        <p class="text-center"><strong>{{$product->name}}</strong></p>
+                        @if (isset($product->advertisments))
+                            <h3 class="text-center">
+                                {{number_format($product->price*(100-$product->advertisments->discount)/100)}} đ
+                            </h3>
+                            <h4 class="text-center">
+                                <strike>{{number_format($product->price)}} đ</strike>
+                            </h4>
+                        @else
+                            <h3 class=" text-center">
+                                {{number_format($product->price)}} đ
+                            </h3>
+                            <br>
+                        @endif
+
+                    </div>
+
+                </div>
+            </div>
+        @endforeach
+    </div>
     <!--section body end-->
 @endsection
 @section('extra_js')
@@ -183,7 +195,8 @@
     </script>
     <script>
         $('#filtMenu .dropdown-menu').on({
-            "click": function (e) {
+            "click": function (e)
+            {
                 e.stopPropagation();
             }
         });
