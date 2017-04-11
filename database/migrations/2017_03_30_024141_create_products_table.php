@@ -20,6 +20,8 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('price');
             $table->string('phoi_do')->nullable();
+            $table->string('height')->nullable();
+            $table->string('material')->nullable();
             $table->integer('ad_id')->unsigned()->nullable();
             $table->foreign('ad_id')->references('id')->on('advertisments')->onDelete('set null')->onUpdate('cascade')->comment('ma quang cao');
             $table->text('attribute')->comment('kieu json');

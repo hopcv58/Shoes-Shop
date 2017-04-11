@@ -3,6 +3,8 @@
 namespace App\Responsitory;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -94,7 +96,7 @@ class Business // extends Model
                 $name = str_random(5) . "_" . $name;
             }
             $arr_ext = ['png', 'jpg', 'gif', 'jpeg'];
-            if (!in_array($ext, $arr_ext) || $img->getClientSize() > 500000) {
+            if (!in_array($ext, $arr_ext)) {
                 $names = null;
                 return redirect()->back()->with('not_img', 'Chọn file ảnh png jpg gif jpeg có kích thước < 5Mb');
             } else {
@@ -116,18 +118,20 @@ class Business // extends Model
             return null;
         }
         try {
-            
-            $this->products->name = $data[ 'name' ];
-            $this->products->code = $data[ 'code' ];
-            $this->products->alias = $data[ 'alias' ];
-            $this->products->description = $data[ 'description' ];
-            $this->products->phoi_do = $data[ 'phoi_do' ];
-            $this->products->ad_id = $data[ 'ad_id' ];
-            $this->products->price = $data[ 'price' ];
-            $this->products->attribute = $data[ 'attribute' ];
-            $this->products->img_profile = $data[ 'img_profile' ];
-            $this->products->img = $data[ 'img' ];
-            $this->products->is_public = $data[ 'is_public' ];
+
+            $this->products->name           = $data['name'];
+            $this->products->code           = $data['code'];
+            $this->products->alias          = $data['alias'];
+            $this->products->description    = $data['description'];
+            $this->products->phoi_do        = $data['phoi_do'];
+            $this->products->ad_id          = $data['ad_id'];
+            $this->products->price          = $data['price'];
+            $this->products->attribute      = $data['attribute'];
+            $this->products->img_profile    = $data['img_profile'];
+            $this->products->img            = $data['img'];
+            $this->products->is_public      = $data['is_public'];
+            $this->products->height         = $data['height'];
+            $this->products->material       = $data['material'];
             $this->products->save();
             foreach ($cates as $cate) {
                 $this->products->productCate()->create(["cate_id" => $cate]);
@@ -193,7 +197,6 @@ class Business // extends Model
     }
 
 
-//   ==================================User function===================================================
     /**
      * lưu thông tin 1 quảng cáo cho các sản phẩm
      * @param array $data
@@ -353,7 +356,7 @@ class Business // extends Model
         }
         return $arr;
     }
-    
+    //   ==================================User function===================================================
     public function getCateById($cate_id)
     {
         $cate = categories::where('id', $cate_id)->first();

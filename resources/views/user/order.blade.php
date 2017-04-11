@@ -197,7 +197,6 @@
                 <a href="{{route('index')}}" class="btn btn-primary btn-lg">Continue Shopping
                 </a>
 
-
                 <div class="spacer"></div>
 
         </div>

@@ -112,7 +112,7 @@ class UserController extends Controller
             Products::find($request->commentable_id)->comments()->create(
               [
                 'customer_id' => $request->customer_id,
-                'content' => $request->content
+                'content' => $request->input('content'),
               ]
             );
             return Redirect::back();
@@ -128,7 +128,7 @@ class UserController extends Controller
             News::find($request->commentable_id)->comments()->create(
               [
                 'customer_id' => $request->customer_id,
-                'content' => $request->content
+                'content' => $request->input('content')
               ]
             );
             return Redirect::back();

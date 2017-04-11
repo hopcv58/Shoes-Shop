@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Responsitory\Business;
 use App\Responsitory\Categories;
 use App\Responsitory\productcate;
 use App\Responsitory\Products;
@@ -12,10 +13,12 @@ use Illuminate\Support\Facades\Validator;
 class CategoriesController extends Controller
 {
     private $cate;
+    private $bussiness;
 
     function __construct()
     {
         $this->cate = new Categories();
+        $this->bussiness = new Business();
     }
 
 
@@ -53,7 +56,16 @@ class CategoriesController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $this->cate->store($request->all());
+            if($request->hasFile('img_profile')){
+                $img = $request->file('img_profile');
+                $img_profile = $this->bussiness->saveImg($img,'upload/img_pages');
+                $this->cate->img_profile = $img_profile;
+            }
+            $this->cate->name = $request->input('name');
+            $this->cate->is_public = $request->has('is_public') ? 1 : 0;
+            $this->cate->alias = $request->input('alias');
+            $this->cate->description = $request->input('description');
+            $this->cate->save();
             return redirect()->route('admin.categories.list')->with(['success' => 'Create category successfully']);
         }
     }
@@ -78,20 +90,28 @@ class CategoriesController extends Controller
         //update ca trong bang con
         $cateId = Categories::findOrFail($id);
         $name = $cateId->name;
-        $data = $request->all();
         $ruleUpdate = [
             'name' => 'required|min:3|max:191',
             'alias' => 'max:191',
         ];
         //kiem tra neu check vao is_public thi them value cua is_public vao mang
-        if (!$request->has('is_public')) {
-            $data = array_merge($data, ['is_public' => 0]);
-        }
         $validator = Validator::make($request->all(), $ruleUpdate);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $this->cate->updateId($id, $data);
+            if($request->hasFile('img_profile')){
+                if($cateId->img_profile != null && file_exists("upload/img_pages/$cateId->img_profile")){
+                    unlink("upload/img_pages/$cateId->img_profile");
+                }
+                $img = $request->file('img_profile');
+                $img_profile = $this->bussiness->saveImg($img,'upload/img_pages');
+                $cateId->img_profile = $img_profile;
+            }
+            $cateId->name = $request->input('name');
+            $cateId->is_public = $request->has('is_public') ? 1 : 0;
+            $cateId->alias = $request->input('alias');
+            $cateId->description = $request->input('description');
+            $cateId->save();
             return redirect()->route('admin.categories.list')->with('success', "update $name successfully");
         }
     }
@@ -117,6 +137,9 @@ class CategoriesController extends Controller
         }
 //        if ($this->cate->destroyId($idCate)) {
         if($idCate->delete()){
+            if($idCate->img_profile != null && file_exists("upload/img_pages/$idCate->img_profile")){
+                unlink("upload/img_pages/$idCate->img_profile");
+            }
             return redirect()->route('admin.categories.list')->with('success', "delete $name successfully");
         }
     }

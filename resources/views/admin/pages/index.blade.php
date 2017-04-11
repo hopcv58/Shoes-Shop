@@ -125,7 +125,13 @@
                                                 <td>{{$hot_product->product_id}}</td>
                                                 <td>{{$hot_product->products->name}}</td>
                                                 <td><span class="label label-primary">${{$hot_product->products->price}}</span></td>
-                                                <td><span class="label label-danger">{{$hot_product->products->advertisments->discount}} %</span></td>
+                                                <td><span class="label label-danger">
+                                                        @if($hot_product->products->advertisments != null)
+                                                        {{$hot_product->products->advertisments->discount}} %
+                                                        @else
+                                                        0%
+                                                            @endif
+                                                    </span></td>
                                                 <td>{{$hot_product->total_qty}}</td>
                                             </tr>
                                         @endforeach

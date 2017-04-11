@@ -56,7 +56,6 @@ class ProductsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -66,18 +65,16 @@ class ProductsController extends Controller
             return redirect()->back()->with('not_img', 'Phải chọn ảnh đại diện')->withInput();
         }
         $img_pro = $this->business->saveImg($img_profile, $path);
+//        $this->_products->img_profile = $img_pro;
         //bien anh mo ta
         $attributes = [
-            'material' => $request->input('material'),
             'size' => $request->input('size'),
             'color' => $request->input('color'),
-            'height' => $request->input('height'),
             'qty' => $request->input('qty'),
         ];
         $is_public = $request->input('is_public') ? 1 : 0;
         $json_att = json_encode($attributes);
         $rule_att = [
-            'material' => 'max:191',
             'color' => 'max:191',
             'qty' => 'max:191',
         ];
@@ -85,6 +82,8 @@ class ProductsController extends Controller
         $data = [
             'name' => $request->input('name'),
             'code' => $request->input('code'),
+            'height' => $request->input('height'),
+            'material' => $request->input('material'),
             'alias' => $request->input('alias'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
@@ -144,16 +143,13 @@ class ProductsController extends Controller
         $path = 'upload/img_product';
         //bien anh mo ta
         $attributes = [
-            'material' => $request->input('material'),
             'size' => $request->input('size'),
             'color' => $request->input('color'),
-            'height' => $request->input('height'),
             'qty' => $request->input('qty'),
         ];
         $is_public = $request->input('is_public') ? 1 : 0;
         $json_att = json_encode($attributes);
         $rule_att = [
-            'material' => 'max:191',
             'color' => 'max:191',
             'qty' => 'max:191',
         ];
@@ -163,6 +159,8 @@ class ProductsController extends Controller
             'code' => $request->input('code'),
             'alias' => $request->input('alias'),
             'description' => $request->input('description'),
+            'height' => $request->input('height'),
+            'material' => $request->input('material'),
             'price' => $request->input('price'),
             'phoi_do' => $request->input('phoi_do'),
             'ad_id' => $request->input('ad_id'),
@@ -195,11 +193,16 @@ class ProductsController extends Controller
         $products->code                 = $data['code'];
         $products->alias                = $data['alias'];
         $products->description          = $data['description'];
+        $products->height               = $data['height'];
+        $products->material             = $data['material'];
         $products->phoi_do              = $data['phoi_do'];
         $products->ad_id                = $data['ad_id'];
         $products->price                = $data['price'];
         $products->attribute            = $data['attribute'];
         if(key_exists('img_profile',$data)) {
+            if(($products->img_profile != null) && file_exists($path . "/$products->img_profile")){
+                unlink($path . "/$products->img_profile");
+            }
             $products->img_profile = $data['img_profile'];
         }
         $products->is_public = $data['is_public'];
