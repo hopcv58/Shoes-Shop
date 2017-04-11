@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Responsitory\Business;
+use App\Responsitory\Customers;
+use App\Responsitory\Feedbacks;
 use App\Responsitory\News;
 use App\Responsitory\Products;
 use Illuminate\Http\Request;
@@ -19,6 +21,9 @@ class UserController extends Controller
         $this->business = new Business();
     }
     
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $feedbacks = $this->business->getFeedback();
@@ -42,6 +47,9 @@ class UserController extends Controller
         
     }
     
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showAllCategory()
     {
 //        $product  =  productcate::with('Categories')->get();
@@ -53,6 +61,10 @@ class UserController extends Controller
         }
     }
     
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showProduct($id)
     {
 //        $product  =  productcate::with('Categories')->get();
@@ -125,4 +137,16 @@ class UserController extends Controller
         }
         
     }
+    
+    public function showFeedbackForm()
+    {
+        return view('user.feedback');
+    }
+    
+    public function addFeedback(Request $request)
+    {
+        $this->business->saveFeedback($request);
+        return view('user.feedback');
+    }
+    
 }

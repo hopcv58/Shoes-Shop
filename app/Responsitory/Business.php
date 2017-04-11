@@ -3,9 +3,8 @@
 namespace App\Responsitory;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -29,17 +28,17 @@ class Business // extends Model
     
     public function __construct()
     {
-        $this->categories       = new Categories();
-        $this->comments         = new Comments();
-        $this->customer         = new Customers();
-        $this->feedbacks        = new Feedbacks();
-        $this->news             = new News();
-        $this->orders           = new Orders();
-        $this->productCates     = new productcate();
-        $this->productOrder     = new productOrder();
-        $this->products         = new Products();
-        $this->slides           = new Slides();
-        $this->advertisments    = new Advertisments();
+        $this->categories = new Categories();
+        $this->comments = new Comments();
+        $this->customer = new Customers();
+        $this->feedbacks = new Feedbacks();
+        $this->news = new News();
+        $this->orders = new Orders();
+        $this->productCates = new productcate();
+        $this->productOrder = new productOrder();
+        $this->products = new Products();
+        $this->slides = new Slides();
+        $this->advertisments = new Advertisments();
     }
     
     public function getCate()
@@ -54,10 +53,12 @@ class Business // extends Model
      */
     public function saveImg($img, $path)
     {
-        if($img == null) return null;
-        $err    = null;
-        $name   = $img->getClientOriginalName();
-        $ext    = $img->getClientOriginalExtension();
+        if ($img == null) {
+            return null;
+        }
+        $err = null;
+        $name = $img->getClientOriginalName();
+        $ext = $img->getClientOriginalExtension();
         //kiem tra file trung ten
         while (file_exists($path . '/' . $name)) {
             $name = str_random(5) . "_" . $name;
@@ -85,9 +86,9 @@ class Business // extends Model
             return null;
         }
         foreach ($imgs as $img) {
-            $err    = null;
-            $name   = $img->getClientOriginalName();
-            $ext    = $img->getClientOriginalExtension();
+            $err = null;
+            $name = $img->getClientOriginalName();
+            $ext = $img->getClientOriginalExtension();
             //kiem tra file trung ten
             while (file_exists($path . '/' . $name)) {
                 $name = str_random(5) . "_" . $name;
@@ -115,24 +116,24 @@ class Business // extends Model
             return null;
         }
         try {
-
-            $this->products->name           = $data['name'];
-            $this->products->code           = $data['code'];
-            $this->products->alias          = $data['alias'];
-            $this->products->description    = $data['description'];
-            $this->products->phoi_do        = $data['phoi_do'];
-            $this->products->ad_id          = $data['ad_id'];
-            $this->products->price          = $data['price'];
-            $this->products->attribute      = $data['attribute'];
-            $this->products->img_profile    = $data['img_profile'];
-            $this->products->img            = $data['img'];
-            $this->products->is_public      = $data['is_public'];
+            
+            $this->products->name = $data[ 'name' ];
+            $this->products->code = $data[ 'code' ];
+            $this->products->alias = $data[ 'alias' ];
+            $this->products->description = $data[ 'description' ];
+            $this->products->phoi_do = $data[ 'phoi_do' ];
+            $this->products->ad_id = $data[ 'ad_id' ];
+            $this->products->price = $data[ 'price' ];
+            $this->products->attribute = $data[ 'attribute' ];
+            $this->products->img_profile = $data[ 'img_profile' ];
+            $this->products->img = $data[ 'img' ];
+            $this->products->is_public = $data[ 'is_public' ];
             $this->products->save();
             foreach ($cates as $cate) {
                 $this->products->productCate()->create(["cate_id" => $cate]);
             }
             return true;
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             return false;
         }
     }
@@ -180,14 +181,14 @@ class Business // extends Model
      */
     public function adminGetProductAttribute($product_id)
     {
-        $product        = $this->products->findOrFail($product_id);
-        $cates          = Categories::select('id', 'name')->get();
-        $advers         = Advertisments::select('id', 'name')->get();
-        $product_cate   = $this->adminGetProductCate($product_id);
-        $attribute      = $product->attribute;
-        $imgs           = $product->img;
-        $arr_img        = json_decode($imgs);
-        $arr_att        = json_decode($attribute);
+        $product = $this->products->findOrFail($product_id);
+        $cates = Categories::select('id', 'name')->get();
+        $advers = Advertisments::select('id', 'name')->get();
+        $product_cate = $this->adminGetProductCate($product_id);
+        $attribute = $product->attribute;
+        $imgs = $product->img;
+        $arr_img = json_decode($imgs);
+        $arr_att = json_decode($attribute);
         return compact('product', 'cates', 'advers', 'product_cate', 'arr_img', 'arr_att');
     }
 
@@ -199,27 +200,28 @@ class Business // extends Model
      * @param array $product_ids
      * @return bool
      */
-    public function adminStoreAd($data, $product_ids){
+    public function adminStoreAd($data, $product_ids)
+    {
         try {
-            $this->advertisments->name          = $data['name'];
-            $this->advertisments->detail        = $data['detail'];
-            $this->advertisments->start_date    = $data['start_date'];
-            $this->advertisments->end_date      = $data['end_date'];
-            $this->advertisments->discount      = $data['discount'];
+            $this->advertisments->name = $data[ 'name' ];
+            $this->advertisments->detail = $data[ 'detail' ];
+            $this->advertisments->start_date = $data[ 'start_date' ];
+            $this->advertisments->end_date = $data[ 'end_date' ];
+            $this->advertisments->discount = $data[ 'discount' ];
             $this->advertisments->save();
-            if($product_ids != null){
-                foreach ($product_ids as $product_id){
+            if ($product_ids != null) {
+                foreach ($product_ids as $product_id) {
                     $pd_id = $this->products->find($product_id);
                     $pd_id->advertisments()->associate($this->advertisments);
                     $pd_id->save();
                 }
             }
             return true;
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return false;
         }
     }
-
+    
     /**
      * Cập nhật thông tin quảng cáo theo id
      * @param array $data
@@ -227,60 +229,65 @@ class Business // extends Model
      * @param array $product_ids
      * @return bool
      */
-    public function adminUpdateAdById($data, $id, $product_ids){
+    public function adminUpdateAdById($data, $id, $product_ids)
+    {
         try {
-            $ad_id              = $this->advertisments->findOrFail($id);
-            $ad_id->name        = $data['name'];
-            $ad_id->detail      = $data['detail'];
-            $ad_id->start_date  = $data['start_date'];
-            $ad_id->end_date    = $data['end_date'];
-            $ad_id->discount    = $data['discount'];
+            $ad_id = $this->advertisments->findOrFail($id);
+            $ad_id->name = $data[ 'name' ];
+            $ad_id->detail = $data[ 'detail' ];
+            $ad_id->start_date = $data[ 'start_date' ];
+            $ad_id->end_date = $data[ 'end_date' ];
+            $ad_id->discount = $data[ 'discount' ];
             $ad_id->save();
-            if($product_ids != null){
-                foreach ($product_ids as $product_id){
+            if ($product_ids != null) {
+                foreach ($product_ids as $product_id) {
                     $pd_id = $this->products->find($product_id);
                     $pd_id->advertisments()->associate($ad_id);
                     $pd_id->save();
                 }
             }
             return true;
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return false;
         }
     }
-
+    
     /**
      * Lấy toàn bộ sản phẩm
      * @return mixed
      */
-    public function adminGetAllProducts(){
+    public function adminGetAllProducts()
+    {
         return $this->products->count();
     }
-
+    
     /**
      * Lấy toàn bộ order
      * @return mixed
      */
-    public function adminGetAllOrders(){
+    public function adminGetAllOrders()
+    {
         return $this->orders->count();
     }
-
+    
     /**
      * Lấy toàn bộ khách hàng
      * @return mixed
      */
-    public function adminGetAllCustomer(){
+    public function adminGetAllCustomer()
+    {
         return $this->customer->count();
     }
-
+    
     /**
      * Tổng doanh thu
      * @return mixed
      */
-    public function adminGetSale(){
+    public function adminGetSale()
+    {
         return $this->orders->where('status', 1)->sum('total');
     }
-
+    
     /**
      * Tổng các hóa đơn đã thanh toán
      * @return mixed
@@ -289,54 +296,64 @@ class Business // extends Model
     {
         return $this->orders->where('status', 1)->count();
     }
-
+    
     /**
      * Lấy tất cả các sản phẩm từ 1 hóa đơn
      * @param integer $order_id
      * @return array|null
      */
-    public function adminGetProductFromOrder($order_id){
+    public function adminGetProductFromOrder($order_id)
+    {
         $product_orders = $this->productOrder->where('order_id', $order_id)->get();
         return $product_orders;
     }
-
+    
     /**
      * Doanh thu theo thang
      * @param integer $month
      * @return mixed
      */
-    public function adminGetMonthSale($month){
+    public function adminGetMonthSale($month)
+    {
 //        $month = Carbon::now()->month;
         return DB::table('orders')->where('status', 1)->whereMonth('created_at', $month)->sum('total');
     }
-
-    public function adminGetQty(){
+    
+    public function adminGetQty()
+    {
         return $this->productOrder->where('status', 1)->sum('qty');
     }
-    public function adminGetMonthQty($month){
+    
+    public function adminGetMonthQty($month)
+    {
         return $this->productOrder->where('status', 1)->whereMonth('created_at', $month)->sum('qty');
     }
-    public function adminGetDayQty($day){
+    
+    public function adminGetDayQty($day)
+    {
         return $this->productOrder->where('status', 1)->whereDay('created_at', $day)->sum('qty');
     }
-
-    public function adminGetDaySale($day){
-        return DB::table('orders')->whereDay('updated_at',$day)->where('status', 1)->sum('total');
+    
+    public function adminGetDaySale($day)
+    {
+        return DB::table('orders')->whereDay('updated_at', $day)->where('status', 1)->sum('total');
     }
-
+    
     /**
      * Trả về mảng số lượng từng sản phẩm
      * @return array
      */
-    public function adminGetProductQuantity(){
+    public function adminGetProductQuantity()
+    {
         $products = $this->products->all();
         $arr = [];
         foreach ($products as $product) {
             $arr_att = json_decode($product->attribute);
-            $arr[$product->id] = ($arr_att != null) ? array_sum($arr_att->qty) : 0;
+            $arr[ $product->id ] = ($arr_att != null) ? array_sum($arr_att->qty) : 0;
         }
         return $arr;
     }
+    
     public function getCateById($cate_id)
     {
         $cate = categories::where('id', $cate_id)->first();
@@ -345,13 +362,13 @@ class Business // extends Model
     
     public function getAllProduct()
     {
-        $products = products::where('is_public',1)->latest()->get();
+        $products = products::where('is_public', 1)->latest()->get();
         return $products;
     }
     
     public function getAllCate()
     {
-        $category = categories::where('is_public',1)->latest()->get();
+        $category = categories::where('is_public', 1)->latest()->get();
         return $category;
     }
     
@@ -363,7 +380,7 @@ class Business // extends Model
             $arr_product[] = $value->product_id;
         }
         $product_list = $this->products
-          ->whereIn('products.id', $arr_product)->where('is_public',1)->latest()->get();
+          ->whereIn('products.id', $arr_product)->where('is_public', 1)->latest()->get();
 //        dd($product_list);
         return $product_list;
         
@@ -386,7 +403,6 @@ class Business // extends Model
                 $option[ $i ][ $key ] = $json[ $key ][ $i ];
             }
         }
-        
         return $option;
     }
     
@@ -401,13 +417,16 @@ class Business // extends Model
     
     public function getNewsById($id)
     {
-        $news = news::where('id', $id)->where('is_public',1)->first();
+        $news = news::where('id', $id)->where('is_public', 1)->first();
         return $news;
     }
-    public function getAllNews(){
-        $news = news::where('is_public',1)->get();
+    
+    public function getAllNews()
+    {
+        $news = news::where('is_public', 1)->get();
         return $news;
     }
+    
     public function getCommentByNews($news_id)
     {
         $comments = comments::where([
@@ -419,36 +438,60 @@ class Business // extends Model
     
     public function getRandomNews($id)
     {
-        $related = news::where('id', '<>', $id)->where('is_public',1)->get()->shuffle()->take(4);
+        $related = news::where('id', '<>', $id)->where('is_public', 1)->get()->shuffle()->take(4);
         return $related;
     }
     
     public function searchNews($input)
     {
-        $news = news::where('title', 'like', '%' . $input . '%')->where('is_public',1)->get();
+        $news = news::where('title', 'like', '%' . $input . '%')->where('is_public', 1)->get();
         return $news;
     }
     
     public function searchCategories($input)
     {
-        $categories = categories::where('name', 'like', '%' . $input . '%')->where('is_public',1)->get();
+        $categories = categories::where('name', 'like', '%' . $input . '%')->where('is_public', 1)->get();
         return $categories;
     }
     
     public function searchProducts($input)
     {
-        $products = products::where('name', 'like', "%$input%")->where('is_public',1)->get();
+        $products = products::where('name', 'like', "%$input%")->where('is_public', 1)->get();
         return $products;
     }
-    public function  getFeedback()
+    
+    public function getFeedback()
     {
-        $feedbacks = Feedbacks::where('is_public',1)->get()->shuffle()->take(6);
+        $feedbacks = Feedbacks::where('is_public', 1)->get()->shuffle()->take(6);
         return $feedbacks;
     }
-    public function  getSlide()
+    
+    public function getSlide()
     {
-        $slides = Slides::where('is_public',1)->get();
+        $slides = Slides::where('is_public', 1)->get();
         return $slides;
     }
     
+    public function saveFeedback(Request $request)
+    {
+        try {
+            $feedback = new Feedbacks();
+//            $order->name = $request->name;
+            $feedback->content = $request->content;
+            if (!isset(Auth::guard('customer')->user()->id)) {
+                $feedback->username = $request->username;
+                $feedback->email = $request->email;
+                $feedback->phone = $request->phone;
+            } else {
+                $feedback->customer_id = Auth::guard('customer')->user()->id;
+                $feedback->username = Auth::guard('customer')->user()->username;
+                $feedback->email = Auth::guard('customer')->user()->email;
+                $feedback->phone = Auth::guard('customer')->user()->phone;
+            }
+            $feedback->is_public = 0;
+            $feedback->save();
+        } catch (Exception $ex) {
+            dd($ex->getMessage());
+        }
+    }
 }

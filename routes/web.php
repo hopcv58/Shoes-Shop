@@ -84,6 +84,8 @@ Route::group(['namespace' => '\User'], function () {
     ]);
     Route::post('product/comment','UserController@addCommentToProduct');
     Route::post('news/comment','UserController@addCommentToNewst');
+    Route::post('feedback','UserController@addFeedback');
+    Route::get('feedback','UserController@showFeedbackForm');
 });
 
 

@@ -14,10 +14,12 @@
     <link href="{{ asset('user/css/bootstrap.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('user/css/my.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('user/css/style.css') }}" rel="stylesheet">--}}
 
-    <!-- Scripts -->
+<!-- Scripts -->
     <script src="{{ asset('user/js/jquery.js') }}"></script>
     <script src="{{ asset('user/js/bootstrap.min.js') }}"></script>
+    <script src="{{asset('user/js/jquery.elevatezoom.js')}}"></script>
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -48,7 +50,8 @@
 <div class="navbar navbar-default nav-nomargin">
     <div class="container">
         <div class="nav navbar-nav col-md-4">
-            <li><a class="navbar-text" href="{{route('index')}}"><img src="{{asset('upload/img_product/logo.png')}}"></a></li>
+            <li><a class="navbar-text" href="{{route('index')}}"><img
+                            src="{{asset('upload/img_product/logo.png')}}"></a></li>
         </div>
         <div class="pull-right">
             <div class="navbar-text">
@@ -105,7 +108,7 @@
                     <li>
                         <a href="{{route('allNews')}}"></a>
                     </li>
-                    @yield('extra_nav')
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -162,7 +165,26 @@
         </nav>
     </div>
     <!--navbar end-->
-    @yield('content')
+    <!--wrapper start-->
+    <div id="wrapper">
+        <div class="container">
+            {{--path--}}
+            {{--@section('path')--}}
+                {{--<a href="{{route('index')}}">Home</a>--}}
+            {{--@show--}}
+            {{--path end--}}
+            {{--side nav--}}
+            <div class="col-md-3 widget">
+                @yield('left_bar')
+            </div>
+            {{--side nav end--}}
+            <div class="col-md-9">
+                @yield('content')
+            </div>
+            @yield('no_left_bar')
+        </div>
+    </div>
+    <!--wrapper end-->
 </div>
 <!--footer begin-->
 <footer class="footer ">

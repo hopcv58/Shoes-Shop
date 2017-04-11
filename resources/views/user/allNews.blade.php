@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('content')
+@section('no_left_bar')
     <!--wrapper start-->
     <div id="wrapper">
         <div class="container">
