@@ -101,7 +101,7 @@
                                         <input type="hidden" name="price" value="{{ $product->price }}">
                                     @else
                                         <input type="hidden" name="price"
-                                               value="{{number_format($product->price*(100-$product->advertisments->discount)/100)}}">
+                                               value="{{$product->price*(100-$product->advertisments->discount)/100}}">
                                     @endif
                                     <input type="hidden" name="size" value="35">
                                     <input type="hidden" name="color"
@@ -117,9 +117,13 @@
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="id" value="{{ $product->id }}">
                                     <input type="hidden" name="name" value="{{ $product->name }}">
-                                    <input type="hidden" name="price"
-                                           value="{{ $product->price }}"><input
-                                            type="hidden" name="size" value="35">
+                                    @if (!isset($product->advertisments))
+                                        <input type="hidden" name="price" value="{{ $product->price }}">
+                                    @else
+                                        <input type="hidden" name="price"
+                                               value="{{$product->price*(100-$product->advertisments->discount)/100}}">
+                                    @endif
+                                    <input type="hidden" name="size" value="35">
                                     <input type="hidden" name="color"
                                            value="{{array_unique(json_decode($product->attribute)->color)[0]}}">
                                     <button type="submit"
