@@ -55,12 +55,12 @@
     <div class="row">
         <h4 class="mybold">CHẤT LIỆU</h4>
         <ul class="list-unstyled">
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da bò" onchange="filt();">Da bò</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da bóng" onchange="filt();">Da bóng</li>
             <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da mờ" onchange="filt();">Da mờ</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da" onchange="filt();">Da bò</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">Kim tuyến</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">Kim tuyến</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">Kim tuyến</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">Kim tuyến</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Nỉ" onchange="filt();">Nỉ</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Kim tuyến" onchange="filt();">Kim tuyến</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da tổng hợp" onchange="filt();">Da tổng hợp</li>
         </ul>
     </div>
 
@@ -165,7 +165,9 @@
                 </div>
             </div>
         @endforeach
-            {{ $products->links() }}
+            @if(isset($category))
+                {{ $products->links() }}
+            @endif
     </div>
     <!--section body end-->
 @endsection

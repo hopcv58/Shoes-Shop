@@ -26,9 +26,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $newsList = $this->business->getAllNews()->shuffle()->take(4);
         $feedbacks = $this->business->getFeedback();
         $slides = $this->business->getSlide();
-        return view('User.index', compact('feedbacks', 'slides'));
+        return view('User.index', compact('feedbacks', 'slides','newsList'));
     }
     
     public function showCategory($cate_id)
@@ -52,7 +53,7 @@ class UserController extends Controller
     public function showNewProduct()
     {
 //        $product  =  productcate::with('Categories')->get();
-        $products = $this->business->getAllProduct()->take(8);
+        $products = $this->business->getAllProduct()->take(12);
         if (isset($products)) {
             return view('user.category', compact('products'));
         } else {
