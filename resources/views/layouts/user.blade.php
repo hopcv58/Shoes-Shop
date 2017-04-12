@@ -20,12 +20,14 @@
 <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="{{asset('admin/plugins/iCheck/square/blue.css')}}">
 
     <!-- Scripts -->
     <script src="{{ asset('user/js/jquery.js') }}"></script>
     <script src="{{ asset('user/js/bootstrap.min.js') }}"></script>
     <script src="{{asset('user/js/jquery.elevatezoom.js')}}"></script>
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -206,8 +208,6 @@
             <div class="row">
                 <div class="col-md-3">
                     @yield('left_bar')
-                </div>
-                <div class="col-md-9">
                 </div>
                 {{--side nav end--}}
                 <div class="col-md-9">
