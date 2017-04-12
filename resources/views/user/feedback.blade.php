@@ -2,81 +2,78 @@
 @section('content')
     {{--comment--}}
     <div class="row">
-        <div class="text-center section-row">
-            <div class="row">
-                <div class="col-md-5">
-                    <hr>
-                </div>
-                <div class="col-md-2 section-title">Ý kiến khách hàng</div>
-                <div class="col-md-5">
-                    <hr>
-                </div>
+        <ol class="breadcrumb">
+            <li><a href="{{route('index')}}">Trang chủ</a></li>
+            <li class="active"><span style="font-weight: bold;">Liên hệ</span></li>
+        </ol>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <img class="img-responsive" style="margin-top: 15px" src="{{asset('upload/img_pages/contact_content_img.jpg')}}" alt="">
+            <p style="color: #615a5e; margin-top: 30px; margin-bottom: 60px">Hãy gửi thông tin phản hồi đến chúng tôi để giúp chúng tôi có thể hoàn thiện sản phẩm của mình hơn.</p>
+            <h4 style="font-weight: bold">THÔNG TIN SHOP</h4>
+                <address style="color: #717171" class="small">
+                    <strong>Điện thoại</strong> <br>
+                    0888340410 <br>
+                    <strong>Email</strong> <br>
+                    cskh@talaha.vn <br>
+                </address>
             </div>
         </div>
-        @if (Auth::guard('customer')->guest())
-            <form class="form-horizontal" role="form" method="POST" action="">
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="name" class="col-md-4 control-label">
-                        Họ tên
-                    </label>
-                    <div class="col-md-6">
-                        <input id="username" type="text" class="form-control"
+        <div class="col-md-6">
+            <h3 class="row">GỬI THƯ CHO CHÚNG TÔI</h3>
+            <p class="row" style="color: #655d62; margin-bottom: 30px; margin-top: 30px">Hãy gửi thông tin phản hồi đến chúng tôi để giúp chúng tôi có thể hoàn thiện sản
+                phẩm của mình hơn.</p>
+            @if (Auth::guard('customer')->guest())
+                <form class="form-horizontal nlienhe" role="form" method="POST" action="">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="name" class="control-label">
+                            Họ tên:
+                        </label>
+                        <input placeholder="Tên:" id="username" type="text" class="form-control"
                                name="username" required>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="phone" class="col-md-4 control-label">
-                        SĐT
-                    </label>
-                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="phone" class=" control-label">
+                            Điện thoại:
+                        </label>
                         <input id="phone" type="tel" class="form-control"
-                               name="phone" required>
+                               name="phone" required placeholder="Điện thoại:">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="email" class="col-md-4 control-label">
-                        Email
-                    </label>
-                    <div class="col-md-6">
-                        <input id="email" type="email" class="form-control"
-                               name="email" required>
+                    <div class="form-group">
+                        <label for="email" class="control-label">
+                            Email:
+                        </label>
+                            <input placeholder="Email:" id="email" type="email" class="form-control"
+                                   name="email" required>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="content" class="col-md-4 control-label">Ý kiến của bạn</label>
-                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="content" class="control-label">Ý kiến của bạn:</label>
                         <textarea id="content" type="text" class="form-control" rows="5"
-                                  name="content"></textarea>
+                                  name="content" placeholder="Tin nhắn:"></textarea>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">
-                            Feedback to us!
-                        </button>
+                    <div class="form-group">
+                            <button type="submit" class=" mybtn btn">
+                                Feedback!
+                            </button>
                     </div>
-                </div>
-            </form>
-        @else
-            <form action="" method="POST" class="form-horizontal col-md-8 col-md-offset-2">
-                {!! csrf_field() !!}
-                <div class="form-group">
-                    <label for="content" class="col-md-4 control-label">Ý kiến của bạn</label>
-                    <div class="col-md-6">
-                        <textarea id="content" type="text" class="form-control" rows="5"
+                </form>
+            @else
+                <form action="" method="POST" class="form-horizontal form-cart">
+                    {!! csrf_field() !!}
+                    <div class="form-group">
+                        <label for="content" class="control-label">Ý kiến của bạn</label>
+                        <textarea id="content" type="text" class="form-control" rows="5" placeholder="Your feedback"
                                   required name="content"></textarea>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">
-                            Feedback to us!
-                        </button>
+                    <div class="form-group">
+                            <button type="submit" class="btn my-default-btn">
+                                Feedback to us!
+                            </button>
                     </div>
-                </div>
-            </form>
-        @endif
+                </form>
+            @endif
+        </div>
     </div>
 
     {{--end comment--}}

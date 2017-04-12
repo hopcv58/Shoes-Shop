@@ -1,7 +1,11 @@
 @extends('layouts.user')
 @section('content')
     <div class="container">
-        @if (sizeof($orders) > 0)
+        <h3 class="Bold">Chi tiết tài khoản và Lịch sử đặt hàng</h3>
+        <h4 class="Bold" style="margin-top: 30px; margin-bottom: 30px;">Đơn hàng của bạn</h4>
+        @if (sizeof($orders) == 0)
+            <p class="Bold">Bạn không đặt bất kỳ đơn hàng nào</p>
+        @else
             <table class="table table-hover card">
                 <tbody>
                 <tr class="active header">
@@ -19,17 +23,13 @@
                         <td>{{$order->payment}}</td>
                         <td>{{$order->address}}</td>
                         <td>{{$order->phone}}</td>
-                        <td>{{$order->total}}</td>
+                        <td>{{number_format($order->total)}} đ</td>
                         <td>{{$order->status ? "Đã chuyển" : "Chưa chuyển"}}</td>
                         <td>{{$order->created_at}}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-        @else
-            <div class="spacer"></div>
-            <h2 class="center-block">Bạn chưa có đơn hàng nào</h2>
         @endif
-        <a href="{{route('index')}}" class="btn btn-primary btn-lg">Continue Shopping</a>
     </div>
 @endsection

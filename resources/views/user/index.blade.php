@@ -113,7 +113,7 @@
                                     </div>
                                     <div style="padding: 20px">
                                         <p class=" text-center"><strong>{{$pro->name}}</strong></p>
-                                        <h3 class=" text-center"><strong>{{$pro->price}}</strong></h3>
+                                        <h3 class=" text-center"><strong>{{number_format($pro->price)}} đ</strong></h3>
                                     </div>
 
                                 </div>
@@ -123,7 +123,7 @@
                     <!--section body end-->
                     <!--section button-->
                     <div class="text-center section-row">
-                        <a class="btn btn-default section-button" href="{{route('category',$cate->id)}}">
+                        <a class=" section-button" href="{{route('category',$cate->id)}}">
                             Xem thêm
                         </a>
                     </div>

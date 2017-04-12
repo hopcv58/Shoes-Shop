@@ -11,8 +11,7 @@
     {{--</ul>--}}
 {{--@endsection--}}
 @section('content')
-    <h1>Your Wishlist</h1>
-
+    <h2>Your Wishlist</h2>
     <hr>
 
     @if (session()->has('success_message'))
@@ -29,15 +28,14 @@
 
     @if (sizeof(Cart::instance('wishlist')->content()) > 0)
 
-        <table class="table">
+        <table class="table table-responsive">
             <thead>
             <tr>
-                <th class="table-image"></th>
+                <th></th>
                 <th>Product</th>
                 <th>Option</th>
                 <th>Price</th>
-                <th class="column-spacer"></th>
-                <th></th>
+                <th colspan="2" style="width: 7%"></th>
             </tr>
             </thead>
             <tbody>
@@ -45,22 +43,21 @@
                 <tr>
                     <td class="table-image"><a href="{{ route('product', [$item->id]) }}"><img
                                     src="{{asset('upload/img_product/'.$products[$item->id]->img_profile)}}"
-                                    alt="product"
-                                    class="img-responsive cart-image col-md-6"></a></td>
+                                    alt="product" width="150px"></a></td>
                     <td><a href="{{ route('product', [$item->id]) }}">{{ $item->name }}</a></td>
                     <td class="col-md-3">Size {{$item->options['size']}},màu {{$item->options['color']}}</td>
-                    <td>${{ $item->subtotal }}</td>
-                    <td class=""></td>
+                    <td><h3>{{ number_format($item->subtotal) }} đ</h3></td>
                     <td>
                         <form action="{{ url('wishlist', [$item->rowId]) }}" method="POST" class="side-by-side">
                             {!! csrf_field() !!}
                             <input type="hidden" name="_method" value="DELETE">
-                            <input type="submit" class="btn btn-danger btn-sm" value="Remove">
+                            <input type="submit" class="btn btn-danger btn-xs" value="Remove">
                         </form>
-
+                    </td>
+                    <td>
                         <form action="{{ url('switchToCart', [$item->rowId]) }}" method="POST" class="side-by-side">
                             {!! csrf_field() !!}
-                            <input type="submit" class="btn btn-success btn-sm" value="To Cart">
+                            <input type="submit" class="btn btn-primary btn-xs" value="To Cart">
                         </form>
                     </td>
                 </tr>
@@ -69,22 +66,19 @@
             </tbody>
         </table>
 
-        <div class="spacer"></div>
-
-        <a href="{{URL::previous()}}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
 
         <div style="float:right">
             <form action="{{ url('/emptyWishlist') }}" method="POST">
                 {!! csrf_field() !!}
                 <input type="hidden" name="_method" value="DELETE">
-                <input type="submit" class="btn btn-danger btn-lg" value="Empty Wishlist">
+                <input type="submit" class="btn my-default-btn" value="Empty Wishlist">
             </form>
         </div>
 
     @else
 
-        <h3>You have no items in your Wishlist</h3>
-        <a href="{{route('index')}}" class="btn btn-primary btn-lg">Continue Shopping</a>
+        <h3>Không có sản phẩm nào trong danh sách yêu thích</h3>
+        <a href="{{route('index')}}" class="btn my-default-btn">Continue Shopping</a>
 
     @endif
 
