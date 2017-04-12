@@ -131,8 +131,9 @@
 
                     @foreach (Cart::content() as $item)
                         <tr>
-                            <td><a href="{{ url('index', [$item->model->slug]) }}"><img
-                                            src="http://placehold.it/300x300" alt="product" width="150px"></a></td>
+                            <td><a href="{{ url('index', [$item->model->slug]) }}">
+                                    <img src="{{asset('upload/img_product/'.$productList[$item->id]->img_profile)}}" alt="product" width="150px">
+                                </a></td>
                             <td><a href="{{ url('index', [$item->model->slug]) }}">{{ $item->name }}</a></td>
 
                             <td class="col-md-3">Size {{$item->options['size']}}

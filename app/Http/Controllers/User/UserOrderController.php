@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Controller;
 use App\Responsitory\Orders;
 use App\Responsitory\productOrder;
+use App\Responsitory\Products;
 use Cart as Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +23,13 @@ class UserOrderController extends Controller
      */
     public function index()
     {
-        return view('user.order');
+        $productList = [];
+        foreach (Cart::content() as $item)
+        {
+            $product = Products::find($item->id);
+            $productList[$item->id] = $product;
+        }
+        return view('user.order',compact('productList'));
     }
     
     /**

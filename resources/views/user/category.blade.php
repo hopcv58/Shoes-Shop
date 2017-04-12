@@ -155,6 +155,7 @@
                 </div>
             </div>
         @endforeach
+            {{ $products->links() }}
     </div>
     <!--section body end-->
 @endsection

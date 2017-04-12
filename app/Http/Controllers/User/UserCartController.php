@@ -5,11 +5,18 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Cart as Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Validator;
 use App\Responsitory\Products;
+use App\Responsitory\Business;
 
 class UserCartController extends Controller
 {
+    private $business;
+    public function __construct()
+    {
+        $this->business = new Business();
+    }
     
     /**
      * Display a listing of the resource.
@@ -35,13 +42,15 @@ class UserCartController extends Controller
      */
     public function store(Request $request)
     {
+        //check duplicate
         $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
             return $cartItem->id === $request->id;
         });
         
         if (!$duplicates->isEmpty()) {
-            return redirect('cart')->withSuccessMessage('Item is already in your cart!');
+            return redirect('cart')->withErrorMessage('Item is already in your cart!');
         }
+        //add to Cart
         Cart::add($request->id, $request->name, 1, $request->price,
           ['color' => $request->color, 'size' => $request->size])->associate('App\Responsitory\Products');
         return redirect('cart')->withSuccessMessage('Item was added to your cart!');

@@ -402,7 +402,7 @@ class Business // extends Model
             $arr_product[] = $value->product_id;
         }
         $product_list = $this->products
-          ->whereIn('products.id', $arr_product)->where('is_public', 1)->latest()->get();
+          ->whereIn('products.id', $arr_product)->where('is_public', 1)->latest()->paginate(8);
 //        dd($product_list);
         return $product_list;
         
@@ -413,21 +413,22 @@ class Business // extends Model
         $product = products::where('id', $id)->first();
         return $product;
     }
-    
-    public function getProductOption($id)
-    {
-        $product = products::where('id', $id)->first();
-        $json = json_decode($product->attribute, true);
-        $option = [];
-        $row = (count($json, COUNT_RECURSIVE) - count($json)) / 5;              // 5 is number of attribute
-        for ($i = 0; $i < $row; $i++) {
-            foreach ($json as $key => $value) {
-                $option[ $i ][ $key ] = $json[ $key ][ $i ];
-            }
-        }
-        return $option;
-    }
-    
+//
+//    public function checkProductAvailable($product_id,$color,$size)
+//    {
+//        $product = products::where('id', $product_id)->first();
+//        //check còn hàng (availavle)
+//        $json = json_decode($product->attribute, true);
+//        $sizes = array_keys($json['size'], $size);
+//        $colors = array_keys($json['color'], $color);
+//        if(current(array_intersect($sizes,$colors))=== false){
+//            return 0;
+//        }
+//        else {
+//            return $json['qty'][current(array_intersect($sizes,$colors))];
+//        }
+//    }
+//
     public function getCommentByProduct($product_id)
     {
         $comment = comments::join('customers', 'comments.customer_id', '=', 'customers.id')->where([
