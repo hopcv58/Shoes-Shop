@@ -44,7 +44,6 @@ class UserController extends Controller
         } else {
             return view('errors.404');
         }
-        
     }
     
     /**
@@ -71,9 +70,8 @@ class UserController extends Controller
         $product = $this->business->getProductById($id);
         if (isset($product)) {
             $comment = $this->business->getCommentByProduct($id);
-            $option = $this->business->getProductOption($id);
             $related = $this->business->getProductRelated($id);
-            return view('user.product', compact('product', 'comment', 'option','related'));
+            return view('user.product', compact('product', 'comment', 'related'));
         } else {
             return view('errors.404');
         }

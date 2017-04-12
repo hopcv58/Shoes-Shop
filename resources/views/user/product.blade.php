@@ -3,6 +3,7 @@
     {{--init--}}
     <?php
     $colors = array_unique(json_decode($product->attribute)->color);
+    $sizes = array_unique(json_decode($product->attribute)->size);
     $images = json_decode($product->img);
     ?>
     <div class="row">
@@ -49,9 +50,9 @@
                 <div class="col-md-12">
                     <h4>Chọn size:</h4>
                     <select class="form-control" name="size" id="size">
-                        @for($i = 35; $i <= 40; $i++)
-                            <option>{!! $i !!}</option>
-                        @endfor
+                        @foreach ($sizes as $size)
+                            <option>{!! $size !!}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-md-4">
