@@ -170,7 +170,7 @@
                     <li class="trangchu"><a href="{{route('index')}}">TRANG CHỦ</a>
                         <ul class="lienhe list-unstyled">
                             <li><a href="#">GIỚI THIỆU</a></li>
-                            <li><a href="#">LIÊN HỆ</a></li>
+                            <li><a href="{{url('feedback')}}">LIÊN HỆ</a></li>
                         </ul>
                     </li>
                     <li><a href="{{route('newProduct')}}">SẢN PHẨM MỚI</a></li>
