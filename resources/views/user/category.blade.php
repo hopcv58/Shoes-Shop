@@ -16,8 +16,6 @@
                 {{isset($category->name)? $category->name : 'Sản phẩm mới nhập'}}
                 </span></li>
         </ol>
-        <h3 class="text-center">{{isset($category->name)? $category->name : 'Sản phẩm mới nhập'}}</h3>
-        <hr style="background-color: #292126; height: 1px">
     </div>
 @endsection
 @section('left_bar')
@@ -55,29 +53,29 @@
     <div class="row">
         <h4 class="mybold">CHẤT LIỆU</h4>
         <ul class="list-unstyled">
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da mờ" onchange="filt();">Da mờ</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da" onchange="filt();">Da bò</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">Kim tuyến</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">Kim tuyến</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">Kim tuyến</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">Kim tuyến</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da mờ" onchange="filt();"> Da mờ</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da" onchange="filt();"> Da bò</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">  Kim tuyến</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">  Kim tuyến</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">  Kim tuyến</li>
+            <li class="col-md-6"><input type="checkbox" id="materialInput" value="4" onchange="filt();">  Kim tuyến</li>
         </ul>
     </div>
 
     <div class="row">
         <h4 class="mybold">ĐỘ CAO</h4>
         <ul class="list-unstyled">
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="1" onchange="filt()">1 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="2" onchange="filt()">2 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="3" onchange="filt()">3 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="4" onchange="filt()">4 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="5" onchange="filt()">5 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="6" onchange="filt()">6 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="7" onchange="filt()">7 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="8" onchange="filt()">8 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="9" onchange="filt()">9 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="10" onchange="filt()">10 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="11" onchange="filt()">11 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="1" onchange="filt()">  1 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="2" onchange="filt()">  2 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="3" onchange="filt()">  3 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="4" onchange="filt()">  4 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="5" onchange="filt()">  5 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="6" onchange="filt()">  6 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="7" onchange="filt()">  7 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="8" onchange="filt()">  8 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="9" onchange="filt()">  9 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="10" onchange="filt()"> 10 cm</li>
+            <li class="col-md-4"><input type="checkbox" id="heightInput" value="11" onchange="filt()"> 11 cm</li>
         </ul>
     </div>
 </div>
@@ -85,6 +83,8 @@
 @section('right_content')
     <!--wrapper start-->
     <!--section body-->
+    <h4>{{isset($category->name)? $category->name : 'Sản phẩm mới nhập'}}</h4>
+    <hr style="background-color: #534450; height: 0.1px">
     <div id="productList">
         @foreach($products as $key => $product)
             <div class="col-md-3" id="card{{$key}}">
@@ -165,8 +165,11 @@
                 </div>
             </div>
         @endforeach
-            {{ $products->links() }}
+            <div class="col-md-12">
+                <div class="pull-left">{{ $products->links() }}</div>
+            </div>
     </div>
+
     <!--section body end-->
 @endsection
 @section('extra_js')

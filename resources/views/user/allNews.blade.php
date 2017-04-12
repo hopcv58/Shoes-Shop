@@ -19,7 +19,7 @@
                                         src="{{asset('upload/img_news/'.$news->img)}}"
                                         class="img-responsive margin" alt="Image"></a>
                             <a href="{{route('news',$news->id)}}">{{$news->title}}</a>
-                            <p>{{$news->summary}}</p>
+                            <p>{!! $news->summary !!}</p>
                     </div>
             @endforeach
             {{--</div>--}}

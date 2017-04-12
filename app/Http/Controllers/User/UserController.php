@@ -53,6 +53,7 @@ class UserController extends Controller
     {
 //        $product  =  productcate::with('Categories')->get();
         $products = $this->business->getAllProduct()->take(8);
+//        $products = $this->business->getAllProduct();
         if (isset($products)) {
             return view('user.category', compact('products'));
         } else {
