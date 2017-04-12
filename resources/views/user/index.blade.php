@@ -84,7 +84,12 @@
                                                     {!! csrf_field() !!}
                                                     <input type="hidden" name="id" value="{{ $pro->id }}">
                                                     <input type="hidden" name="name" value="{{ $pro->name }}">
-                                                    <input type="hidden" name="price" value="{{ $pro->price }}">
+                                                    @if (!isset($pro->advertisments))
+                                                        <input type="hidden" name="price" value="{{ $pro->price }}">
+                                                    @else
+                                                        <input type="hidden" name="price"
+                                                               value="{{number_format($pro->price*(100-$pro->advertisments->discount)/100)}}">
+                                                    @endif
                                                     <input type="hidden" name="size" value="35">
                                                     <input type="hidden" name="color"
                                                            value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
@@ -99,7 +104,12 @@
                                                     {!! csrf_field() !!}
                                                     <input type="hidden" name="id" value="{{ $pro->id }}">
                                                     <input type="hidden" name="name" value="{{ $pro->name }}">
-                                                    <input type="hidden" name="price" value="{{ $pro->price }}">
+                                                    @if (!isset($pro->advertisments))
+                                                        <input type="hidden" name="price" value="{{ $pro->price }}">
+                                                    @else
+                                                        <input type="hidden" name="price"
+                                                               value="{{number_format($pro->price*(100-$pro->advertisments->discount)/100)}}">
+                                                    @endif
                                                     <input type="hidden" name="size" value="35">
                                                     <input type="hidden" name="color"
                                                            value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
@@ -113,7 +123,19 @@
                                     </div>
                                     <div style="padding: 20px">
                                         <p class=" text-center"><strong>{{$pro->name}}</strong></p>
-                                        <h3 class=" text-center"><strong>{{number_format($pro->price)}} đ</strong></h3>
+                                        @if (isset($pro->advertisments))
+                                            <h3 class="text-center">
+                                                {{number_format($pro->price*(100-$pro->advertisments->discount)/100)}} đ
+                                            </h3>
+                                            <h4 class="text-center">
+                                                <strike>{{number_format($pro->price)}} đ</strike>
+                                            </h4>
+                                        @else
+                                            <h3 class=" text-center">
+                                                {{number_format($pro->price)}} đ
+                                            </h3>
+                                            <br>
+                                        @endif
                                     </div>
 
                                 </div>
