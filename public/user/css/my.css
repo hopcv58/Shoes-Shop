@@ -472,3 +472,40 @@ h4.mybold{
     margin-bottom: 15px;
     margin-left: 15px;
 }
+.tintuc p img{
+    text-align: center;
+}
+div#gal1 a {
+    float: left;
+    width: 22%;
+    margin: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+div#gal1 a:last-child{
+    margin-right: 0;
+}
+div#gal1 a img#zoom_01 {
+    height: 75px !important;
+    border: 1px solid;
+}
+div#gal1 {
+    margin-top: 10px;
+}
+ul.dichvu li{
+    list-style: circle;
+    margin-bottom: 15px;
+}
+.form-chi-tiet select{
+    border-radius: 0px;
+    border: 1px solid;
+}
+.comment-product{
+    margin-bottom: 30px;
+}
+
+.comment-product .form-control{
+    border: 1px solid;
+    border-radius: 0px;
+    padding: 10px;
+}

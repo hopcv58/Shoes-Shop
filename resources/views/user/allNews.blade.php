@@ -16,13 +16,14 @@
             <hr style="background-color: #2a2a2a; height: 1px">
             {{--<div class="row section-row">--}}
             @foreach($newsList as $news)
-                <div class="col-md-3 section-row">
-                    <a href="{{route('news',$news->id)}}"><img
-                                src="{{asset('upload/img_news/'.$news->img)}}"
-                                class="img-responsive margin" alt="Image"></a>
-                    <a href="{{route('news',$news->id)}}">{{$news->title}}</a>
-                    <p>{{$news->summary}}</p>
-                </div>
+
+                    <div class="col-md-3 section-row">
+                            <a href="{{route('news',$news->id)}}"><img
+                                        src="{{asset('upload/img_news/'.$news->img)}}"
+                                        class="img-responsive margin" alt="Image"></a>
+                            <a href="{{route('news',$news->id)}}">{{$news->title}}</a>
+                            <p>{!! $news->summary !!}</p>
+                    </div>
             @endforeach
             {{--</div>--}}
         </div>
