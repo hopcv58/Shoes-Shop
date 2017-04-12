@@ -59,7 +59,7 @@ class UserAuthController extends Controller
             if(Auth::guard('customer')->attempt($input,$request->has('remember'))){
                 return redirect()->route('index');
             }else{
-                return redirect()->back()->with(['login_fails' => 'incorrect username or password']);
+                return redirect()->back()->with(['fail' => 'Incorrect username or password']);
             }
         }
     }
@@ -78,13 +78,12 @@ class UserAuthController extends Controller
     public function register(Request $request)
     {
         $rule = [
-            'name' => 'required|max:191',
-            'email' => 'email|max:191',
-            'password' => 'required|min:6|max:191',
-            'confirm' => 'required|min:6|max:191',
-            'address' => 'required|max:191',
-            'phone' => 'required|max:191'
-
+            'name' => 'required|max:30',
+            'email' => 'email|min:3|max:50',
+            'password' => 'required|min:6|max:20',
+            'confirm' => 'required|min:6|max:20',
+            'address' => 'required|min:3|max:191',
+            'phone' => 'required|max:30'
         ];
         $validator = Validator::make($request->all(), $rule);
         if($validator->fails()){
@@ -93,6 +92,10 @@ class UserAuthController extends Controller
         if($request->password != $request->confirm){
             return redirect()->back()->with('fail', 'Mật khẩu không khớp')->withInput();
         }
+        if(count(Customers::where('email',$request->email)->get()))
+        {
+            return redirect()->back()->with('fail', 'Email đã có người sử dụng')->withInput();
+        }
         $customer = new Customers();
         $customer->username = $request->name;
         $customer->email = $request->email;
@@ -100,7 +103,7 @@ class UserAuthController extends Controller
         $customer->address = $request->address;
         $customer->phone = $request->phone;
         $customer->save();
-        return redirect()->back()->with('success', 'Thêm mới người dùng thành công');
+        return redirect()->route('login')->with('success', 'Đăng ký thành công. Mời bạn đăng nhập');
     }
 
 

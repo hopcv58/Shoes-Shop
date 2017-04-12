@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Controller;
 use App\Responsitory\Orders;
 use App\Responsitory\productOrder;
@@ -11,7 +10,7 @@ use Cart as Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class UserOrderController extends Controller
 {
@@ -24,12 +23,11 @@ class UserOrderController extends Controller
     public function index()
     {
         $productList = [];
-        foreach (Cart::content() as $item)
-        {
+        foreach (Cart::content() as $item) {
             $product = Products::find($item->id);
-            $productList[$item->id] = $product;
+            $productList[ $item->id ] = $product;
         }
-        return view('user.order',compact('productList'));
+        return view('user.order', compact('productList'));
     }
     
     /**
@@ -40,7 +38,18 @@ class UserOrderController extends Controller
     {
         try {
             $order = new Orders();
-//            $order->name = $request->name;
+            $rule = [
+              'username' => 'required|max:30',
+              'payment' => 'required|max:30|in:paypal,free ship',
+              'email' => 'email|min:3|max:50',
+              'address' => 'required|min:3|max:191',
+              'phone' => 'required|max:30',
+              'note' => 'max:500'
+            ];
+            $validator = Validator::make($request->all(), $rule);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $order->payment = $request->payment;
             $order->status = 0;
             $order->total = str_replace(",", "", Cart::instance('default')->subtotal());

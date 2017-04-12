@@ -33,18 +33,18 @@ class Customers extends Authenticatable
     public function rule()
     {
         return [
-            'username' => 'required|min:3|max:191',
-            'password' => 'required|min:6|max:191',
-            'email' => 'required|min:3|max:191|email',
+            'username' => 'required|min:3|max:30',
+            'password' => 'required|min:6|max:20',
+            'email' => 'required|min:3|max:50|email',
             'address' => 'required|min:3|max:191',
-            'phone' => 'min:8|digits',
+            'phone' => 'min:8|max:30|digits',
         ];
     }
 
     public function ruleLogin(){
         return [
-            'email' => 'required|email|max:191|min:3',
-            'password' => 'required|min:6',
+            'email' => 'required|email|max:50|min:3',
+            'password' => 'required|min:6|max:20',
         ];
     }
     public function comments()
