@@ -92,7 +92,7 @@
                                                         <input type="hidden" name="price" value="{{ $pro->price }}">
                                                     @else
                                                         <input type="hidden" name="price"
-                                                               value="{{number_format($pro->price*(100-$pro->advertisments->discount)/100)}}">
+                                                               value="{{$pro->price*(100-$pro->advertisments->discount)/100}}">
                                                     @endif
                                                     <input type="hidden" name="size" value="35">
                                                     <input type="hidden" name="color"
@@ -112,7 +112,7 @@
                                                         <input type="hidden" name="price" value="{{ $pro->price }}">
                                                     @else
                                                         <input type="hidden" name="price"
-                                                               value="{{number_format($pro->price*(100-$pro->advertisments->discount)/100)}}">
+                                                               value="{{$pro->price*(100-$pro->advertisments->discount)/100}}">
                                                     @endif
                                                     <input type="hidden" name="size" value="35">
                                                     <input type="hidden" name="color"
