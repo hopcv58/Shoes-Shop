@@ -10,22 +10,16 @@
         {{--@endforeach--}}
     {{--</ul>--}}
 {{--@endsection--}}
+@section('path')
+    <ol class="breadcrumb">
+        <li><a href="{{route('index')}}">Trang chủ</a></li>
+        <li class="active"><span style="font-weight: bold;">Wishlist</span></li>
+    </ol>
+    <h2 class="Bold" style="margin-left: 30px">Wishlist</h2>
+@endsection
 @section('content')
     <h2>Your Wishlist</h2>
     <hr>
-
-    @if (session()->has('success_message'))
-        <div class="alert alert-success">
-            {{ session()->get('success_message') }}
-        </div>
-    @endif
-
-    @if (session()->has('error_message'))
-        <div class="alert alert-danger">
-            {{ session()->get('error_message') }}
-        </div>
-    @endif
-
     @if (sizeof(Cart::instance('wishlist')->content()) > 0)
 
         <table class="table table-responsive">

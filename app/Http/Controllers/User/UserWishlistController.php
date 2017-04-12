@@ -40,12 +40,12 @@ class UserWishlistController extends Controller
         });
         
         if (!$duplicates->isEmpty()) {
-            return redirect(url()->previous())->withErrorMessage('Item is already in your wishlist!');
+            return redirect(url()->previous())->with(['modalFail' => 'Item already in your wishlist']);
         }
         
         Cart::add($request->id, $request->name, 1, $request->price,
           ['color' => $request->color, 'size' => $request->size])->associate('App\Responsitory\Products');
-        return redirect(url()->previous())->withSuccessMessage('Item was added to your wishlist!');
+        return redirect(url()->previous())->with(['modalSuccess' => 'Item was added to your wishlist']);
     }
     
     /**
@@ -69,7 +69,7 @@ class UserWishlistController extends Controller
     public function destroy($id)
     {
         Cart::instance('wishlist')->remove($id);
-        return redirect('wishlist')->withSuccessMessage('Item has been removed!');
+        return redirect('wishlist')->with(['success' => 'Item has been removed from wishlist']);
     }
     
     /**
@@ -80,7 +80,7 @@ class UserWishlistController extends Controller
     public function emptyWishlist()
     {
         Cart::instance('wishlist')->destroy();
-        return redirect('wishlist')->withSuccessMessage('Your wishlist has been cleared!');
+        return redirect('wishlist')->with(['success' => 'You wishlist has been cleared']);
     }
     
     /**
@@ -98,12 +98,12 @@ class UserWishlistController extends Controller
         });
         
         if (!$duplicates->isEmpty()) {
-            return redirect(url()->previous())->withErrorMessage('Item is already in your cart!');
+            return redirect(url()->previous())->with(['fail' => 'Item already in your cart']);
         }
         Cart::instance('default')->add($item->id, $item->name, 1, $item->price, $item->options->toArray())
           ->associate('App\Responsitory\Products');
         
-        return redirect('wishlist')->withSuccessMessage('Item has been moved to your shopping cart!');
+        return redirect('wishlist')->with(['success' => 'Item moved to your cart sucessfully']);
         
     }
 }

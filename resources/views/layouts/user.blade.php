@@ -88,7 +88,7 @@
             <form action="{{route('search')}}" class="navbar-form navbar-left">
                 <div class="input-group">
                     <input type="text" name="input" class="form-control" placeholder="search..."
-                           style="border-radius: 0px;">
+                           style="border-radius: 0px;" required>
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </span>
@@ -201,8 +201,55 @@
 
     <div id="wrapper">
         <div class="container">
-
-            @yield('path')
+            {{--modal--}}
+            <div class="modal fade" id="message" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">
+                                @if(session('modalSuccess'))
+                                    <strong class="text-success">Success!</strong>
+                                @endif
+                                @if(session('modalFail'))
+                                    <strong class="text-danger">Error!</strong>
+                                @endif
+                            </h4>
+                        </div>
+                        @if(session('modalSuccess'))
+                            <div class="modal-body alert alert-success">
+                                <p>{{session('modalSuccess')}} </p>
+                            </div>
+                        @endif
+                        @if(session('modalFail'))
+                            <div class="modal-body alert alert-danger">
+                                <p>{{session('modalFail')}}</p>
+                            </div>
+                        @endif
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{--modal--}}
+            <div class="row">
+                @if(session('success'))
+                    <div class="alert alert-success col-md-8 col-md-offset-2">
+                        <a href="#" class="close">&times;</a>
+                        {{session('success')}}
+                    </div>
+                @endif
+                @if(session('fail'))
+                    <div class="alert alert-danger col-md-8 col-md-offset-2">
+                        <a href="#" class="close">&times;</a>
+                        {{session('fail')}}
+                    </div>
+                @endif
+            </div>
+            <div class="row">
+                @yield('path')
+            </div>
             {{--path end--}}
             {{--side nav--}}
             <div class="row">
@@ -213,6 +260,7 @@
                 <div class="col-md-9">
                     @yield('right_content')
                 </div>
+
                 @yield('content')
             </div>
         </div>
@@ -288,8 +336,9 @@
 <!--footer end-->
     <!-- Scripts -->
     <div id="fb-root"></div>
-    <script>(function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
+    <script>(function (d, s, id)
+        {
+            var js, fjs = d.getElementsByTagName(s)[ 0 ];
             if (d.getElementById(id)) {
                 return;
             }
@@ -298,6 +347,14 @@
             js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>
+        @if(session('modalSuccess') || session('modalFail'))
+            $(document).ready(function ()
+        {
+            $('#message').modal('show');
+        });
+        @endif
     </script>
 </div>
 </body>

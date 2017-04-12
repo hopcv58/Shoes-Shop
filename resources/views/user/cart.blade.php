@@ -10,25 +10,14 @@
 {{--@endforeach--}}
 {{--</ul>--}}
 {{--@endsection--}}
-@section('content')
+@section('path')
     <ol class="breadcrumb">
         <li><a href="{{route('index')}}">Trang chủ</a></li>
         <li class="active"><span style="font-weight: bold;">Giỏ Hàng</span></li>
     </ol>
     <h2 class="Bold" style="margin-left: 30px">Giỏ Hàng</h2>
-
-
-    @if (session()->has('success_message'))
-        <div class="alert alert-success">
-            {{ session()->get('success_message') }}
-        </div>
-    @endif
-
-    @if (session()->has('error_message'))
-        <div class="alert alert-danger">
-            {{ session()->get('error_message') }}
-        </div>
-    @endif
+@endsection
+@section('content')
 
     @if (sizeof(Cart::content()) > 0)
 
@@ -116,14 +105,16 @@
 
 @section('extra_js')
     <script>
-        (function () {
+        (function ()
+        {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            $('.quantity').on('change', function () {
+            $('.quantity').on('change', function ()
+            {
                 var id = $(this).attr('data-id')
                 $.ajax({
                     type: "PATCH",
@@ -131,7 +122,8 @@
                     data: {
                         'quantity': this.value,
                     },
-                    success: function (data) {
+                    success: function (data)
+                    {
                         window.location.href = '{{ url('/cart') }}';
                     }
                 });

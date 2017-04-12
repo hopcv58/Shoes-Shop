@@ -7,19 +7,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    @if(session('success'))
-                        <div class="alert alert-success myAlert">
-                            <a href="#" class="close">&times;</a>
-                            {{session('success')}}
-                        </div>
-                    @endif
-
-                    @if(session('fail'))
-                        <div class="alert alert-danger myAlert">
-                            <a href="#" class="close">&times;</a>
-                            {{session('fail')}}
-                        </div>
-                    @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
