@@ -27,7 +27,7 @@ class News extends BaseModel
     }
 
 
-    public function comment()
+    public function comments()
     {
         return $this->morphMany('App\Responsitory\Comments', 'commentable');
     }

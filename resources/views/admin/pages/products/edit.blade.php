@@ -62,7 +62,7 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group {{$errors->has('code') ? 'has-error' : ''}}">
                                     <label>Categories (*)</label>
                                     <select class="form-control select2" multiple="multiple"
                                             data-placeholder="Select a Categories" name="cate_id[]"
