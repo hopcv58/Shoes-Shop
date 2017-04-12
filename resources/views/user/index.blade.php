@@ -72,7 +72,11 @@
                     <div class="row">
                         @foreach($productList[$cate->id] as $pro)
                             <div class="col-md-3">
+
                                 <div class="col-md-12 card img-container">
+                                    @if (isset($pro->advertisments))
+                                        <div class="img-adv"><p>-{{$pro->advertisments->discount}}%</p></div>
+                                    @endif
                                     <a href="{{route('product',[$pro->id])}}" class="row thumbnail">
                                         <img src="{{asset('upload/img_product/'.$pro->img_profile)}}"
                                              class="img-responsive margin" alt="Image">
