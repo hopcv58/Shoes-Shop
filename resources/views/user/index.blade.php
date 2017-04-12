@@ -73,11 +73,11 @@
                         @foreach($productList[$cate->id] as $pro)
                             <div class="col-md-3">
 
-                                <div class="col-md-12 card img-container">
+                                <div class="col-md-12 img-container">
                                     @if (isset($pro->advertisments))
                                         <div class="img-adv"><p>-{{$pro->advertisments->discount}}%</p></div>
                                     @endif
-                                    <a href="{{route('product',[$pro->id])}}" class="row thumbnail">
+                                    <a href="{{route('product',[$pro->id])}}" class="row">
                                         <img src="{{asset('upload/img_product/'.$pro->img_profile)}}"
                                              class="img-responsive margin" alt="Image">
                                     </a>
@@ -156,6 +156,65 @@
                     <!--section button end-->
                 </section>
             @endforeach
+
+            {{--Section tin tuc--}}
+            <section>
+                <!--section label-->
+                <div class="text-center section-row">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <hr>
+                        </div>
+                        <div class="col-md-2 section-title text-center">Tin tức</div>
+                        <div class="col-md-5">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <!--section label end-->
+                <!--section body-->
+                <div class="row">
+                    @foreach($feedbacks as $feedback)
+                        <div class="col-md-3">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/150x150" width="100%"
+                                     class=" margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/300x300" width="100%"
+                                     class="margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/150x150" width="100%"
+                                     class="margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <!--section body end-->
+                <div class="text-center section-row">
+                    <a class=" section-button" href="{{route('allNews')}}">
+                        Xem thêm
+                    </a>
+                </div>
+            </section>
+
+            {{--.section tin tuc--}}
             <section>
                 <!--section label-->
                 <div class="text-center section-row">
@@ -174,49 +233,61 @@
                 <div class="row">
                     @foreach($feedbacks as $feedback)
                         <div class="col-md-2">
-                            <div class="col-md-12 card img-container">
-                                <a href="{{route('product',[$pro->id])}}" class="row thumbnail">
-                                    <img src="{{asset('upload/img_product/'.$pro->img_profile)}}"
-                                         class="img-responsive margin" alt="Image">
-                                </a>
-                                <div class="img-middle">
-                                    <div class="img-overlay">
-                                        <div class="col-md-6">
-                                            <form action="{{ route('cart.store') }}" method="POST">
-                                                {!! csrf_field() !!}
-                                                <input type="hidden" name="id" value="{{ $pro->id }}">
-                                                <input type="hidden" name="name" value="{{ $pro->name }}">
-                                                <input type="hidden" name="price" value="{{ $pro->price }}">
-                                                <input type="hidden" name="size" value="35">
-                                                <input type="hidden" name="color"
-                                                       value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
-                                                <button type="submit"
-                                                        class="glyphicon glyphicon-shopping-cart btn-default img-btn"
-                                                        aria-hidden="true">
-                                                </button>
-                                            </form>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <form action="{{ route('wishlist.store') }}" method="POST">
-                                                {!! csrf_field() !!}
-                                                <input type="hidden" name="id" value="{{ $pro->id }}">
-                                                <input type="hidden" name="name" value="{{ $pro->name }}">
-                                                <input type="hidden" name="price" value="{{ $pro->price }}">
-                                                <input type="hidden" name="size" value="35">
-                                                <input type="hidden" name="color"
-                                                       value="{{array_unique(json_decode($pro->attribute)->color)[0]}}">
-                                                <button type="submit"
-                                                        class="glyphicon glyphicon-tags btn-default img-btn"
-                                                        aria-hidden="true">
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="padding: 20px">
-                                    <p class=" text-center"><strong>{{$pro->name}}</strong></p>
-                                    <h3 class=" text-center"><strong>{{$pro->price}} {{$pro->code}}</strong></h3>
-                                </div>
+                            <div class="col-md-12">
+                                    <img src="http://placehold.it/150x150"
+                                         class="img-circle margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>{{$feedback->username}}</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/150x150"
+                                     class="img-circle margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/150x150"
+                                     class="img-circle margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/150x150"
+                                     class="img-circle margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/150x150"
+                                     class="img-circle margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/150x150"
+                                     class="img-circle margin" alt="Image">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
 
                             </div>
                         </div>
@@ -224,11 +295,6 @@
                 </div>
                 <!--section body end-->
                 <!--section button-->
-                <div class="text-center section-row">
-                    <a class="btn btn-default section-button" href="{{route('category',$cate->id)}}">
-                        Xem thêm
-                    </a>
-                </div>
                 <!--section button end-->
             </section>
         </div>
