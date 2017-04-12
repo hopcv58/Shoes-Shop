@@ -402,7 +402,7 @@ class Business // extends Model
             $arr_product[] = $value->product_id;
         }
         $product_list = $this->products
-          ->whereIn('products.id', $arr_product)->where('is_public', 1)->latest()->paginate(8);
+          ->whereIn('products.id', $arr_product)->where('is_public', 1)->latest()->paginate(12);
 //        dd($product_list);
         return $product_list;
         

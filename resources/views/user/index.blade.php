@@ -174,36 +174,17 @@
                 <!--section label end-->
                 <!--section body-->
                 <div class="row">
-                    @foreach($feedbacks as $feedback)
+                    @foreach($newsList as $news)
                         <div class="col-md-3">
                             <div class="col-md-12">
-                                <img src="http://placehold.it/150x150" width="100%"
+                                <img src="{{asset('upload/img_news/'.$news->img)}}" width="100%"
                                      class=" margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
+                                <p style="margin-top: 20px"><strong>{{$news->title}}</strong></p>
+                                <p class="feedback-index">{{$news->summary}}</p>
 
                             </div>
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="col-md-12">
-                                <img src="http://placehold.it/300x300" width="100%"
-                                     class="margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="col-md-12">
-                                <img src="http://placehold.it/150x150" width="100%"
-                                     class="margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
-
-                            </div>
-                        </div>
                     @endforeach
                 </div>
                 <!--section body end-->
@@ -234,61 +215,16 @@
                     @foreach($feedbacks as $feedback)
                         <div class="col-md-2">
                             <div class="col-md-12">
-                                    <img src="http://placehold.it/150x150"
-                                         class="img-circle margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>{{$feedback->username}}</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="col-md-12">
                                 <img src="http://placehold.it/150x150"
                                      class="img-circle margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="col-md-12">
-                                <img src="http://placehold.it/150x150"
-                                     class="img-circle margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="col-md-12">
-                                <img src="http://placehold.it/150x150"
-                                     class="img-circle margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="col-md-12">
-                                <img src="http://placehold.it/150x150"
-                                     class="img-circle margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="col-md-12">
-                                <img src="http://placehold.it/150x150"
-                                     class="img-circle margin" alt="Image">
-                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
-                                <p class="feedback-index">Chất liệu kiểu dáng y như hình mẫu. Mình rất hài lòng về sản phẩm của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...</p>
-
+                                @if(isset($feedback->customer_id))
+                                    <p style="margin-top: 20px"><strong>{{$feedback->customers->username}}</strong></p>
+                                @else
+                                    <p style="margin-top: 20px"><strong>{{$feedback->username}}</strong></p>
+                                @endif
+                                <p class="feedback-index">
+                                    {{$feedback->content}}
+                                </p>
                             </div>
                         </div>
                     @endforeach
