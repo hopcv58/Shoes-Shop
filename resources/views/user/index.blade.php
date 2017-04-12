@@ -145,7 +145,7 @@
                     <!--section body end-->
                     <!--section button-->
                     <div class="text-center section-row">
-                        <a class="btn btn-default section-button" href="{{route('category',$cate->id)}}">
+                        <a class=" section-button" href="{{route('category',$cate->id)}}">
                             Xem thêm
                         </a>
                     </div>

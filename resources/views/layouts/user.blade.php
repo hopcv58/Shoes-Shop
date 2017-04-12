@@ -166,18 +166,14 @@
         <nav class="navbar" data-spy="affix" data-offset-top="130"
              style="background-color: #fff; padding: 10px;">
             <div class="container">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-collapse">
                     <li class="trangchu"><a href="{{route('index')}}">TRANG CHỦ</a>
                         <ul class="lienhe list-unstyled">
                             <li><a href="#">GIỚI THIỆU</a></li>
-                            <li><a href="#">LIÊN HỆ</a></li>
+                            <li><a href="{{url('feedback')}}">LIÊN HỆ</a></li>
                         </ul>
                     </li>
                     <li><a href="{{route('newProduct')}}">SẢN PHẨM MỚI</a></li>
-                    {{--<li class="dropdown">--}}
-                    {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Tất cả sản phẩm--}}
-                    {{--<span class="caret"></span></a>--}}
-                    {{--<ul class="dropdown-menu">--}}
                     @foreach($cateList as $category)
                         <li><a href="{{url('category',[$category->id])}}">{{$category->name}}</a></li>
                     @endforeach
@@ -189,19 +185,7 @@
                     @yield('extra_nav')
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{--     <li>
-                             <form action="{{route('search')}}" class="navbar-form navbar-left">
-                                 <div class="form-group">
-                                     <input type="text" name="input" class="form-control">
-                                 </div>
-                                 <button type="submit" class="btn btn-primary"><span
-                                             class="glyphicon glyphicon-search"></span> Search
-                                 </button>
-                             </form>
-                         </li>--}}
-
-                    {{--cart/wishlist area--}}
-                    <li><a href="{{ url('/wishlist') }}">wishlist
+                    <li><a href="{{ url('/wishlist') }}"><span class="glyphicon glyphicon-tags"></span>
                             ({{ Cart::instance('wishlist')->count(false) }})</a></li>
                     <li><a href="{{ url('/cart') }}"><span class="glyphicon glyphicon-shopping-cart"></span>
                             ({{ Cart::instance('default')->count(false) }})</a></li>
@@ -211,16 +195,11 @@
             </div>
             <hr>
         </nav>
-
     </div>
-    <!--navbar end-->
-    <!--wrapper start-->
+
     <div id="wrapper">
         <div class="container">
-            {{--path--}}
-            {{--@section('path')--}}
-            {{--<a href="{{route('index')}}">Home</a>--}}
-            {{--@show--}}
+
             @yield('path')
             {{--path end--}}
             {{--side nav--}}
@@ -309,9 +288,8 @@
 <!--footer end-->
     <!-- Scripts -->
     <div id="fb-root"></div>
-    <script>(function (d, s, id)
-        {
-            var js, fjs = d.getElementsByTagName(s)[ 0 ];
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {
                 return;
             }
@@ -321,5 +299,6 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+</div>
 </body>
 </html>
