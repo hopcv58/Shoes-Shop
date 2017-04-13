@@ -19,66 +19,75 @@
     </div>
 @endsection
 @section('left_bar')
-<div class="col-md-12">
-    <h4 class="mybold">TÌM THEO TÊN</h4>
-    <div class="input-group">
+    <div class="col-md-12">
+        <h4 class="mybold">TÌM THEO TÊN</h4>
+        <div class="input-group">
         <span class="input-group-btn">
             <button class="btn btn-default"><i class="fa fa-search"></i></button>
         </span>
-        <input id="search" onkeyup="filt()" type="text" class="form-control col-md-7"
-               placeholder="Nhập tên sản phẩm ...">
-    </div>
-    <div class="row">
-        <h4 class="mybold">DANH MỤC</h4>
-        <ul class="list-unstyled">
-            @foreach($cateList as $cate)
-                <li style="margin-left: 10px; margin-bottom: 10px; color: #3d393a"><strong><a href="{{url('category',[$cate->id])}}">{{$cate->name}}</a></strong></li>
-            @endforeach
-        </ul>
-    </div>
+            <input id="search" onkeyup="filt()" type="text" class="form-control col-md-7"
+                   placeholder="Nhập tên sản phẩm ...">
+        </div>
+        <div class="row">
+            <h4 class="mybold">DANH MỤC</h4>
+            <ul class="list-unstyled">
+                @foreach($cateList as $cate)
+                    <li style="margin-left: 10px; margin-bottom: 10px; color: #3d393a"><strong><a
+                                    href="{{url('category',[$cate->id])}}">{{$cate->name}}</a></strong></li>
+                @endforeach
+            </ul>
+        </div>
 
-    <div class="row">
-        <h4 class="mybold">KHOẢNG GIÁ</h4>
-        <div class="text-left">
-            <p><strong>Từ</strong></p>
-            <input id="min" name="min" type="number" class="form-control col-md-7" onkeyup="filt()">
-            <br> <br>
-            <br>
-            <p><strong>Đến</strong></p>
-            <input id="max" name="max" type="number" class="form-control col-md-7" onkeyup="filt()">
+        <div class="row">
+            <h4 class="mybold">KHOẢNG GIÁ</h4>
+            <div class="text-left">
+                <p><strong>Từ</strong></p>
+                <input id="min" name="min" type="number" class="form-control col-md-7" onkeyup="filt()">
+                <br> <br>
+                <br>
+                <p><strong>Đến</strong></p>
+                <input id="max" name="max" type="number" class="form-control col-md-7" onkeyup="filt()">
 
+            </div>
+        </div>
+
+        <div class="row">
+            <h4 class="mybold">CHẤT LIỆU</h4>
+            <ul class="list-unstyled">
+                <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da bò" onchange="filt();">Da bò
+                </li>
+                <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da bóng" onchange="filt();">Da
+                    bóng
+                </li>
+                <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da mờ" onchange="filt();">Da mờ
+                </li>
+                <li class="col-md-6"><input type="checkbox" id="materialInput" value="Nỉ" onchange="filt();">Nỉ</li>
+                <li class="col-md-6"><input type="checkbox" id="materialInput" value="Kim tuyến" onchange="filt();">Kim
+                    tuyến
+                </li>
+                <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da tổng hợp" onchange="filt();">Da
+                    tổng hợp
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <h4 class="mybold">ĐỘ CAO</h4>
+            <ul class="list-unstyled">
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="1" onchange="filt()"> 1 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="2" onchange="filt()"> 2 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="3" onchange="filt()"> 3 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="4" onchange="filt()"> 4 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="5" onchange="filt()"> 5 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="6" onchange="filt()"> 6 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="7" onchange="filt()"> 7 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="8" onchange="filt()"> 8 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="9" onchange="filt()"> 9 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="10" onchange="filt()"> 10 cm</li>
+                <li class="col-md-4"><input type="checkbox" id="heightInput" value="11" onchange="filt()"> 11 cm</li>
+            </ul>
         </div>
     </div>
-
-    <div class="row">
-        <h4 class="mybold">CHẤT LIỆU</h4>
-        <ul class="list-unstyled">
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da bò" onchange="filt();">Da bò</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da bóng" onchange="filt();">Da bóng</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da mờ" onchange="filt();">Da mờ</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Nỉ" onchange="filt();">Nỉ</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Kim tuyến" onchange="filt();">Kim tuyến</li>
-            <li class="col-md-6"><input type="checkbox" id="materialInput" value="Da tổng hợp" onchange="filt();">Da tổng hợp</li>
-        </ul>
-    </div>
-
-    <div class="row">
-        <h4 class="mybold">ĐỘ CAO</h4>
-        <ul class="list-unstyled">
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="1" onchange="filt()">  1 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="2" onchange="filt()">  2 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="3" onchange="filt()">  3 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="4" onchange="filt()">  4 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="5" onchange="filt()">  5 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="6" onchange="filt()">  6 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="7" onchange="filt()">  7 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="8" onchange="filt()">  8 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="9" onchange="filt()">  9 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="10" onchange="filt()"> 10 cm</li>
-            <li class="col-md-4"><input type="checkbox" id="heightInput" value="11" onchange="filt()"> 11 cm</li>
-        </ul>
-    </div>
-</div>
 @endsection
 @section('right_content')
     <!--wrapper start-->
@@ -113,7 +122,7 @@
                                         <input type="hidden" name="price"
                                                value="{{$product->price*(100-$product->advertisments->discount)/100}}">
                                     @endif
-                                    <input type="hidden" name="size" value="35">
+                                    <input type="hidden" name="size" value="{{array_unique(json_decode($product->attribute)->size)[0]}}">
                                     <input type="hidden" name="color"
                                            value="{{array_unique(json_decode($product->attribute)->color)[0]}}">
                                     <button type="submit"
@@ -165,23 +174,27 @@
                 </div>
             </div>
         @endforeach
-            @if(isset($category))
-                {{ $products->links() }}
-            @endif
     </div>
-
+    @if(isset($category))
+        <div class="col-md-12">
+            {{ $products->links() }}
+        </div>
+    @endif
     <!--section body end-->
 @endsection
 @section('extra_js')
     <script>
-        function filt() {
+        function filt()
+        {
             var input, productList, productName, min, max, price, material, height;
             var materialInput = [];
             var heightInput = [];
-            $("input:checkbox[id=materialInput]:checked").each(function () {
+            $("input:checkbox[id=materialInput]:checked").each(function ()
+            {
                 materialInput.push($(this).val());
             });
-            $("input:checkbox[id=heightInput]:checked").each(function () {
+            $("input:checkbox[id=heightInput]:checked").each(function ()
+            {
                 heightInput.push($(this).val());
             });
             input = document.getElementById("search").value;
@@ -210,7 +223,8 @@
     </script>
     <script>
         $('#filtMenu .dropdown-menu').on({
-            "click": function (e) {
+            "click": function (e)
+            {
                 e.stopPropagation();
             }
         });

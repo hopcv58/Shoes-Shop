@@ -410,7 +410,7 @@ class Business // extends Model
     
     public function getProductById($id)
     {
-        $product = products::where('id', $id)->first();
+        $product = products::where('id', $id)->where('is_public',1)->first();
         return $product;
     }
 //

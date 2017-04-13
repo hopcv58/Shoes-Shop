@@ -1,14 +1,14 @@
 @extends('layouts.user')
 {{--@section('path')--}}
-    {{--@parent / Wishlist--}}
+{{--@parent / Wishlist--}}
 {{--@endsection--}}
 {{--@section('left_bar')--}}
-    {{--<ul><strong><h3>Danh mục</h3></strong></ul>--}}
-    {{--<ul class="col-md-offset-1">--}}
-        {{--@foreach($cateList as $category)--}}
-            {{--<li><strong><a href="{{url('category',[$category->id])}}">{{$category->name}}</a></strong></li>--}}
-        {{--@endforeach--}}
-    {{--</ul>--}}
+{{--<ul><strong><h3>Danh mục</h3></strong></ul>--}}
+{{--<ul class="col-md-offset-1">--}}
+{{--@foreach($cateList as $category)--}}
+{{--<li><strong><a href="{{url('category',[$category->id])}}">{{$category->name}}</a></strong></li>--}}
+{{--@endforeach--}}
+{{--</ul>--}}
 {{--@endsection--}}
 @section('path')
     <ol class="breadcrumb">
@@ -42,7 +42,8 @@
                     <td class="col-md-3">Size {{$item->options['size']}},màu {{$item->options['color']}}</td>
                     <td><h3>{{ number_format($item->subtotal) }} đ</h3></td>
                     <td>
-                        <form action="{{ url('wishlist', [$item->rowId]) }}" method="POST" class="side-by-side">
+                        <form action="{{ url('wishlist', [$item->rowId]) }}" method="POST" class="side-by-side"
+                              onsubmit="return confirm('Are you sure to delete this from your wishlist?');">
                             {!! csrf_field() !!}
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="submit" class="btn btn-danger btn-xs" value="Remove">
@@ -62,7 +63,8 @@
 
 
         <div style="float:right">
-            <form action="{{ url('/emptyWishlist') }}" method="POST">
+            <form action="{{ url('/emptyWishlist') }}" method="POST"
+                  onsubmit="return confirm('This will empty your wishlist completely\n Are you sure about this?');">
                 {!! csrf_field() !!}
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="submit" class="btn my-default-btn" value="Empty Wishlist">
