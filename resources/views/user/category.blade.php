@@ -6,7 +6,7 @@
                  class="img-responsive"/>
         @else
             {{--Link ảnh cho sản phẩm mới nhất ở đây--}}
-            <img src="{{asset("upload/img_pages/sanPhamMoiNhat")}}" alt=""
+            <img src="{{asset("upload/img_pages/banner1.jpg")}}" alt=""
                  class="img-responsive"/>
         @endif
         <ol class="breadcrumb">
