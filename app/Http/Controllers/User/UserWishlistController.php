@@ -3,13 +3,20 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Responsitory\Business;
+use App\Responsitory\Products;
 use Cart as Cart;
 use Illuminate\Http\Request;
 use Validator;
-use App\Responsitory\Products;
 
 class UserWishlistController extends Controller
 {
+    private $business;
+    
+    public function __construct()
+    {
+        $this->business = new Business();
+    }
     
     /**
      * Display a listing of the resource.
@@ -19,12 +26,11 @@ class UserWishlistController extends Controller
     public function index()
     {
         $products = [];
-        foreach (Cart::instance('wishlist')->content() as $item)
-        {
+        foreach (Cart::instance('wishlist')->content() as $item) {
             $product = Products::find($item->id);
-            $products[$item->id] = $product;
+            $products[ $item->id ] = $product;
         }
-        return view('user.wishlist',compact('products'));
+        return view('user.wishlist', compact('products'));
     }
     
     /**
@@ -36,16 +42,24 @@ class UserWishlistController extends Controller
     public function store(Request $request)
     {
         $duplicates = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
+            return ($cartItem->rowId == $request->id || $cartItem->id == $request->id);
         });
-        
         if (!$duplicates->isEmpty()) {
             return redirect(url()->previous())->with(['modalFail' => 'Item already in your wishlist']);
         }
-        
-        Cart::add($request->id, $request->name, 1, $request->price,
-          ['color' => $request->color, 'size' => $request->size])->associate('App\Responsitory\Products');
-        return redirect(url()->previous())->with(['modalSuccess' => 'Item was added to your wishlist']);
+        $product = $this->business->getProductById($request->id);
+        if (isset($product)) {
+            if (isset($product->advertisments)) {
+                $product->price = $product->price * (100 - $product->advertisments->discount) / 100;
+            }
+            $product->color = array_unique(json_decode($product->attribute)->color)[ 0 ];
+            $product->size = array_unique(json_decode($product->attribute)->size)[ 0 ];
+            Cart::add($product->id, $product->name, 1, $product->price,
+              ['color' => $product->color, 'size' => $product->size])->associate('App\Responsitory\Products');
+            return redirect(url()->previous())->with(['modalSuccess' => 'Item was added to your wishlist']);
+        } else {
+            return redirect(url()->previous())->with(['modalFail' => 'Error! Please select a valid product!']);
+        }
     }
     
     /**
@@ -92,17 +106,16 @@ class UserWishlistController extends Controller
     public function switchToCart($id)
     {
         $item = Cart::instance('wishlist')->get($id);
-        Cart::instance('wishlist')->remove($id);
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($id) {
-            return $cartItem->id === $id;
-        });
+//        Cart::instance('wishlist')->remove($id);
         
+        $duplicates = Cart::instance('default')->search(function ($cartItem, $rowId) use ($id) {
+            return ($cartItem->rowId == $id || $cartItem->id == $id);
+        });
         if (!$duplicates->isEmpty()) {
             return redirect(url()->previous())->with(['fail' => 'Item already in your cart']);
         }
         Cart::instance('default')->add($item->id, $item->name, 1, $item->price, $item->options->toArray())
           ->associate('App\Responsitory\Products');
-        
         return redirect('wishlist')->with(['success' => 'Item moved to your cart sucessfully']);
         
     }

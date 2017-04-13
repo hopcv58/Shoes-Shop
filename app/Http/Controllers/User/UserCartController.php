@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Responsitory\Business;
+use App\Responsitory\Products;
 use Cart as Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Validator;
-use App\Responsitory\Products;
-use App\Responsitory\Business;
 
 class UserCartController extends Controller
 {
     private $business;
+    
     public function __construct()
     {
         $this->business = new Business();
@@ -26,12 +26,11 @@ class UserCartController extends Controller
     public function index()
     {
         $products = [];
-        foreach (Cart::content() as $item)
-        {
+        foreach (Cart::content() as $item) {
             $product = Products::find($item->id);
-            $products[$item->id] = $product;
+            $products[ $item->id ] = $product;
         }
-        return view('user.cart',compact('products'));
+        return view('user.cart', compact('products'));
     }
     
     /**
@@ -44,16 +43,27 @@ class UserCartController extends Controller
     {
         //check duplicate
         $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
+            return ($cartItem->rowId == $request->id || $cartItem->id == $request->id);
         });
         
         if (!$duplicates->isEmpty()) {
             return redirect(url()->previous())->with(['modalFail' => 'Item alredy in your cart']);
         }
-        //add to Cart
-        Cart::add($request->id, $request->name, 1, $request->price,
-          ['color' => $request->color, 'size' => $request->size])->associate('App\Responsitory\Products');
-        return redirect(url()->previous())->with(['modalSuccess' => 'Item added to your cart!']);
+        $product = $this->business->getProductById($request->id);
+        if (isset($product)) {
+            if (isset($product->advertisments)) {
+                $product->price = $product->price * (100 - $product->advertisments->discount) / 100;
+            }
+            $product->color = array_unique(json_decode($product->attribute)->color)[ 0 ];
+            $product->size = array_unique(json_decode($product->attribute)->size)[ 0 ];
+            //add to Cart
+            Cart::add($product->id, $product->name, 1, $product->price,
+              ['color' => $product->color, 'size' => $product->size])->associate('App\Responsitory\Products');
+            return redirect(url()->previous())->with(['modalSuccess' => 'Item added to your cart!']);
+        } else {
+            return redirect(url()->previous())->with(['modalFail' => 'Error! Please select a valid product!']);
+        }
+        
     }
     
     /**
@@ -76,7 +86,6 @@ class UserCartController extends Controller
         }
         
         Cart::update($id, $request->quantity);
-        session()->flash('success', 'Quantity was updated successfully!');
         
         return response()->json(['success' => true]);
         
@@ -118,7 +127,7 @@ class UserCartController extends Controller
         Cart::remove($id);
         
         $duplicates = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($id) {
-            return $cartItem->id === $id;
+            return ($cartItem->rowId == $id || $cartItem->id == $id);
         });
         
         if (!$duplicates->isEmpty()) {

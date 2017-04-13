@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Mail\orderMail;
+use App\Responsitory\Business;
 use App\Responsitory\Orders;
 use App\Responsitory\productOrder;
 use App\Responsitory\Products;
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Validator;
 
 class UserOrderController extends Controller
 {
+    private $business;
+    
+    function __construct()
+    {
+        $this->business = new Business();
+    }
     
     /**
      * Display a listing of the resource.
@@ -71,8 +78,9 @@ class UserOrderController extends Controller
             $order->save();
             $order_products = [];
             foreach (Cart::content() as $item) {
+                $product = $this->business->getProductById($item->id);
                 $productOrder = new productOrder();
-                $productOrder->product_id = $item->id;
+                $productOrder->product_id = $product->id;
                 $productOrder->qty = $item->qty;
                 $productOrder->attribute = json_encode($item->options);
                 $productOrder->status = 0;
