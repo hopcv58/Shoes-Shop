@@ -4,25 +4,25 @@
         <li><a href="{{route('index')}}">Trang chủ</a></li>
         <li class="active"><span style="font-weight: bold;">Liên hệ</span></li>
     </ol>
-    <div class="col-md-6">
-        <div class="col-md-12">
-            <img class="img-responsive" style="margin-top: 15px"
-                 src="{{asset('upload/img_pages/contact_content_img.jpg')}}" alt="">
-            <p style="color: #615a5e; margin-top: 30px; margin-bottom: 60px">Hãy gửi thông tin phản hồi đến chúng tôi để
-                giúp chúng tôi có thể hoàn thiện sản phẩm của mình hơn.</p>
-            <h4 style="font-weight: bold">THÔNG TIN SHOP</h4>
-            <address style="color: #717171" class="small">
-                <strong>Điện thoại</strong> <br>
-                0888340410 <br>
-                <strong>Email</strong> <br>
-                cskh@talaha.vn <br>
-            </address>
-        </div>
-    </div>
 @endsection
 @section('content')
     {{--comment--}}
     <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <img class="img-responsive" style="margin-top: 15px"
+                     src="{{asset('upload/img_pages/contact_content_img.jpg')}}" alt="">
+                <p style="color: #615a5e; margin-top: 30px; margin-bottom: 60px">Hãy gửi thông tin phản hồi đến chúng tôi để
+                    giúp chúng tôi có thể hoàn thiện sản phẩm của mình hơn.</p>
+                <h4 style="font-weight: bold">THÔNG TIN SHOP</h4>
+                <address style="color: #717171" class="small">
+                    <strong>Điện thoại</strong> <br>
+                    0888340410 <br>
+                    <strong>Email</strong> <br>
+                    cskh@talaha.vn <br>
+                </address>
+            </div>
+        </div>
 
         <div class="col-md-6">
             <h3 class="row">GỬI THƯ CHO CHÚNG TÔI</h3>
