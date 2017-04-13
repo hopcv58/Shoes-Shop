@@ -88,7 +88,7 @@
             <form action="{{route('search')}}" class="navbar-form navbar-left">
                 <div class="input-group">
                     <input type="text" name="input" class="form-control" placeholder="search..."
-                           style="border-radius: 0px;" required>
+                           style="border-radius: 0px;" value="{{isset($_GET['input'])? $_GET['input'] : ''}}" required>
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </span>
@@ -234,6 +234,9 @@
             </div>
             {{--modal--}}
             <div class="row">
+                @yield('path')
+            </div>
+            <div class="row">
                 @if(session('success'))
                     <div class="alert alert-success col-md-8 col-md-offset-2">
                         <a href="#" class="close">&times;</a>
@@ -246,9 +249,6 @@
                         {{session('fail')}}
                     </div>
                 @endif
-            </div>
-            <div class="row">
-                @yield('path')
             </div>
             {{--path end--}}
             {{--side nav--}}

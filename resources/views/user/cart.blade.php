@@ -57,7 +57,8 @@
                     </td>
                     <td class="text-center"><h3>{{ number_format($item->subtotal) }} đ</h3></td>
                     <td>
-                        <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
+                        <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side"
+                              onsubmit="return confirm('Are you sure to delete this from your cart?');">
                             {!! csrf_field() !!}
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="submit" class="btn btn-danger btn-xs" value="Xóa">
@@ -88,7 +89,8 @@
                 </h2>
 
                 <a href="{{route('order.index')}}" class="btn mybtn" style="float: right;">Thanh Toán</a>
-                <form action="{{ url('emptyCart') }}" method="POST">
+                <form action="{{ url('emptyCart') }}" method="POST"
+                      onsubmit="return confirm('This will empty your cart completely\n Are you sure about this?');">
                     {!! csrf_field() !!}
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="submit" class="mybtn btn" value="Empty Cart">
