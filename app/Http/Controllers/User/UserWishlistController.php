@@ -45,7 +45,7 @@ class UserWishlistController extends Controller
             return ($cartItem->rowId == $request->id || $cartItem->id == $request->id);
         });
         if (!$duplicates->isEmpty()) {
-            return redirect(url()->previous())->with(['modalFail' => 'Item already in your wishlist']);
+            return redirect(url()->previous())->with(['modalFail' => 'Sản phẩm đã tồn tại trong danh sách yêu thích']);
         }
         $product = $this->business->getProductById($request->id);
         if (isset($product)) {
@@ -56,9 +56,9 @@ class UserWishlistController extends Controller
             $product->size = array_unique(json_decode($product->attribute)->size)[ 0 ];
             Cart::add($product->id, $product->name, 1, $product->price,
               ['color' => $product->color, 'size' => $product->size])->associate('App\Responsitory\Products');
-            return redirect(url()->previous())->with(['modalSuccess' => 'Item was added to your wishlist']);
+            return redirect(url()->previous())->with(['modalSuccess' => 'Thêm vào mục yêu thích thành công']);
         } else {
-            return redirect(url()->previous())->with(['modalFail' => 'Error! Please select a valid product!']);
+            return redirect(url()->previous())->with(['modalFail' => 'LỖI! Hãy chọn đúng sản phẩm']);
         }
     }
     
@@ -83,7 +83,7 @@ class UserWishlistController extends Controller
     public function destroy($id)
     {
         Cart::instance('wishlist')->remove($id);
-        return redirect('wishlist')->with(['success' => 'Item has been removed from wishlist']);
+        return redirect('wishlist')->with(['success' => 'Xóa khỏi mục yêu thích thành công']);
     }
     
     /**
@@ -94,7 +94,7 @@ class UserWishlistController extends Controller
     public function emptyWishlist()
     {
         Cart::instance('wishlist')->destroy();
-        return redirect('wishlist')->with(['success' => 'You wishlist has been cleared']);
+        return redirect('wishlist')->with(['success' => 'Làm rỗng mục yêu thích thành công']);
     }
     
     /**
@@ -112,11 +112,11 @@ class UserWishlistController extends Controller
             return ($cartItem->rowId == $id || $cartItem->id == $id);
         });
         if (!$duplicates->isEmpty()) {
-            return redirect(url()->previous())->with(['fail' => 'Item already in your cart']);
+            return redirect(url()->previous())->with(['fail' => 'Sản phẩm đã tồn tại trong giỏ hàng']);
         }
         Cart::instance('default')->add($item->id, $item->name, 1, $item->price, $item->options->toArray())
           ->associate('App\Responsitory\Products');
-        return redirect('wishlist')->with(['success' => 'Item moved to your cart sucessfully']);
+        return redirect('wishlist')->with(['success' => 'Chuyển sang giỏ hàng thành công']);
         
     }
 }

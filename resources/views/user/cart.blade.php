@@ -58,7 +58,7 @@
                     <td class="text-center"><h3>{{ number_format($item->subtotal) }} đ</h3></td>
                     <td>
                         <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side"
-                              onsubmit="return confirm('Are you sure to delete this from your cart?');">
+                              onsubmit="return confirm('Bạn có chắc chắn xóa khỏi giỏ hàng?');">
                             {!! csrf_field() !!}
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="submit" class="btn btn-danger btn-xs" value="Xóa">
@@ -69,7 +69,7 @@
                         <form action="{{ url('switchToWishlist', [$item->rowId]) }}" method="POST"
                               class="side-by-side">
                             {!! csrf_field() !!}
-                            <input type="submit" class="btn btn-primary btn-xs" value="Đánh dấu">
+                            <input type="submit" class="btn btn-primary btn-xs" value="Yêu thích">
                         </form>
                     </td>
                 </tr>
@@ -90,16 +90,16 @@
 
                 <a href="{{route('order.index')}}" class="btn mybtn" style="float: right;">Thanh Toán</a>
                 <form action="{{ url('emptyCart') }}" method="POST"
-                      onsubmit="return confirm('This will empty your cart completely\n Are you sure about this?');">
+                      onsubmit="return confirm('Bạn có chắc muốn làm rỗng giỏ hàng?');">
                     {!! csrf_field() !!}
                     <input type="hidden" name="_method" value="DELETE">
-                    <input type="submit" class="mybtn btn" value="Empty Cart">
+                    <input type="submit" class="mybtn btn" value="Xóa hết">
                 </form>
             </div>
         </div>
     @else
-        <h3>Không có sản phẩm nào trong giỏ hàng của bạn :((</h3>
-        <a href="{{route('index')}}" class="btn my-default-btn">Continue Shopping</a>
+        <h3>Không có sản phẩm nào trong giỏ hàng của bạn </h3>
+        <a href="{{route('index')}}" class="btn my-default-btn">Tiếp tục mua hàng</a>
 
     @endif
 

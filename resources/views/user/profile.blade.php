@@ -9,13 +9,13 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="">
                         {{ csrf_field() }}
-                        <div class="col-md-4 text-right"><strong>Name</strong></div>
+                        <div class="col-md-4 text-right"><strong>Tên</strong></div>
                         <div class="col-md-6">{{$customer->username}}</div>
-                        <div class="col-md-4 text-right"><strong>E-mail address</strong></div>
+                        <div class="col-md-4 text-right"><strong>E-mail</strong></div>
                         <div class="col-md-6">{{$customer->email}}</div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <label for="password" class="col-md-4 control-label">Mật khẩu</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Xác nhận mật khẩu</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="confirm" required>
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="address" class="col-md-4 control-label">Address</label>
+                            <label for="address" class="col-md-4 control-label">Địa chỉ</label>
 
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control" name="address" value="{{ $customer->address }}" required>

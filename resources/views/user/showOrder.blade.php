@@ -11,11 +11,11 @@
                 <tr class="active header">
                     <th>Người nhận</th>
                     <th>Payment</th>
-                    <th class="col-md-3">Address</th>
-                    <th>Phone</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Date</th>
+                    <th class="col-md-3">Địa chỉ</th>
+                    <th>SĐT</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày giờ</th>
                 </tr>
                 @foreach($orders as $order)
                     <tr>

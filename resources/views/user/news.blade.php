@@ -57,20 +57,19 @@
 
             @if (Auth::guard('customer')->guest())
                 <div class="col-md-8 col-md-offset-2">
-                    You're not log in. Please <a class="" href="{{route('login')}}">Login</a>
-                    or <a class="" href="{{route('register')}}">Register</a> to comment
+                    Bạn chưa đăng nhập. Hãy <a class="" href="{{route('login')}}">đăng nhập</a>
+                    hoặc <a class="" href="{{route('register')}}">đăng kí</a> để bình luận
                 </div>
             @else
                 <form action="{{url('news/comment')}}" method="POST" class="form-horizontal col-md-8 col-md-offset-2">
                     {!! csrf_field() !!}
                     <div class="form-group">
                         <textarea class="col-md-8 form-control" rows="5" name="content" id="comment"
-                                  placeholder="Your comment" required></textarea>
+                                  placeholder="Bình luận tại đây" required></textarea>
                     </div>
                     <input type="hidden" name="commentable_id" value="{{$news->id}}">
                     <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->user()->id}}">
-                    <button class="btn my-default-btn">Comment
-                        as {{ Auth::guard('customer')->user()->username }}</button>
+                    <button class="btn my-default-btn">Bình luận bằng tên {{ Auth::guard('customer')->user()->username }}</button>
                 </form>
             @endif
         </div>
