@@ -27,6 +27,15 @@ Route::group(['namespace' => '\User'], function () {
         'uses' => 'UserAuthController@showLoginForm',
     ]);
 
+    Route::get('profile', [
+        'as' => 'profile',
+        'uses' => 'UserController@showProfile',
+    ]);
+    
+    Route::post('profile', [
+        'uses' => 'UserController@editProfile',
+    ]);
+
     Route::post('login', [
         'as' => 'login',
         'uses' => 'UserAuthController@login'

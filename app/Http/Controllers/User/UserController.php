@@ -5,12 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Responsitory\Business;
 use App\Responsitory\Customers;
-use App\Responsitory\Feedbacks;
 use App\Responsitory\News;
 use App\Responsitory\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -29,7 +29,41 @@ class UserController extends Controller
         $newsList = $this->business->getAllNews()->shuffle()->take(4);
         $feedbacks = $this->business->getFeedback();
         $slides = $this->business->getSlide();
-        return view('User.index', compact('feedbacks', 'slides','newsList'));
+        return view('User.index', compact('feedbacks', 'slides', 'newsList'));
+    }
+    
+    public function showProfile()
+    {
+        if (Auth::guard('customer')->guest()) {
+            return view('errors.404');
+        } else {
+            $customer = $this->business->getCustomerById();
+        }
+        return view('user.profile', compact('customer'));
+    }
+    
+    public function editProfile(Request $request)
+    {
+        $rule = [
+          'password' => 'required|min:6|max:20',
+          'confirm' => 'required|min:6|max:20',
+          'address' => 'required|min:3|max:191',
+          'phone' => 'required|max:30'
+        ];
+        $validator = Validator::make($request->all(), $rule);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        if ($request->password != $request->confirm) {
+            return redirect()->back()->with('fail', 'Mật khẩu không khớp')->withInput();
+        }
+        Customers::where('id', Auth::guard('customer')->user()->id)
+          ->update([
+            'password' => bcrypt($request->password),
+            'address' => $request->address,
+            'phone' => $request->phone,
+          ]);
+        return redirect()->route('profile')->with('modalSuccess', 'Sửa thông tin thành công');
     }
     
     public function showCategory($cate_id)
@@ -53,7 +87,7 @@ class UserController extends Controller
     public function showNewProduct()
     {
 //        $product  =  productcate::with('Categories')->get();
-
+        
         $products = $this->business->getAllProduct()->take(12);
         if (isset($products)) {
             return view('user.category', compact('products'));
@@ -101,7 +135,7 @@ class UserController extends Controller
     
     public function search(Request $request)
     {
-        if($request->input == ""){
+        if ($request->input == "") {
             return redirect()->back()->with(['modalFail' => 'You must enter a character to search']);
         }
         $categories = $this->business->searchCategories($request->input);
