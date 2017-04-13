@@ -47,7 +47,7 @@ class UserCartController extends Controller
         });
         
         if (!$duplicates->isEmpty()) {
-            return redirect(url()->previous())->with(['modalFail' => 'Item alredy in your cart']);
+            return redirect(url()->previous())->with(['modalFail' => 'Sản phẩm đã có trong giỏ hàng']);
         }
         $product = $this->business->getProductById($request->id);
         if (isset($product)) {
@@ -59,9 +59,9 @@ class UserCartController extends Controller
             //add to Cart
             Cart::add($product->id, $product->name, 1, $product->price,
               ['color' => $product->color, 'size' => $product->size])->associate('App\Responsitory\Products');
-            return redirect(url()->previous())->with(['modalSuccess' => 'Item added to your cart!']);
+            return redirect(url()->previous())->with(['modalSuccess' => 'Thêm vào giỏ hàng thành công!']);
         } else {
-            return redirect(url()->previous())->with(['modalFail' => 'Error! Please select a valid product!']);
+            return redirect(url()->previous())->with(['modalFail' => 'LỖI! Đề nghị bạn chọn đúng sản phẩm']);
         }
         
     }
@@ -81,7 +81,7 @@ class UserCartController extends Controller
         ]);
         
         if ($validator->fails()) {
-            session()->flash('fail', 'Quantity must be between 1 and 5.');
+            session()->flash('fail', 'Số lượng phải nằm trong khoảng từ 1-5');
             return response()->json(['success' => false]);
         }
         
@@ -100,7 +100,7 @@ class UserCartController extends Controller
     public function destroy($id)
     {
         Cart::remove($id);
-        return redirect('cart')->with(['success' => 'Delete item successfully']);
+        return redirect('cart')->with(['success' => 'Xóa thành công!']);
     }
     
     /**
@@ -111,7 +111,7 @@ class UserCartController extends Controller
     public function emptyCart()
     {
         Cart::destroy();
-        return redirect('cart')->with(['success' => 'Your cart has been cleared']);
+        return redirect('cart')->with(['success' => 'Làm rỗng giỏ hàng thành công']);
     }
     
     /**
@@ -131,13 +131,13 @@ class UserCartController extends Controller
         });
         
         if (!$duplicates->isEmpty()) {
-            return redirect(url()->previous())->with(['fail' => 'Item alredy in your wishlist']);
+            return redirect(url()->previous())->with(['fail' => 'Sản phẩm đã có trong mục yêu thích']);
         }
         
         Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price, $item->options->toArray())
           ->associate('App\Responsitory\Products');
         
-        return redirect('cart')->with(['success' => 'Item moved to your wishlist']);
+        return redirect('cart')->with(['success' => 'Chuyển sang danh sách yêu thích thành công']);
         
     }
 }

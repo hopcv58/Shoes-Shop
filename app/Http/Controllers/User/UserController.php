@@ -136,7 +136,7 @@ class UserController extends Controller
     public function search(Request $request)
     {
         if ($request->input == "") {
-            return redirect()->back()->with(['modalFail' => 'You must enter a character to search']);
+            return redirect()->back()->with(['modalFail' => 'Bạn cần nhập từ khóa để tìm kiếm']);
         }
         $categories = $this->business->searchCategories($request->input);
         $newsList = $this->business->searchNews($request->input);

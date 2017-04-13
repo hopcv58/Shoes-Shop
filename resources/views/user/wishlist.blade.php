@@ -13,9 +13,9 @@
 @section('path')
     <ol class="breadcrumb">
         <li><a href="{{route('index')}}">Trang chủ</a></li>
-        <li class="active"><span style="font-weight: bold;">Wishlist</span></li>
+        <li class="active"><span style="font-weight: bold;">Yêu thích</span></li>
     </ol>
-    <h2 class="Bold" style="margin-left: 30px">Wishlist</h2>
+    <h2 class="Bold" style="margin-left: 30px">Yêu thích</h2>
 @endsection
 @section('content')
     <h2>Your Wishlist</h2>
@@ -43,16 +43,16 @@
                     <td><h3>{{ number_format($item->subtotal) }} đ</h3></td>
                     <td>
                         <form action="{{ url('wishlist', [$item->rowId]) }}" method="POST" class="side-by-side"
-                              onsubmit="return confirm('Are you sure to delete this from your wishlist?');">
+                              onsubmit="return confirm('Bạn có chắc muốn xóa khỏi mục yêu thích?');">
                             {!! csrf_field() !!}
                             <input type="hidden" name="_method" value="DELETE">
-                            <input type="submit" class="btn btn-danger btn-xs" value="Remove">
+                            <input type="submit" class="btn btn-danger btn-xs" value="Xóa">
                         </form>
                     </td>
                     <td>
                         <form action="{{ url('switchToCart', [$item->rowId]) }}" method="POST" class="side-by-side">
                             {!! csrf_field() !!}
-                            <input type="submit" class="btn btn-primary btn-xs" value="To Cart">
+                            <input type="submit" class="btn btn-primary btn-xs" value="Đến giỏ hàng">
                         </form>
                     </td>
                 </tr>
@@ -64,17 +64,17 @@
 
         <div style="float:right">
             <form action="{{ url('/emptyWishlist') }}" method="POST"
-                  onsubmit="return confirm('This will empty your wishlist completely\n Are you sure about this?');">
+                  onsubmit="return confirm('Mục yêu thích sẽ bị làm rỗng\n Bạn có chắc không?');">
                 {!! csrf_field() !!}
                 <input type="hidden" name="_method" value="DELETE">
-                <input type="submit" class="btn my-default-btn" value="Empty Wishlist">
+                <input type="submit" class="btn my-default-btn" value="Xóa hết">
             </form>
         </div>
 
     @else
 
         <h3>Không có sản phẩm nào trong danh sách yêu thích</h3>
-        <a href="{{route('index')}}" class="btn my-default-btn">Continue Shopping</a>
+        <a href="{{route('index')}}" class="btn my-default-btn">Tiếp tục mua hàng</a>
 
     @endif
 

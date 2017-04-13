@@ -59,7 +59,7 @@ class UserAuthController extends Controller
             if(Auth::guard('customer')->attempt($input,$request->has('remember'))){
                 return redirect()->route('index');
             }else{
-                return redirect()->back()->with(['fail' => 'Incorrect username or password']);
+                return redirect()->back()->with(['fail' => 'Mật khẩu hoặc tài khoản không đúng']);
             }
         }
     }
