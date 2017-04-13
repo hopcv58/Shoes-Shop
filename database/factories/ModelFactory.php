@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'email' => 'admin@gmail.com',
         'password' => $password ?: $password = bcrypt('123456'),
 		'img' => $faker->sentence,
         'remember_token' => str_random(10),

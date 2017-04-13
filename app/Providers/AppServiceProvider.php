@@ -16,8 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         $business = new Business();
-        Schema::defaultStringLength(255);
+
         //        view share data
         $cateList = $business->getAllCate();
         $productList = [];
