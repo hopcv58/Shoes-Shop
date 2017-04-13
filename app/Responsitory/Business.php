@@ -43,11 +43,6 @@ class Business // extends Model
         $this->advertisments = new Advertisments();
     }
     
-    public function getCate()
-    {
-        return $this->categories->index();
-    }
-    
     /**
      * @param UploadedFile $img
      * @param string $path
@@ -412,11 +407,7 @@ class Business // extends Model
         $customer = Customers::find(Auth::guard('customer')->user()->id);
         return $customer;
     }
-    public function editCustomer()
-    {
-        $customer = Customers::find($id);
-        return $customer;
-    }
+    
     public function getProductById($id)
     {
         $product = products::where('id', $id)->where('is_public',1)->first();
