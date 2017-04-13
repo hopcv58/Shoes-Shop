@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\orderMail;
 use App\Responsitory\Orders;
 use App\Responsitory\productOrder;
 use App\Responsitory\Products;
 use Cart as Cart;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -34,7 +36,7 @@ class UserOrderController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function store(Request $request)
+    public function store(Request $request, Mailer $mailer)
     {
         try {
             $order = new Orders();
@@ -67,6 +69,7 @@ class UserOrderController extends Controller
                 $order->address = $request->input('address');
             }
             $order->save();
+            $order_products = [];
             foreach (Cart::content() as $item) {
                 $productOrder = new productOrder();
                 $productOrder->product_id = $item->id;
@@ -75,7 +78,11 @@ class UserOrderController extends Controller
                 $productOrder->status = 0;
                 $productOrder->order_id = $order->id;
                 $productOrder->save();
+                $order_products[] = $productOrder;
             }
+//            dd($order);
+            $mail_to = $request->input('email');
+            $mailer->to($mail_to)->send(new orderMail($order, $order_products));
             Cart::destroy();
             return Redirect::back();
         } catch (Exception $ex) {

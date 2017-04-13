@@ -178,9 +178,9 @@
                         <div class="col-md-3">
                             <div class="col-md-12">
                                 <img src="{{asset('upload/img_news/'.$news->img)}}" width="100%"
-                                     class=" margin" alt="Image">
+                                     class=" margin" alt="Image" height="200px">
                                 <p style="margin-top: 20px"><strong>{{$news->title}}</strong></p>
-                                <p class="feedback-index">{{$news->summary}}</p>
+                                <p class="feedback-index">{!! $news->summary !!}</p>
 
                             </div>
                         </div>
@@ -212,7 +212,7 @@
                 <!--section label end-->
                 <!--section body-->
                 <div class="row">
-                    @foreach($feedbacks as $feedback)
+{{--                    @foreach($feedbacks as $feedback)
                         <div class="col-md-2">
                             <div class="col-md-12">
                                 <img src="http://placehold.it/150x150"
@@ -227,7 +227,55 @@
                                 </p>
                             </div>
                         </div>
-                    @endforeach
+                    @endforeach--}}
+                    <div class="col-md-2">
+                            <img src="http://sw001.hstatic.net/6/01ecebb0cbcbcf/unnamed__1__grande.png"
+                                 class="" alt="Image" width="100%" height="120px">
+                                <p style="margin-top: 20px"><strong>Chị Diễn Vy</strong></p>
+                            <p class="feedback-index">
+                                Chất liệu kiểu dáng y hình mẫu. Mình rất hài lòng về sp của talaha. Bạn chăm sóc khách hàng tư vấn rất nhiệt tình...
+                            </p>
+                    </div>
+                        <div class="col-md-2">
+                                <img src="http://sw001.hstatic.net/2/023979a0ed2c65/14356057_10207566533900880_330190549_n_grande.png"
+                                     class="img-feedback" alt="Image">
+                                    <p style="margin-top: 20px"><strong>Chị Nguyễn Thị Quí</strong></p>
+
+                                <p class="feedback-index">
+                                    Mẫu mã của Talaha rất đa dạng, mình vừa mua 1 đôi sandal bên này đi lên dáng rất đẹp và êm chân. Giao hàng rất đúng hẹn...
+                                </p>
+                        </div>
+                        <div class="col-md-2">
+                                <img src="http://sw001.hstatic.net/6/01fa6799416ce0/14341788_10207565887044709_204502548_n_grande.png"
+                                     class="img-feedback" alt="Image">
+                                    <p style="margin-top: 20px"><strong>Chị Nguyễn Thu Liễu</strong></p>
+                                <p class="feedback-index">
+                                    Giày chất lượng và rất bền. Mong nhiều mẫu giày mới. Cảm thấy rất tin tưởng khi đặt giày của Talaha...
+                                </p>
+                        </div>
+                        <div class="col-md-2">
+                                <img src="http://sw001.hstatic.net/5/0202badb19cc84/14365359_10207565915165412_507229059_n_grande.png"
+                                     class="img-feedback" alt="Image">
+                                    <p style="margin-top: 20px"><strong>Chị Nguyễn Thị Thanh Tâm</strong></p>
+                                <p class="feedback-index">
+                                    Mình rất thích giày của shop. Mỗi lần đi chọn giày là mình rất vất vả mà giày của shop nhìn là mình ưng liền mà đi thì...
+                                </p>
+                        </div>
+                        <div class="col-md-2">
+                                <img class="img-feedback" src="http://sw001.hstatic.net/5/01ecefa405c40e/unnamed_grande.png" alt="Image">
+                                    <p style="margin-top: 20px"><strong>Chị Hằng Nguyễn</strong></p>
+                                <p class="feedback-index">
+                                    Thích talaha vì mang rất êm chân. Mang đc 2 đôi mà tới giờ còn chưa suy suyển...
+                                </p>
+                        </div>
+                        <div class="col-md-2">
+                                <img src="http://sw001.hstatic.net/2/0206cc97e86a81/unnamed_grande.png"
+                                     class="img-feedback" alt="Image">
+                                    <p style="margin-top: 20px"><strong>Chị Nguyễn Thị Lệ Thủy</strong></p>
+                                <p class="feedback-index">
+                                    Giày Talaha kiểu dáng y như hình.  Ngoài còn đẹp hơn ý, đi rất êm chân. Em rất thích...
+                                </p>
+                        </div>
                 </div>
                 <!--section body end-->
                 <!--section button-->
