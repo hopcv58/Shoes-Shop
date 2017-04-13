@@ -147,6 +147,9 @@
                                 <li>
                                     <a href="{{route('allOrders')}}">Xem các đơn hàng</a>
                                 </li>
+                                <li>
+                                    <a href="{{route('profile')}}">Sửa thông tin cá nhân</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

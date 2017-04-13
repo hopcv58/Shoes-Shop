@@ -407,7 +407,16 @@ class Business // extends Model
         return $product_list;
         
     }
-    
+    public function getCustomerById()
+    {
+        $customer = Customers::find(Auth::guard('customer')->user()->id);
+        return $customer;
+    }
+    public function editCustomer()
+    {
+        $customer = Customers::find($id);
+        return $customer;
+    }
     public function getProductById($id)
     {
         $product = products::where('id', $id)->where('is_public',1)->first();
