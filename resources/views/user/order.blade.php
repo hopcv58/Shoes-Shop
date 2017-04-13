@@ -172,10 +172,10 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Product</th>
-                        <th>Option</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Size/Màu</th>
                         <th>Qty</th>
-                        <th>Price</th>
+                        <th>Giá</th>
                         <th class="column-spacer"></th>
                     </tr>
                     </thead>
@@ -193,7 +193,7 @@
                             <td class="col-md-3">Size {{$item->options['size']}}
                                 ,màu {{$item->options['color']}}</td>
                             <td>{{$item->qty}}</td>
-                            <td>${{ $item->subtotal }}</td>
+                            <td>{{ number_format($item->subtotal) }}đ</td>
                         </tr>
 
                     @endforeach

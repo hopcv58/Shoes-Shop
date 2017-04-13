@@ -106,7 +106,7 @@ class UserWishlistController extends Controller
     public function switchToCart($id)
     {
         $item = Cart::instance('wishlist')->get($id);
-//        Cart::instance('wishlist')->remove($id);
+        Cart::instance('wishlist')->remove($id);
         
         $duplicates = Cart::instance('default')->search(function ($cartItem, $rowId) use ($id) {
             return ($cartItem->rowId == $id || $cartItem->id == $id);
