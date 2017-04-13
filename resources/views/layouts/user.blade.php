@@ -212,10 +212,10 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">
                                 @if(session('modalSuccess'))
-                                    <strong class="text-success">Success!</strong>
+                                    <strong class="text-success">Thành công!</strong>
                                 @endif
                                 @if(session('modalFail'))
-                                    <strong class="text-danger">Error!</strong>
+                                    <strong class="text-danger">Lỗi!</strong>
                                 @endif
                             </h4>
                         </div>
@@ -230,7 +230,7 @@
                             </div>
                         @endif
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                         </div>
                     </div>
                 </div>

@@ -8,13 +8,13 @@
                     <h3>NHẬP THÔNG TIN GIAO HÀNG</h3>
                     <hr>
                     <div class="col-md-8 col-md-offset-2 form-cart">
-                        <form onsubmit="return confirm('This will empty your cart and submit your order\n Are you sure about this?');"
+                        <form onsubmit="return confirm('Giỏ hàng sẽ bị làm trống và đơn hàng sẽ được gửi\n Bạn có chắc chắn?');"
                               class="form-horizontal" role="form" method="POST" action="">
                             {{ csrf_field() }}
                             <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
                                 <label for="username" class="control-label">
                                     Họ tên</label>
-                                <input id="username" type="text" class="form-control" placeholder="Name..."
+                                <input id="username" type="text" class="form-control" placeholder="Tên..."
                                        name="username" required>
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <label for="phone" class="control-label">
                                     Điện thoại <span class="text-danger">(*)</span></label>
-                                <input id="phone" type="tel" class="form-control" placeholder="Phone Number..."
+                                <input id="phone" type="tel" class="form-control" placeholder="SĐT..."
                                        name="phone" required>
                             </div>
                             <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
@@ -55,7 +55,7 @@
                             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
                                 <label for="address" class="control-label">
                                     Địa chỉ giao hàng <span class="text-danger">(*)</span></label>
-                                <input id="address" type="text" class="form-control" placeholder="Address..."
+                                <input id="address" type="text" class="form-control" placeholder="Địa chỉ..."
                                        name="address" required>
                                 @if ($errors->has('address'))
                                     <span class="help-block">
@@ -65,7 +65,7 @@
                             </div>
                             <div class="form-group {{ $errors->has('note') ? ' has-error' : '' }}">
                                 <label for="note" class="control-label">Ghi chú</label>
-                                <textarea id="note" type="text" class="form-control" placeholder="Note..."
+                                <textarea id="note" type="text" class="form-control" placeholder="Viết ghi chú cho đơn hàng"
                                           name="note"></textarea>
                                 @if ($errors->has('note'))
                                     <span class="help-block">
@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn my-default-btn">
-                                    Confirm!
+                                    Xác nhận!
                                 </button>
                             </div>
                         </form>
@@ -84,13 +84,13 @@
                     <h3>THÔNG TIN GIAO HÀNG</h3>
                     <hr>
                     <div class="col-md-8 col-md-offset-2 form-cart">
-                        <form onsubmit="return confirm('This will empty your cart and submit your order\n Are you sure about this?');"
+                        <form onsubmit="return confirm('Giỏ hàng sẽ bị làm trống và đơn hàng sẽ được gửi\n Bạn có chắc chắn?');"
                               class="form-horizontal" role="form" method="POST" action="">
                             {{ csrf_field() }}
                             <div class="form-group" {{ $errors->has('username') ? ' has-error' : '' }}>
                                 <label for="username" class="control-label">
                                     Họ Tên</label>
-                                <input id="username" type="text" class="form-control" placeholder="Name..."
+                                <input id="username" type="text" class="form-control" placeholder="Tên..."
                                        name="username" value="{{Auth::guard('customer')->user()->username}}" required>
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -102,7 +102,7 @@
                                 <label for="phone"
                                        class="control-label {{ $errors->has('phone') ? ' has-error' : '' }}">
                                     Điện Thoai <span class="text-danger">(*)</span></label>
-                                <input id="phone" type="tel" class="form-control" placeholder="Phone Number ..."
+                                <input id="phone" type="tel" class="form-control" placeholder="SĐT ..."
                                        name="phone" value="{{Auth::guard('customer')->user()->phone}}" required>
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
@@ -137,7 +137,7 @@
                             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
                                 <label for="address" class="control-label">
                                     Địa Chỉ</label>
-                                <input id="address" type="text" class="form-control" placeholder="Address..."
+                                <input id="address" type="text" class="form-control" placeholder="Địa chỉ..."
                                        name="address" value="{{Auth::guard('customer')->user()->address}}"
                                        required>
                                 @if ($errors->has('address'))
@@ -148,7 +148,7 @@
                             </div>
                             <div class="form-group  {{ $errors->has('note') ? ' has-error' : '' }}">
                                 <label for="note" class="control-label">Ghi chú</label>
-                                <textarea id="note" type="text" class="form-control" placeholder="Note..."
+                                <textarea id="note" type="text" class="form-control" placeholder="Ghi chú..."
                                           name="note"></textarea>
                                 @if ($errors->has('note'))
                                     <span class="help-block">
@@ -200,7 +200,7 @@
                     </tbody>
                 </table>
                 <div>
-                    <h4 style="text-align: right">Thành tiền</td>
+                    <h4 style="text-align: right">Thành tiền</h4>
                         <h3 style="text-align: right" class="Bold">{{ Cart::instance('default')->subtotal() }} đ </h3>
                 </div>
             </div>
