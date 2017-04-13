@@ -286,7 +286,7 @@ Route::group([
     });
 });
 
-Route::get('/sendmail', [
+/*Route::get('/sendmail', [
     'as' => 'sendmail',
     'uses' => 'MailController@sendMail'
-]);
+]);*/
