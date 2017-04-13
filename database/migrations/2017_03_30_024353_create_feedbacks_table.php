@@ -21,7 +21,7 @@ class CreateFeedbacksTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->integer('customer_id')->unsigned()->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
         });
     }
