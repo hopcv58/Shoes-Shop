@@ -92,7 +92,7 @@ class UserOrderController extends Controller
             $mail_to = $request->input('email');
             $mailer->to($mail_to)->send(new orderMail($order, $order_products));
             Cart::destroy();
-            return Redirect::back();
+            return Redirect::back()->with(['success' => 'Cảm ơn bạn đã lựa chọn chúng tôi. Bạn hãy check mail để kiểm tra đơn hàng. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất']);
         } catch (Exception $ex) {
             dd($ex->getMessage());
         }
