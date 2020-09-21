@@ -19,6 +19,7 @@ class CategoriesController extends Controller
     {
         $this->cate = new Categories();
         $this->bussiness = new Business();
+        parent::__construct();
     }
 
 

@@ -11,12 +11,11 @@ return [
     | sending of e-mail. You may specify which one you're using throughout
     | your application here. By default, Laravel is setup for SMTP mail.
     |
-    | Supported: "smtp", "sendmail", "mailgun", "mandrill", "ses",
-    |            "sparkpost", "log", "array"
+    | Supported: "smtp", "mail", "sendmail", "mailgun", "mandrill", "ses", "log"
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'mailgun'),
+    'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +28,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,10 +54,8 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'AdminTalaha@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'AdminTalaha'),
-    ],
+//    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => env('MAIL_USERNAME'), 'name' => env('MAIL_NAME')],
 
     /*
     |--------------------------------------------------------------------------
@@ -86,6 +83,17 @@ return [
 
     'username' => env('MAIL_USERNAME'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | SMTP Server Password
+    |--------------------------------------------------------------------------
+    |
+    | Here you may set the password required by your SMTP server to send out
+    | messages from your application. This will be given to the server on
+    | connection so that the application will be able to send messages.
+    |
+    */
+
     'password' => env('MAIL_PASSWORD'),
 
     /*
@@ -103,21 +111,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Markdown Mail Settings
+    | Mail "Pretend"
     |--------------------------------------------------------------------------
     |
-    | If you are using Markdown based email rendering, you may configure your
-    | theme and component paths here, allowing you to customize the design
-    | of the emails. Or, you may simply stick with the Laravel defaults!
+    | When this option is enabled, e-mail will not actually be sent over the
+    | web and will instead be written to your application's logs files so
+    | you may inspect the message. This is great for local development.
     |
     */
 
-    'markdown' => [
-        'theme' => 'default',
-
-        'paths' => [
-            resource_path('views/vendor/mail'),
-        ],
-    ],
+    'pretend' => false,
 
 ];

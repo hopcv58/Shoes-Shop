@@ -18,7 +18,7 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         if(!Auth::check()){
-            return redirect('adminTalaha/login');
+            return redirect('adminLogin/login');
         }
         return $next($request);
     }

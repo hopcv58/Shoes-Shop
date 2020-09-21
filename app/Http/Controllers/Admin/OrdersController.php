@@ -17,6 +17,7 @@ class OrdersController extends Controller
     {
         $this->orders = new Orders();
         $this->business = new Business();
+        parent::__construct();
     }
 
     public function index(Request $request)

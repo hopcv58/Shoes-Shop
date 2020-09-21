@@ -16,6 +16,7 @@ class NewsController extends Controller
     {
         $this->business = new Business();
         $this->news     = new News();
+        parent::__construct();
     }
 
     /**

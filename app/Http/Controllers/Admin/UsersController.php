@@ -20,6 +20,7 @@ class UsersController extends Controller
     {
         $this->users    = new User();
         $this->business = new Business();
+        parent::__construct();
     }
 
     /**

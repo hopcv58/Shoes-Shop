@@ -122,9 +122,9 @@
                                         <input type="hidden" name="price"
                                                value="{{$product->price*(100-$product->advertisments->discount)/100}}">
                                     @endif
-                                    <input type="hidden" name="size" value="{{array_unique(json_decode($product->attribute)->size)[0]}}">
-                                    <input type="hidden" name="color"
-                                           value="{{array_unique(json_decode($product->attribute)->color)[0]}}">
+{{--                                    <input type="hidden" name="size" value="{{array_unique(json_decode($product->attribute)->size)[0]}}">--}}
+{{--                                    <input type="hidden" name="color"--}}
+{{--                                           value="{{array_unique(json_decode($product->attribute)->color)[0]}}">--}}
                                     <button type="submit"
                                             class="glyphicon glyphicon-shopping-cart btn-default img-btn"
                                             aria-hidden="true">
@@ -143,8 +143,8 @@
                                                value="{{$product->price*(100-$product->advertisments->discount)/100}}">
                                     @endif
                                     <input type="hidden" name="size" value="35">
-                                    <input type="hidden" name="color"
-                                           value="{{array_unique(json_decode($product->attribute)->color)[0]}}">
+{{--                                    <input type="hidden" name="color"--}}
+{{--                                           value="{{array_unique(json_decode($product->attribute)->color)[0]}}">--}}
                                     <button type="submit"
                                             class="glyphicon glyphicon-tags btn-default img-btn"
                                             aria-hidden="true">
@@ -220,8 +220,6 @@
             }
             @endforeach
         }
-    </script>
-    <script>
         $('#filtMenu .dropdown-menu').on({
             "click": function (e)
             {

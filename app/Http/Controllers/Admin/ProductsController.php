@@ -20,6 +20,7 @@ class ProductsController extends Controller
     {
         $this->_products = new Products();
         $this->business = new Business();
+        parent::__construct();
     }
 
     /**

@@ -40,6 +40,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('adminRIA', ['except' => 'adminLogout']);
+        parent::__construct();
     }
 
     public function showAdminLoginForm()

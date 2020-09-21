@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\Responsitory\News;
-use App\Responsitory\Product;
-use App\Responsitory\Products;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

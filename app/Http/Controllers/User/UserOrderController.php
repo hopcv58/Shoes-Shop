@@ -22,6 +22,7 @@ class UserOrderController extends Controller
     function __construct()
     {
         $this->business = new Business();
+        parent::__construct();
     }
     
     /**

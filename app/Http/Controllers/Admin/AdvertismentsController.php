@@ -19,6 +19,7 @@ class AdvertismentsController extends Controller
     {
         $this->adv = new Advertisments();
         $this->bussiness = new Business();
+        parent::__construct();
     }
 
     /**

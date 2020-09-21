@@ -31,7 +31,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => 'admin@gmail.com',
         'password' => $password ?: $password = bcrypt('123456'),
-		'img' => $faker->sentence,
+		'img' => "cutecat.jpg",
         'remember_token' => str_random(10),
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
@@ -56,8 +56,8 @@ $factory->define(Products::class, function (Generator $faker){
        'price' => $faker->numberBetween(100,1000),
        'ad_id' => $faker->numberBetween(1,10),
        'attribute' => $faker->sentence,
-       'img_profile' => $faker->sentence,
-       'img' => $faker->sentence,
+       'img_profile' => "giay1.jpg",
+       'img' => "giay1.jpg",
        'is_public' => $faker->numberBetween(0,1),
    ] ;
 });
@@ -105,7 +105,7 @@ $factory->define(News::class, function (Generator $faker) {
        'title' => $faker->sentence,
        'content' => $faker->paragraph,
        'summary' => $faker->sentence,
-       'img' => $faker->sentence,
+       'img' => "banner1.jpg",
        'is_public' => $faker->numberBetween(0,1),
    ];
 });
@@ -142,7 +142,7 @@ $factory->define(productOrder::class, function (Generator $faker) {
        'product_id' => $faker->numberBetween(1,10),
        'order_id' => $faker->numberBetween(1,10),
        'qty' => $faker->numberBetween(1,10),
-       'amount' => $faker->numberBetween(100,1000),
+       'attribute' => $faker->numberBetween(100,1000),
        'status' => $faker->numberBetween(0,1),
    ];
 });

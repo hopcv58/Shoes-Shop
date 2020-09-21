@@ -28,7 +28,7 @@ class AdminController extends Controller
     {
         $this->business = new Business();
 //        $this->middleware('admin');
-
+        parent::__construct();
     }
 
     public function getIndex()

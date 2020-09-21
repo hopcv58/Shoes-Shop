@@ -61,7 +61,7 @@ class Business // extends Model
             $name = str_random(5) . "_" . $name;
         }
         $arr_ext = ['png', 'jpg', 'gif', 'jpeg'];
-        if (!in_array($ext, $arr_ext) || $img->getClientSize() > 500000) {
+        if (!in_array($ext, $arr_ext) || $img->getClientSize() > 5000000) {
             $name = null;
             return redirect()->back()->with('not_img', 'Chọn file ảnh png jpg gif jpeg có kích thước < 5Mb');
         } else {

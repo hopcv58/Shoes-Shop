@@ -107,7 +107,7 @@ Route::group(['namespace' => '\User'], function () {
 
 Route::group([
 //    'middleware' => 'admin_redirect',
-    'prefix' => 'adminTalaha',
+    'prefix' => 'adminLogin',
     'namespace' => '\Admin',
 ], function () {
 
