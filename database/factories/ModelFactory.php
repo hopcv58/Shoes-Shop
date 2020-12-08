@@ -55,7 +55,7 @@ $factory->define(Products::class, function (Generator $faker){
        'description' => $faker->paragraph,
        'price' => $faker->numberBetween(100,1000),
        'ad_id' => $faker->numberBetween(1,10),
-       'attribute' => $faker->sentence,
+       'attribute' => '{"size":["35","35","36","36"],"color":["Red","Blue","Red","Blue"],"qty":["1","2","1","4"]}',
        'img_profile' => "giay1.jpg",
        'img' => "giay1.jpg",
        'is_public' => $faker->numberBetween(0,1),

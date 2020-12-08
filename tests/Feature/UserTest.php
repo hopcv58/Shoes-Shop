@@ -27,13 +27,13 @@ class UserTest extends TestCase
 
     public function test_login()
     {
-        $response = $this->call('GET', 'adminTalaha/login');
+        $response = $this->call('GET', 'adminLogin/login');
         $this->assertResponseStatus(200); //Tương đương với lệnh trên
         $this->assertEquals('Lê Anh', $response->getContent());
     }
 
     public function testAddCategories(){
-        $this->visit('/adminTalaha/categories/create')
+        $this->visit('/adminLogin/categories/create')
             ->type('GIAY BUP BE', 'name')
             ->check('is_public')
             ->press('submit')

@@ -2,9 +2,10 @@
 @section('content')
     {{--init--}}
     <?php
-    $colors = array_unique(json_decode($product->attribute)->color);
-    $sizes = array_unique(json_decode($product->attribute)->size);
-    $images = json_decode($product->img);
+    $attribute = json_decode($product->attribute);
+    $colors = !empty($attribute->color) ? array_unique($attribute->color) : [];
+    $sizes = !empty($attribute->size) ? array_unique($attribute->size) : [];
+    $images = json_decode($product->img) !== null ? json_decode($product->img) : [];
     ?>
     <div class="row">
         <div>
@@ -92,8 +93,8 @@
             <p>Sản phẩm: {{$product->name}}</p>
             <p>Chất liệu: {{$product->material}}</p>
             <p>Độ cao: {{$product->height}}</p>
-            <p>Màu sắc: {{implode(", ",json_decode($product->attribute)->color)}}</p>
-            <p>Kích cỡ: {{implode(", ",json_decode($product->attribute)->size)}}</p>
+            <p>Màu sắc: {{implode(", ",$colors)}}</p>
+            <p>Kích cỡ: {{implode(", ",$sizes)}}</p>
             <p>Phối đồ: {{$product->phoi_do}}</p>
             <br>
             <p><strong>ĐẶC ĐIỂM NỔI BẬT</strong></p>
@@ -173,7 +174,7 @@
                                         @endif
                                         <input type="hidden" name="size" value="35">
                                         <input type="hidden" name="color"
-                                               value="{{array_unique(json_decode($relate->attribute)->color)[0]}}">
+                                               value="{{!empty(json_decode($relate->attribute)->color) ? array_unique(json_decode($relate->attribute)->color)[0] : 0}}">
                                         <button type="submit"
                                                 class="glyphicon glyphicon-shopping-cart btn-default img-btn"
                                                 aria-hidden="true">
@@ -193,7 +194,7 @@
                                         @endif
                                         <input type="hidden" name="size" value="35">
                                         <input type="hidden" name="color"
-                                               value="{{array_unique(json_decode($relate->attribute)->color)[0]}}">
+                                               value="{{!empty(json_decode($relate->attribute)->color) ? array_unique(json_decode($relate->attribute)->color)[0] : 0}}">
                                         <button type="submit"
                                                 class="glyphicon glyphicon-tags btn-default img-btn"
                                                 aria-hidden="true">

@@ -20,7 +20,7 @@ class Categories extends TestCase
     }
 
     public function testAddCategories(){
-        $this->visit('/adminTalaha/categories/create')
+        $this->visit('/adminLogin/categories/create')
             ->type('GIAY BUP BE', 'name')
             ->check('is_public')
             ->press('submit')

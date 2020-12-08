@@ -27,11 +27,11 @@ class AdminTest extends DuskTestCase
         $user = factory(User::class)->create();
 
         $this->browse(function ($browser) use ($user) {
-            $browser->visit('/adminTalaha')
+            $browser->visit('/adminLogin')
                 ->type('email', $user->email)
                 ->type('password', '123456')
                 ->press('login')
-                ->assertPathIs('/adminTalaha/dashboard');
+                ->assertPathIs('/adminLogin/dashboard');
         });
     }
 }

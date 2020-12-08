@@ -20,7 +20,7 @@ class AminRoleMiddleware
         {
             return $next($request);
         }else{
-            return redirect('adminTalaha/dashboard');
+            return redirect('adminLogin/dashboard');
         }
 
     }
