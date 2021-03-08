@@ -446,7 +446,7 @@ class Business // extends Model
         {
             $related[] = $this->getProductByCate($cate->cate_id);
         }
-        return ($related[array_rand($related)]->shuffle()->take(4));
+        return $related ? ($related[array_rand($related)]->shuffle()->take(4)) : [];
     }
     
     public function getNewsById($id)
